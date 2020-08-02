@@ -1,0 +1,17 @@
+- Put folder and GUIConfigServer.js into MagicMirror folder
+- Put guiconfigfn.js into config folder
+- Need to kill port before turn-off Magic Mirror, you can use code below and put it in
+electron.js , below console.log("Shutting down MagicMirror..."); inside app.on function
+
+
+
+// Remember declare myProcessToKill7777 variable as global with this 
+// var myKillAllProcess = require('child_process');
+myProcessToKill7777.exec('sudo killall -9 python3',function (err,stdout,stderr) {
+    	if (err) {
+        	console.log("ERROR WHEN KILLED PORT 7777 \n"+stderr);
+    	} 
+		else {
+        	console.log("KILLED python3 electron.js");
+   		}
+    	});
