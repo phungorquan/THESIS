@@ -1,6 +1,7 @@
 # NODEMCU VIA G.A
 
 # Function 
+- Can config wifi for NODEMCU via WifiManager with phone or computer
 - Auto re-connect saved connections if lost wifi connection 
 - Receive status from firebase (G.A) and control led
 - Control led from NODEMCU and send status to firebase
