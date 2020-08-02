@@ -1,2 +1,3 @@
 # THESIS
-It will be error and can not use if use 'Ctrl + R' to reload SmartMirror, will fix in the future
+It will be error and sometime it can not use anymore if use 'Ctrl + R' to reload SmartMirror, will fix in the future
+-> Reset Smart Mirror will re-run again!!!
