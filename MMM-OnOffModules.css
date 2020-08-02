@@ -1,0 +1,139 @@
+/*td{
+  border: 1px solid green;
+}
+
+tr{
+  border: 1px solid yellow;
+}*/
+/*#idMyMenuOnOff*/
+
+
+.myTable{
+  table-layout: fixed;
+  text-align: center;
+  font-size: 40%;
+}
+
+/* Sửa cái form hiển thị ra khi ấn vào xem lịch sử */
+/* The Modal (background) */
+.modal {
+  text-align: center;
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  top:0px;
+  left:0px;
+  max-width: 200%; /* Full width */
+  max-height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  padding-left: 4%;
+  padding-top: 10%;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: black;
+  margin: auto auto auto auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 10px;
+  width: 70%;
+  height: 70%;
+}
+
+/* Add Zoom Animation */
+.animateIn {
+  animation: animateIn 1s;
+}
+/* Add Zoom Animation */
+.animateOut {
+  animation: animateOut 1s;
+}
+
+@keyframes animateIn {
+  /*from {transform: scale(0)} 
+  to {transform: scale(1)}*/
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animateOut {
+  /*from {transform: scale(0)} 
+  to {transform: scale(1)}*/
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/* Bên dưới để sửa thanh gạt tròn tròn nhỏ*/
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 25px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.sliderOnOff {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid white;
+  background-color: black;
+  -webkit-transition: 0s;
+  transition: 0s;
+}
+
+.sliderOnOff:before {
+  position: absolute;
+  content: "";
+  height: 17px;
+  width: 17px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: 0s;
+  transition: 0s;
+}
+
+input:checked + .sliderOnOff {
+  background-color: gray;
+}
+
+input:focus + .sliderOnOff {
+  box-shadow: 0 0 0.2px gray;
+}
+
+input:checked + .sliderOnOff:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.sliderOnOff.round {
+  border-radius: 20px;
+}
+
+.sliderOnOff.round:before {
+  border-radius: 60%;
+}
+
+
+
