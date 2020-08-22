@@ -49,10 +49,10 @@ void lightControl()
     }
     else
     {   
-        // Turn off led (normal)
+        // Turn off Wifi led (normal)
         digitalWrite(WIFI_LED, HIGH);
 
-        // Control led
+        // Control light
         if (lightFireStt == "on")
             lightStt = true;
         else
@@ -88,10 +88,10 @@ void fanControl()
     }
     else
     {   
-        // Turn off led (normal)
+        // Turn off Wifi led (normal)
         digitalWrite(WIFI_LED, HIGH);
 
-        // Control led
+        // Control fan
         if (fanFireStt == "on")
             fanStt = true;
         else
