@@ -12,7 +12,8 @@ var numOfUrls = 0; // numOfUrls from "config.js"
 var currentCalendarElement = 0; // This variable will save switch counter
 var arrUrls = []; // Save all urls
 var urlColors = ["Violet","PowderBlue","LightSalmon","LightGreen","Gold"]; // urlColors, the last color is used for arrUrls[4] -> arrUrls[n]
-var alarmOnceSound = true; // Alarm once
+var eventArr = []; // Save all event title to send notification once
+var existTitle = false; // Flag to support eventArr above
 // 1End Xiu add
 
 Module.register("calendar", {
@@ -30,7 +31,7 @@ Module.register("calendar", {
 		wrapEvents: false, // wrap events to multiple lines breaking at maxTitleLength
 		maxTitleLines: 3,
 		fetchInterval: 1 * 60 * 1000, // Update every 5 minutes.
-		animationSpeed: 1000,
+		animationSpeed: 500,
 		fade: true,
 		urgency: 7,
 		timeFormat: "relative", // absolute , dataheaders
@@ -126,7 +127,8 @@ Module.register("calendar", {
 			var self = this;
 			setInterval(function() {
 				self.addCalendar(calendar.url, calendar.auth, calendarConfig);
-				alarmOnceSound = true;
+				eventArr = [];
+				existTitle = false;
 			}, self.config.fetchInterval);
 		}
 
@@ -378,14 +380,24 @@ Module.register("calendar", {
 						if (event.startDate >= new Date()) {
 							// Xiu add alarm sound
 							// Check < 5' and check whether this event from google(USER's calendar) or holiday calendars
-							if(event.startDate - now < 5*oneMinute && event.url.indexOf("google") != -1 && alarmOnceSound == true)
+							if(event.startDate - now < 5*oneMinute && event.url.indexOf("google") != -1)
 							{	
-								this.sendNotification("SHOW_ALERT",{type: "notification",title: event.title , message:"EVENT IS COMING"});
-								var audio = new Audio('/modules/MyExtraResources/Alarm.mp3');
-								audio.play();
-								alarmOnceSound = false;
+								for(var index = 0; index < eventArr.length; index++)
+								{
+									if(eventArr[index] == event.title)
+									{
+										existTitle = true;
+										break;
+									}
+								}
+								if (!existTitle)
+								{
+									eventArr.push(event.title);
+									var audio = new Audio('/modules/MyExtraResources/Alarm.mp3');
+									audio.play();
+									this.sendNotification("SHOW_ALERT",{type: "notification",title: event.title , message:"EVENT IS COMING"});
+								}
 							}
-
 							// End Xiu add
 							if (event.startDate - now < 2 * oneDay) {
 								// This event is within the next 48 hours (2 days)
@@ -490,16 +502,30 @@ Module.register("calendar", {
 
 		// 5Begin Xiu add
 		// Create a button with css = calendarSwitchBtn, onClick event = switchCalendar()
-		var calendarSwitchBtn = document.createElement("BUTTON");
-		calendarSwitchBtn.setAttribute("id","idCalendarSwitchBtn");
-		calendarSwitchBtn.innerHTML = this.translate("SWITCH CALENDARS");
-		calendarSwitchBtn.addEventListener("click", () => this.switchCalendar());
-		calendarSwitchBtn.className = "calendarSwitchBtn"; // This Xiu's CSS putting "calendar.css" file
-		wrapper.appendChild(calendarSwitchBtn);
+		// var calendarSwitchBtn = document.createElement("BUTTON");
+		// calendarSwitchBtn.setAttribute("id","idCalendarSwitchBtn");
+		// calendarSwitchBtn.innerHTML = this.translate("SWITCH CALENDARS");
+		// calendarSwitchBtn.addEventListener("click", () => this.switchCalendar());
+		// calendarSwitchBtn.className = "calendarSwitchBtn"; // This Xiu's CSS putting "calendar.css" file
+		// wrapper.appendChild(calendarSwitchBtn);
 		// 5End Xiu add
 
 		return wrapper;
 	},
+
+	// XBegin Xiu add
+	// Add notification to switch calendar from external signal
+	notificationReceived: function(notification, payload, sender) {
+		if (notification == "SWITCH_CALENDAR") {
+			this.switchCalendar(); // Switch next calendar
+		} 
+		else if (notification == "SWITCH_ALL_CALENDAR")
+		{
+			currentCalendarElement = arrUrls.length;
+			this.switchCalendar(); // Switch to first calendar (All calendar will be displayed)
+		}
+	},
+	// XEnd Xiu add
 
 	// 6Begin Xiu add
 	// This is event func will be invoked when click button
@@ -545,7 +571,21 @@ Module.register("calendar", {
 			// Check my available calendar to display my sentence
 			var getIndexOfMyCalendar = arrUrls[myAvailableElement].indexOf("google");
 			if(getIndexOfMyCalendar > 0)
-				return this.translate("MY EVENTS");
+			{
+				function nthIndex(str, pat, n){
+    				var L= str.length, i= -1;
+    				while(n-- && i++<L){
+    				    i= str.indexOf(pat, i);
+    				    if (i < 0) break;
+    				}
+    				return i;
+				}	
+				var getFifthSlashIndex = nthIndex(arrUrls[myAvailableElement],'/',5) + 1;
+				var getFirstPercentageIndex = arrUrls[myAvailableElement].indexOf("%");
+				var getLengthAccount = getFirstPercentageIndex - getFifthSlashIndex;
+				var getGmailAccount = arrUrls[myAvailableElement].substr(getFifthSlashIndex,getLengthAccount);
+				return this.translate("EVENT OF - " + getGmailAccount);
+			}
 
 			// Check countries available calendar to display
 			var getIndexOfLastSlash = arrUrls[myAvailableElement].lastIndexOf("/")+1;
@@ -559,7 +599,7 @@ Module.register("calendar", {
 				// Cut countries name from URL
 				var getLengthTitle = getIndexOfLastDot - getIndexOfLastSlash;
 				var getLocationTitle = arrUrls[myAvailableElement].substr(getIndexOfLastSlash,getLengthTitle);
-				return getLocationTitle;
+				return this.translate("EVENT OF - " + getLocationTitle);
 			} 
 		}
 	},
