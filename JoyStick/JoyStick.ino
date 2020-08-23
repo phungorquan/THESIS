@@ -1,3 +1,4 @@
+#define swPin 12
 int x = 0, y = 0;
 int xpos = 0, ypos = 0;
 int swStatus = 0;
@@ -5,7 +6,7 @@ int sensitivity=20;    // you can adjust the sensitivity based on your comfort
 
 void setup() {
   Serial.begin(9600);
-  pinMode(7,INPUT_PULLUP);     // SW pin
+  pinMode(swPin,INPUT_PULLUP);     // SW pin
 }
 
 void loop() {
@@ -21,26 +22,28 @@ void loop() {
   if(y<=450)                  
   ypos=map(y,450,0,0,sensitivity); 
 
-  if(digitalRead(7)==0)
+  if(digitalRead(swPin)==0)
   {
-    delay(500);
-    if(digitalRead(7)==0) // If press < 1s -> left click
-    {
-      delay(2000);
-      if(digitalRead(7)==0) // If press > 2.5s -> right click 
-        {
-          delay(3000);
-            if(digitalRead(7)==0)
-              {
-                while(digitalRead(7) == 0); // Avoid press too long
-                swStatus = 3; // Press alt
-              }
-            else 
-              swStatus = 2; // Right button
-        }
-      else
-        swStatus = 1; // Left button
-    }
+    while(digitalRead(swPin)==0);
+    swStatus = 1;
+//    delay(500);
+//    if(digitalRead(swPin)==0) // If press < 1s -> left click
+//    {
+//      delay(2000);
+//      if(digitalRead(swPin)==0) // If press > 2.5s -> right click 
+//        {
+//          delay(3000);
+//            if(digitalRead(swPin)==0)
+//              {
+//                while(digitalRead(swPin) == 0); // Avoid press too long
+//                swStatus = 3; // Press alt
+//              }
+//            else 
+//              swStatus = 2; // Right button
+//        }
+//      else
+//        swStatus = 1; // Left button
+//    }
   }
 
     if(xpos!=0 || ypos!=0 || swStatus != 0) // prints only when the joystick is moved or pressed
