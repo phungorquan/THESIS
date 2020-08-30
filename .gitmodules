@@ -1,0 +1,3 @@
+[submodule "MMM-News-QR"]
+	path = MMM-News-QR
+	url = git@github.com:nischi/MMM-News-QR.git
