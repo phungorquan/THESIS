@@ -17,7 +17,7 @@ Module.register("clock",{
 		clockBold: false,
 		showDate: true,
 		showWeek: false,
-		dateFormat: "dd, DD/MM/YYYY",
+		dateFormat: "ddd, DD/MM/YYYY",
 
 		/* specific to the analog clock */
 		analogSize: "200px",
@@ -32,9 +32,11 @@ Module.register("clock",{
 		lat: 47.630539,
 		lon: -122.344147,
 	},
+
+
 	// Define required scripts.
 	getScripts: function() {
-		return ["moment.js", "moment-timezone.js", "suncalc.js"];
+		return ["moment.js", "moment-timezone.js", "suncalc.js","lunar.js"];
 	},
 	// Define styles.
 	getStyles: function() {
@@ -43,7 +45,6 @@ Module.register("clock",{
 	// Define start sequence.
 	start: function() {
 		Log.info("Starting module: " + this.name);
-
 		// Schedule update interval.
 		var self = this;
 		self.second = moment().second();
@@ -132,7 +133,10 @@ Module.register("clock",{
 		}
 
 		if(this.config.showDate){
-			dateWrapper.innerHTML = now.format(this.config.dateFormat);
+			// Xiu add lunarcalendar
+			var getTodayDate = new Date();	
+			var getDateJSON = getLunarDate(getTodayDate.getDate(),getTodayDate.getMonth() + 1,getTodayDate.getFullYear());
+			dateWrapper.innerHTML = now.format(this.config.dateFormat) + "<sup>(" + getDateJSON.day + "/" + getDateJSON.month + ")</sup>";
 		}
 		if (this.config.showWeek) {
 			weekWrapper.innerHTML = this.translate("WEEK", { weekNumber: now.week() });
