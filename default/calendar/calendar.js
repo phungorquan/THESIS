@@ -1,17 +1,7 @@
-/* global Module */
-
-/* Magic Mirror
- * Module: Calendar
- *
- * By Michael Teeuw http://michaelteeuw.nl
- * MIT Licensed.
- */
-
 // 1Begin Xiu add some variables
 var numOfUrls = 0; // numOfUrls from "config.js"
 var currentCalendarElement = 0; // This variable will save switch counter
 var arrUrls = []; // Save all urls
-var urlColors = ["Violet","PowderBlue","LightSalmon","LightGreen","Gold"]; // urlColors, the last color is used for arrUrls[4] -> arrUrls[n]
 var eventArr = []; // Save all event title to send notification once
 var existTitle = false; // Flag to support eventArr above
 // 1End Xiu add
@@ -23,33 +13,33 @@ Module.register("calendar", {
 		maximumEntries: 10, // Total Maximum Entries
 		maximumNumberOfDays: 365,
 		displaySymbol: false,
-		defaultSymbol: "calendar", // Fontawesome Symbol see http://fontawesome.io/cheatsheet/
 		showLocation: true,
 		displayRepeatingCountTitle: true,
 		defaultRepeatingCountTitle: "",
-		maxTitleLength: 25,
-		wrapEvents: false, // wrap events to multiple lines breaking at maxTitleLength
+		maxTitleLength: 10,
+		wrapEvents: true, // wrap events to multiple lines breaking at maxTitleLength
 		maxTitleLines: 3,
 		fetchInterval: 1 * 60 * 1000, // Update every 5 minutes.
 		animationSpeed: 500,
 		fade: true,
 		urgency: 7,
-		timeFormat: "relative", // absolute , dataheaders
+		displayButton: true, // Display button to switch between calendars
 		dateFormat: "DD MMM",
-		dateEndFormat: "LT(DD/MM)",
+		dateEndFormat: "HH:mm(DD/MM)",
 		fullDayEventDateFormat: "DD/MM",
 		showEnd: true, // Xiu add - Actually i had to plus "endDate" by 1, had no idea why it was minus by 1 :v
+		defaultColor: "white",
 		getRelative: 6,
 		fadePoint: 0.25, // Start on 1/4th of the list.
-		hidePrivate: false,
+		hidePrivate: true,
 		hideOngoing: false,
 		colored: true,
-		coloredSymbolOnly: false,
 		tableClass: "xsmall",
 		calendars: [
 			{
-				symbol: "calendar",
-				url: ""
+				url: "",
+				color: "",
+				name: ""
 			}
 		],
 		titleReplace: {
@@ -89,7 +79,7 @@ Module.register("calendar", {
 	start: function () {
 		Log.log("Starting module: " + this.name);
 		// Set locale.
-		moment.updateLocale(config.language, this.getLocaleSpecification(config.timeFormat));
+		moment.updateLocale(config.language, { longDateFormat: {LT: "HH:mm" }});//moment.localeData().longDateFormat("LT")} });
 
 		for (var c in this.config.calendars) {
 			var calendar = this.config.calendars[c];
@@ -129,6 +119,8 @@ Module.register("calendar", {
 				self.addCalendar(calendar.url, calendar.auth, calendarConfig);
 				eventArr = [];
 				existTitle = false;
+				currentCalendarElement = arrUrls.length;
+				this.switchCalendar(); // Switch to first calendar (All calendar will be displayed)
 			}, self.config.fetchInterval);
 		}
 
@@ -145,7 +137,13 @@ Module.register("calendar", {
 
 		this.calendarData = {};
 		this.loaded = false;
+		//this.MMM_DB("X");
+
 	},
+
+	// MMM_DB_RECEIVED: function(payload){
+	// 	console.log(payload);
+	// },
 
 	// Override socket notification handler.
 	socketNotificationReceived: function (notification, payload) {
@@ -192,93 +190,37 @@ Module.register("calendar", {
 			for (var e in events) {
 				var event = events[e];
 				var dateAsString = moment(event.startDate, "x").format(this.config.dateFormat);
-				if(this.config.timeFormat === "dateheaders"){
-					if(lastSeenDate !== dateAsString){
-						var dateRow = document.createElement("tr");
-						dateRow.className = "normal";
-						var dateCell = document.createElement("td");
-						dateCell.colSpan = "3";
-						dateCell.innerHTML = dateAsString;
-						dateCell.style.paddingTop = "10px";
-						dateRow.appendChild(dateCell);
-						wrapper.appendChild(dateRow);
-	
-						if (e >= startFade) {			//fading
-							currentFadeStep = e - startFade;
-							dateRow.style.opacity = 1 - (1 / fadeSteps * currentFadeStep);
-						}
-	
-						lastSeenDate = dateAsString;
-					}
-				}
-	
 				var eventWrapper = document.createElement("tr");
 	
 				// 3Begin Xiu add 
 				// Change calender color
-				if (this.config.colored && !this.config.coloredSymbolOnly) {
-					switch(event.url) // Check each urls
+				if (this.config.colored) {
+
+					if(currentCalendarElement == 0)
 					{
-						case arrUrls[0]:
+						for(var i = 0; i < arrUrls.length; i++)
 						{
-							eventWrapper.style.color = urlColors[0];
-							break;
+							if(event.url === arrUrls[i])
+							{
+								if(this.config.calendars[i].hasOwnProperty("color"))
+									eventWrapper.style.color = this.config.calendars[i].color;
+								else eventWrapper.style.color = this.config.defaultColor;
+							}
+							
 						}
-						case arrUrls[1]:
-						{
-							eventWrapper.style.color = urlColors[1];
-							break;
-						}
-						case arrUrls[2]:
-						{
-							eventWrapper.style.color = urlColors[2];
-							break;
-						}
-						case arrUrls[3]:
-						{
-							eventWrapper.style.color = urlColors[3];
-							break;
-						}
-						default: // arrUrls[4] -> arrUrls[n] will be affected with this color
-						{
-							eventWrapper.style.color = urlColors[4];
-							break;
-						}
+					}
+					else{
+						var myAvailableElement = currentCalendarElement - 1;
+
+						if(this.config.calendars[myAvailableElement].hasOwnProperty("color"))
+							eventWrapper.style.color = this.config.calendars[myAvailableElement].color;
+						else
+							eventWrapper.style.color = this.config.defaultColor;
 					}
 				}
 				// 3End Xiu add
 
 				eventWrapper.className = "normal";
-
-				if (this.config.displaySymbol) {
-					var symbolWrapper = document.createElement("td");
-
-					if (this.config.colored && this.config.coloredSymbolOnly) {
-						symbolWrapper.style.cssText = "color:" + this.colorForUrl(event.url);
-					}
-
-					var symbolClass = this.symbolClassForUrl(event.url);
-					symbolWrapper.className = "symbol align-right " + symbolClass;
-
-					var symbols = this.symbolsForUrl(event.url);
-					if(typeof symbols === "string") {
-					symbols = [symbols];
-					}
-
-					for(var i = 0; i < symbols.length; i++) {
-						var symbol = document.createElement("span");
-						symbol.className = "fa fa-fw fa-" + symbols[i];
-						if(i > 0){
-							symbol.style.paddingLeft = "5px";
-						}
-						symbolWrapper.appendChild(symbol);
-					}
-					eventWrapper.appendChild(symbolWrapper);
-				} else if(this.config.timeFormat === "dateheaders"){
-					var blankCell = document.createElement("td");
-					blankCell.innerHTML = "&nbsp;&nbsp;&nbsp;";
-					eventWrapper.appendChild(blankCell);
-				}
 
 				var titleWrapper = document.createElement("td"),
 					repeatingCountTitle = "";
@@ -295,6 +237,7 @@ Module.register("calendar", {
 					}
 				}
 
+				// Ten su kien o day 
 				// Xiu add, this is a TIPS: we can translate all calendar title here 
 				titleWrapper.innerHTML = this.titleTransform(event.title) + repeatingCountTitle;
 
@@ -307,28 +250,8 @@ Module.register("calendar", {
 					titleWrapper.style.fontFamily = "Roboto,bold"; // Xiu add font
 				}
 
-				if(this.config.timeFormat === "dateheaders"){
+					// Cho nay la time ne
 
-					if (event.fullDayEvent) {
-						titleWrapper.colSpan = "2";
-						titleWrapper.align = "left";
-
-					} else {
-
-						var timeClass = this.timeClassForUrl(event.url);
-						var timeWrapper = document.createElement("td");
-						timeWrapper.className = "time light " + timeClass;
-						timeWrapper.align = "left";
-						timeWrapper.style.paddingLeft = "2px";
-						timeWrapper.innerHTML = moment(event.startDate, "x").format("LT");
-						eventWrapper.appendChild(timeWrapper);
-						titleWrapper.align = "right";
-					}
-
-					eventWrapper.appendChild(titleWrapper);
-				} 
-				else 
-				{
 					var timeWrapper = document.createElement("td");
 					timeWrapper.style.fontFamily = "Roboto"; // Xiu add font
 					eventWrapper.appendChild(titleWrapper);
@@ -353,23 +276,7 @@ Module.register("calendar", {
 								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
 							}
 						} else {
-							/* Check to see if the user displays absolute or relative dates with their events
-							* Also check to see if an event is happening within an 'urgency' time frameElement
-							* For example, if the user set an .urgency of 7 days, those events that fall within that
-							* time frame will be displayed with 'in xxx' time format or moment.fromNow()
-							*
-							* Note: this needs to be put in its own function, as the whole thing repeats again verbatim
-							*/
-							if (this.config.timeFormat === "absolute") {
-								if ((this.config.urgency > 1) && (event.startDate - now < (this.config.urgency * oneDay))) {
-									// This event falls within the config.urgency period that the user has set
-									timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").from(moment().format("YYYYMMDD")));
-								} else {
-									timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.fullDayEventDateFormat));
-								}
-							} else {
-								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").from(moment().format("YYYYMMDD")));
-							}
+							timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").from(moment().format("YYYYMMDD")));
 						}
 						// Xiu add, plus oneDay here, not inside else condition below
 						if(this.config.showEnd){
@@ -395,7 +302,7 @@ Module.register("calendar", {
 									eventArr.push(event.title);
 									var audio = new Audio('/modules/MyExtraResources/Alarm.mp3');
 									audio.play();
-									this.sendNotification("SHOW_ALERT",{type: "notification",title: event.title , message:"EVENT IS COMING"});
+									this.sendNotification("SHOW_ALERT",{type: "alert",title: "<h1>" + event.title + "</h1>", message:"EVENT IS COMING", timer: 7000});
 								}
 							}
 							// End Xiu add
@@ -405,32 +312,12 @@ Module.register("calendar", {
 									// If event is within 6 hour, display 'in xxx' time format or moment.fromNow()
 									timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
 								} else {
-									if(this.config.timeFormat === "absolute" && !this.config.nextDaysRelative) {
-										timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dateFormat));
-									} else {
 										// Otherwise just say 'Today/Tomorrow at such-n-such time'
 										timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").calendar());
-									}
 								}
 							} else {
-								
-								/* Check to see if the user displays absolute or relative dates with their events
-								* Also check to see if an event is happening within an 'urgency' time frameElement
-								* For example, if the user set an .urgency of 7 days, those events that fall within that
-								* time frame will be displayed with 'in xxx' time format or moment.fromNow()
-								*
-								* Note: this needs to be put in its own function, as the whole thing repeats again verbatim
-								*/
-								if (this.config.timeFormat === "absolute") {
-									if ((this.config.urgency > 1) && (event.startDate - now < (this.config.urgency * oneDay))) {
-										// This event falls within the config.urgency period that the user has set
-										timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
-									} else {
-										timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").format(this.config.dateFormat));
-									}
-								} else {
-									timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
-								}
+								timeWrapper.innerHTML = this.capFirst(moment(event.startDate, "x").fromNow());
+
 							}
 						} else {
 							timeWrapper.innerHTML = this.capFirst(
@@ -450,7 +337,7 @@ Module.register("calendar", {
 					var timeClass = this.timeClassForUrl(event.url);
 					timeWrapper.className = "time light " + timeClass;
 					eventWrapper.appendChild(timeWrapper);
-				}
+				
 				wrapper.appendChild(eventWrapper);
 
 				// Create fade effect.
@@ -502,12 +389,15 @@ Module.register("calendar", {
 
 		// 5Begin Xiu add
 		// Create a button with css = calendarSwitchBtn, onClick event = switchCalendar()
-		// var calendarSwitchBtn = document.createElement("BUTTON");
-		// calendarSwitchBtn.setAttribute("id","idCalendarSwitchBtn");
-		// calendarSwitchBtn.innerHTML = this.translate("SWITCH CALENDARS");
-		// calendarSwitchBtn.addEventListener("click", () => this.switchCalendar());
-		// calendarSwitchBtn.className = "calendarSwitchBtn"; // This Xiu's CSS putting "calendar.css" file
-		// wrapper.appendChild(calendarSwitchBtn);
+		if(this.config.displayButton == true)
+		{
+			var calendarSwitchBtn = document.createElement("BUTTON");
+			calendarSwitchBtn.setAttribute("id","idCalendarSwitchBtn");
+			calendarSwitchBtn.innerHTML = this.translate("SWITCH CALENDARS");
+			calendarSwitchBtn.addEventListener("click", () => this.switchCalendar());
+			calendarSwitchBtn.className = "calendarSwitchBtn"; // This Xiu's CSS putting "calendar.css" file
+			wrapper.appendChild(calendarSwitchBtn);
+		}
 		// 5End Xiu add
 
 		return wrapper;
@@ -560,75 +450,58 @@ Module.register("calendar", {
 	// Override getHeader method.
 	// This method is only available for mycalendar on google and from ical website
 	getHeader: function() {
+		
 
-		// First time when finished loading calendar
+		//First time when finished loading calendar
 		if(currentCalendarElement == 0)
 			return this.translate("ALL EVENTS ARE COMING");
 		else
 		{
 			var myAvailableElement = currentCalendarElement - 1; // We need to minus by 1 when using with arr[]
-
-			// Check my available calendar to display my sentence
-			var getIndexOfMyCalendar = arrUrls[myAvailableElement].indexOf("google");
-			if(getIndexOfMyCalendar > 0)
+			if(this.config.calendars[myAvailableElement].hasOwnProperty("name"))
 			{
-				function nthIndex(str, pat, n){
-    				var L= str.length, i= -1;
-    				while(n-- && i++<L){
-    				    i= str.indexOf(pat, i);
-    				    if (i < 0) break;
-    				}
-    				return i;
-				}	
-				var getFifthSlashIndex = nthIndex(arrUrls[myAvailableElement],'/',5) + 1;
-				var getFirstPercentageIndex = arrUrls[myAvailableElement].indexOf("%");
-				var getLengthAccount = getFirstPercentageIndex - getFifthSlashIndex;
-				var getGmailAccount = arrUrls[myAvailableElement].substr(getFifthSlashIndex,getLengthAccount);
-				return this.translate("EVENT OF - " + getGmailAccount);
+				return this.config.calendars[myAvailableElement].name;
 			}
-
-			// Check countries available calendar to display
-			var getIndexOfLastSlash = arrUrls[myAvailableElement].lastIndexOf("/")+1;
-			var getIndexOfLastDot = arrUrls[myAvailableElement].lastIndexOf(".");
-
-			// If there is not any url countries are available
-			if(getIndexOfLastSlash < 0 && getIndexOfLastDot < 0)
-				return this.translate("ALL EVENTS ARE COMING");
-			else
+			else 
 			{
-				// Cut countries name from URL
-				var getLengthTitle = getIndexOfLastDot - getIndexOfLastSlash;
-				var getLocationTitle = arrUrls[myAvailableElement].substr(getIndexOfLastSlash,getLengthTitle);
-				return this.translate("EVENT OF - " + getLocationTitle);
-			} 
+				//Check my available calendar to display my sentence
+				var getIndexOfMyCalendar = arrUrls[myAvailableElement].indexOf("google");
+				if(getIndexOfMyCalendar > 0)
+				{
+					function nthIndex(str, pat, n){
+    					var L= str.length, i= -1;
+    					while(n-- && i++<L){
+    					    i= str.indexOf(pat, i);
+    					    if (i < 0) break;
+    					}
+    					return i;
+					}	
+					var getFifthSlashIndex = nthIndex(arrUrls[myAvailableElement],'/',5) + 1;
+					var getFirstPercentageIndex = arrUrls[myAvailableElement].indexOf("%");
+					var getLengthAccount = getFirstPercentageIndex - getFifthSlashIndex;
+					var getGmailAccount = arrUrls[myAvailableElement].substr(getFifthSlashIndex,getLengthAccount);
+					return this.translate("EVENT OF - ") + getGmailAccount;
+				}
+
+				// Check countries available calendar to display
+				var getIndexOfLastSlash = arrUrls[myAvailableElement].lastIndexOf("/")+1;
+				var getIndexOfLastDot = arrUrls[myAvailableElement].lastIndexOf(".");
+
+				// If there is not any url countries are available
+				if(getIndexOfLastSlash < 0 && getIndexOfLastDot < 0)
+					return this.translate("ALL EVENTS ARE COMING");
+				else
+				{
+					// Cut countries name from URL
+					var getLengthTitle = getIndexOfLastDot - getIndexOfLastSlash;
+					var getLocationTitle = arrUrls[myAvailableElement].substr(getIndexOfLastSlash,getLengthTitle);
+					return this.translate("EVENT OF - ") + getLocationTitle;
+				} 
+			}
+			
 		}
 	},
 	// 7End Xiu add
-
-	/**
-	 * This function accepts a number (either 12 or 24) and returns a moment.js LocaleSpecification with the
-	 * corresponding timeformat to be used in the calendar display. If no number is given (or otherwise invalid input)
-	 * it will a localeSpecification object with the system locale time format.
-	 *
-	 * @param {number} timeFormat Specifies either 12 or 24 hour time format
-	 * @returns {moment.LocaleSpecification}
-	 */
-	getLocaleSpecification: function(timeFormat) {
-		switch (timeFormat) {
-		case 12: {
-			return { longDateFormat: {LT: "h:mm A"} };
-			break;
-		}
-		case 24: {
-			return { longDateFormat: {LT: "HH:mm"} };
-			break;
-		}
-		default: {
-			return { longDateFormat: {LT: moment.localeData().longDateFormat("LT")} };
-			break;
-		}
-		}
-	},
 
 	/* hasCalendarURL(url)
 	 * Check if this config contains the calendar url.
