@@ -31,7 +31,14 @@ Module.register("MMM-Snow",{
 			"flakePrefix" : "bubble",   // prefix of css name, e.g. bubble1 
 			"imagesCount"  : 1,         // number of images in this theme, here:  bubble1
 			"downwards"    : false,     // direction of flake movements, bubbles raise upwards			
-			"sizeFactor"   : 2}         // adapt size of flakes to your liking, we like bigger bubbles
+			"sizeFactor"   : 2},         // adapt size of flakes to your liking, we like bigger bubbles
+
+		"custom"   : { 
+			"flakePrefix" : "custom",   // prefix of css name, e.g. bubble1 
+			"imagesCount"  : 2,         // number of images in this theme, here:  bubble1
+			"downwards"    : true,     // direction of flake movements, bubbles raise upwards			
+			"sizeFactor"   : 4}         // adapt size of flakes to your liking, we like bigger bubbles
+
 	},
 
 	getStyles: function() {
@@ -81,5 +88,52 @@ Module.register("MMM-Snow",{
 		}
 		return wrapper;
 	}
+
+	// getDom: function() {
+	// 	var themeSettings = this.themes[this.config.theme];
+	// 	var wrapper = document.createElement("div")
+	// 	wrapper.className = "wrapper"
+
+	// 	var flake, jiggle, size;
+
+	// 	for(var i = 0; i < this.config.flakeCount; i++) {
+
+	// 		size = themeSettings.sizeFactor * (Math.random() * 0.5) + 0.25;
+	// 		flakeImage = document.createElement("div")
+			
+	// 		var flakeSuffix = Math.round(1 + Math.random() * (themeSettings.imagesCount - 1));
+	// 		flakeImage.className = themeSettings.flakePrefix + flakeSuffix;
+	// 		flakeImage.style.transform = "scale(" + size +", " + size + ")";
+	// 		flakeImage.style.opacity = size;
+
+	// 		flake = document.createElement("div");
+	// 		if(themeSettings.downwards) {
+	// 			flake.className = "flake-downwards";
+	// 		}
+	// 		else {
+	// 			flake.className = "flake-upwards"
+	// 		}
+
+	// 		jiggle = document.createElement("div");
+	// 		jiggle.style.animationDelay = (Math.random() * 1) + "s";
+	// 		jiggle.style.animationDuration = ((Math.random() * 1) + 10) + "s";
+	// 		jiggle.appendChild(flakeImage);
+
+	// 		size = (Math.random() * 0.75) + 0.25;
+	// 		jiggle.style.transform = "scale(" + size +", " + size + ")";
+	// 		jiggle.style.opacity = size;
+
+	// 		flake.appendChild(jiggle);
+	// 		flake.style.left = ((Math.random() * 20) - 10) + "%";
+	// 		flake.style.top = ((Math.random() * 50) - 25) + "%";
+	// 		flake.style.right = ((Math.random() * 150) - 55) + "%";
+	// 		flake.style.bottom = ((Math.random() * 70) - 45) + "%";
+	// 		flake.style.animationDelay = (Math.random() * 10) + "s";
+	// 		flake.style.animationDuration = 70 - (Math.random() * 10 * size) + "s";
+
+	// 		wrapper.appendChild(flake);
+	// 	}
+	// 	return wrapper;
+	// }
 
 });
