@@ -10,7 +10,7 @@
 Module.register("alert",{
 	defaults: {
 		// scale|slide|genie|jelly|flip|bouncyflip|exploader
-		effect: "slide",
+		effect: "slidefadingdown", // Xiu add
 		// scale|slide|genie|jelly|flip|bouncyflip|exploader
 		alert_effect: "jelly",
 		//time a notification is displayed in seconds
@@ -31,8 +31,7 @@ Module.register("alert",{
 		return {
 			en: "translations/en.json",
 			de: "translations/de.json",
-			nl: "translations/nl.json",
-			vi: "translations/vi.json"
+			nl: "translations/nl.json"
 		};
 	},
 	show_notification: function(message) {
@@ -43,7 +42,7 @@ Module.register("alert",{
 		}
 		if (message.message){
 			if (msg !== ""){
-				msg+= "<br />";
+				// msg+= "<br />";
 			}
 			msg += "<span class='light bright small'>" + message.message + "</span>";
 		}
@@ -86,7 +85,7 @@ Module.register("alert",{
 		}
 		if (params.message) {
 			if (message !== ""){
-				message += "<br />";
+				//message += "<br />"; //Xiu add
 			}
 
 			message += "<span class='thin bright small'>" + params.message + "</span>";

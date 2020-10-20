@@ -1,7 +1,7 @@
 /* Based on work by http://tympanus.net/codrops/licensing/ */
 
 .ns-box {
-  background-color: rgba(0, 0, 0, 0.93);
+  background-color: rgba(0, 0, 0, 0.95);
   padding: 17px;
   line-height: 1.4;
   margin-bottom: 10px;
@@ -43,7 +43,7 @@
 .black_overlay {
   position: fixed;
   z-index: 2;
-  background-color: rgba(0, 0, 0, 0.93);
+  background-color: rgba(0, 0, 0, 0.95);
   width: 100%;
   height: 100%;
 }
@@ -1738,5 +1738,24 @@
     opacity: 1;
     -webkit-transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
     transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
+  }
+}
+
+.ns-effect-slidefadingdown.ns-show,
+.ns-effect-slidefadingdown.ns-hide {
+  -webkit-animation-name: animSlidefadingdown;
+  animation-name: animSlidefadingdown;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+}
+
+@-webkit-keyframes animSlidefadingdown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-50px);
+  }
+  100% {
+    -webkit-transform: translateY(0px);
+    opacity: 1;
   }
 }
