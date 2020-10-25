@@ -18,6 +18,7 @@ Module.register("clock",{
 		showDate: true,
 		showWeek: false,
 		dateFormat: "ddd, DD/MM/YYYY",
+		lunarShow: true,
 
 		/* specific to the analog clock */
 		analogSize: "200px",
@@ -103,8 +104,8 @@ Module.register("clock",{
 		var moonWrapper = document.createElement("div");
 		var weekWrapper = document.createElement("div");
 		// Style Wrappers
-		dateWrapper.className = "date normal medium";
-		timeWrapper.className = "time bright large light";
+		dateWrapper.className = "date normal small";
+		timeWrapper.className = "time bright medium light";
 		secondsWrapper.className = "dimmed";
 		sunWrapper.className = "sun dimmed small";
 		moonWrapper.className = "moon dimmed small";
@@ -134,9 +135,16 @@ Module.register("clock",{
 
 		if(this.config.showDate){
 			// Xiu add lunarcalendar
-			var getTodayDate = new Date();	
-			var getDateJSON = getLunarDate(getTodayDate.getDate(),getTodayDate.getMonth() + 1,getTodayDate.getFullYear());
-			dateWrapper.innerHTML = now.format(this.config.dateFormat) + "<sup>(" + getDateJSON.day + "/" + getDateJSON.month + ")</sup>";
+
+			if(this.config.lunarShow)
+			{
+				var getTodayDate = new Date();	
+				var getDateJSON = getLunarDate(getTodayDate.getDate(),getTodayDate.getMonth() + 1,getTodayDate.getFullYear());
+				dateWrapper.innerHTML = now.format(this.config.dateFormat) + "<sup>(" + getDateJSON.day + "/" + getDateJSON.month + ")</sup>";	
+			}			
+			else{
+				dateWrapper.innerHTML = now.format(this.config.dateFormat);	
+			}
 		}
 		if (this.config.showWeek) {
 			weekWrapper.innerHTML = this.translate("WEEK", { weekNumber: now.week() });
