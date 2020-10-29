@@ -140,7 +140,9 @@ Module.register("clock",{
 			{
 				var getTodayDate = new Date();	
 				var getDateJSON = getLunarDate(getTodayDate.getDate(),getTodayDate.getMonth() + 1,getTodayDate.getFullYear());
-				dateWrapper.innerHTML = now.format(this.config.dateFormat) + "<sup>(" + getDateJSON.day + "/" + getDateJSON.month + ")</sup>";	
+				var getDate2Digits =  ("0" + getDateJSON.day).slice(-2);
+				var getMonth2Digits = ("0" + getDateJSON.month).slice(-2);
+				dateWrapper.innerHTML = now.format(this.config.dateFormat) + "<sup>(" + getDate2Digits + "/" + getMonth2Digits + ")</sup>";	
 			}			
 			else{
 				dateWrapper.innerHTML = now.format(this.config.dateFormat);	
