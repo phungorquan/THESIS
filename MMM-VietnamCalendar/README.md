@@ -1,8 +1,28 @@
-# Module: VietNamCalendar
+# MODULE: VietNamCalendar
 
 - This module will display your personal google calendar and VietNam events
 - We can edit events in VietNamCal.js
-
+# CONFIG:
+```
+{
+    "module": "MMM-VietnamCalendar",
+    "position": "top_left",
+    "config": {
+        "maximumEntries": 10,
+        "lunarColor": "LightGreen",
+        "calendars": [{
+            "url": "https://calendar.google.com/calendar/ical/anhquantong77%40gmail.com/public/basic.ics",
+            "color": "Violet",
+            "name": "Lịch cá nhân của anhquantong77"
+        }, {
+            "url": "https://calendar.google.com/calendar/ical/quan.ng0anhin98%40gmail.com/public/basic.ics",
+            "color": "PowderBlue",
+            "name": "Lịch cá nhân của quan.ng0anhin98"
+        }, ]
+    }
+}
+        
+```
 # EVENTS:
 1. Tết Dương lịch
 2. Ngày Sinh viên Học sinh VN
