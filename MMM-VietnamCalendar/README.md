@@ -1,4 +1,5 @@
 # MODULE: VietNamCalendar
+![image](MMM-VietnamCalendar.png)
 
 - This module will display your personal google calendar and VietNam events
 - We can edit events in VietNamCal.js
