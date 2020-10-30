@@ -17,7 +17,7 @@ Module.register("clock",{
 		clockBold: false,
 		showDate: true,
 		showWeek: false,
-		dateFormat: "ddd, DD/MM/YYYY",
+		dateFormat: "ddd, DD/MM",
 		lunarShow: true,
 
 		/* specific to the analog clock */
@@ -142,7 +142,26 @@ Module.register("clock",{
 				var getDateJSON = getLunarDate(getTodayDate.getDate(),getTodayDate.getMonth() + 1,getTodayDate.getFullYear());
 				var getDate2Digits =  ("0" + getDateJSON.day).slice(-2);
 				var getMonth2Digits = ("0" + getDateJSON.month).slice(-2);
-				dateWrapper.innerHTML = now.format(this.config.dateFormat) + "<sup>(" + getDate2Digits + "/" + getMonth2Digits + ")</sup>";	
+				var indexOfThisModule = 0;
+
+				// Check position of module and then give the margin respectively
+				for(indexOfThisModule; indexOfThisModule < config.modules.length; indexOfThisModule++)
+				{
+					if(config.modules[indexOfThisModule].module == this.name)
+					{
+						if(config.modules[indexOfThisModule].position == "top_center")
+						{
+							dateWrapper.innerHTML = now.format(this.config.dateFormat) + "<sup style = 'font-size: 10px; vertical-align: top; position: relative; left: 4px; top: 4px; '>(" + getDate2Digits + "/" + getMonth2Digits + ")</sup>" + "<sub style = 'font-size: 10px; vertical-align: bottom; position: relative; bottom: -7px; left: -27px '>(" + getYearCanChi(2020) + ")</sub>";	
+							dateWrapper.style.marginLeft  = "35px";
+						}
+						else if(config.modules[indexOfThisModule].position == "top_right")
+						{
+							dateWrapper.innerHTML = now.format(this.config.dateFormat) + "<sup style = 'font-size: 10px; vertical-align: top; position: relative; left: 4px; top: 4px; '>(" + getDate2Digits + "/" + getMonth2Digits + ")</sup>" + "<sub style = 'font-size: 10px; vertical-align: bottom; position: relative; bottom: -7px; left: -27px '>(" + getYearCanChi(2020) + ")</sub>";	
+							dateWrapper.style.marginRight  = "-27px";
+						}
+						break;
+					}
+				}				
 			}			
 			else{
 				dateWrapper.innerHTML = now.format(this.config.dateFormat);	
