@@ -1,0 +1,31 @@
+(A) Run camera on Rasp with command "sudo motion"
+(B) To kill process please use: "sudo killall -9 motion"
+
+******* CAPTURE PICTURE *******
+1. Go this '/etc/motion'
+2. RENAME the 'motion.conf' to another name
+3. RENAME the 'chuphinh.conf' to 'motion.conf'
+4. Run (A) - (the picture will be taken every 3seconds - you can edit)
+5. You can open browser to see your bullshit FACE with 'rasperryip:8081'
+6. Image will be saved into '/home/pi/PS3Save' folder
+7. Run (B) after taken
+
+******* STREAM IMAGE without CAPTURE *******
+1. Go this '/etc/motion'
+2. RENAME the 'chuphinh.conf' to another name
+3. RENAME another name of motion.conf to 'motion.conf'
+4. Run (A)
+5. You can open browser to see your bullshit FACE with 'rasperryip:8081'
+6. Run (B) when you were bored
+
+******* STREAM and COMBINE with MMM *******
+1. Extract my face_recognition.zip
+3. Go inside face-recognition and use git command to see what i commited
+4. If you don't know how to use git, please use my .zip for the first test
+5. On raspberry go inside MagicMirror folder and run MMM with 'npm start'
+6. On Ubuntu (Laptop) change to your environment if you use conda
+7. On Ubuntu (Laptop) open 'video_classifier.py' inside 'face-recognition/inference' to change 
+raspberry IP 
+8. On Ubuntu (Laptop) go inside face-recognition folder and run this command "python -m inference.video_classifier" 
+
+Enjoy
