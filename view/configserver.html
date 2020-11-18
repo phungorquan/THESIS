@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <link rel="stylesheet" href="../configserver/css/configserver.css">  <!-- include File CSS tự tạo -->
+        <style>
+        </style>
+    </head>
+    <body>
+      
+      
+      <table cellspacing = "50" style = "margin-left: auto;  margin-right: auto;  margin-top: auto;  margin-bottom: auto; padding: 5px">
+        <td style = "border: 0px solid black; border-radius: 10px;"> 
+          <select id ="dropONModules" style = "text-align: center; width: 100%;" onchange="dropONModules()"></select><br><br>
+          <textarea id = "modulesContent" style = "width:300px; height:400px;"></textarea><br><br>
+          <button id = "buttonSavePro" class = "myButton" onclick="saveModuleContent()">Save</button><br><br>
+          <button id = "buttonGenPro" class = "myButton" onclick="genModuleContent()">Gen</button>
+        </td>
+        <td><div style = "border-left: 1px solid black;height: 500px;"></div></td>
+        <td style = "border: 0px solid black; border-radius: 10px;"> 
+          <p style = "text-align: center; float: center;">ALL MODULES</p>
+          <table id="allModulesStatus" style = "width:100%; text-align: center;"></table><br>
+          <table>
+            <select id ="dropAllModules" style = "text-align: center; width: 100%;"></select><br><br>
+            <button id = "buttonApplyStatus" class = "myStatusButton" onclick="updateStatus()">Change</button>
+          </table>
+        </td>
+      </table>
+    </body>
+    <script src="/configserver/beauty/beautify.js">
+    </script>
+    <script src="/socket.io/socket.io.js">
+    </script>
+    <script src="/configserver/configbackend.js">
+    </script>
+</html>

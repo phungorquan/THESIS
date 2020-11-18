@@ -1,0 +1,61 @@
+.modulesTable{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.myProInput{
+  width: 95%;
+  height: 5%;
+  padding: 5px 5px ;
+  text-align: center;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.myButton{
+  width: 100%;
+  height: 5%;
+  color: black;
+  padding: 5px 5px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.hideoption { display:none; visibility:hidden; height:0; font-size:0; }
+.myStatusInput{
+  width: 95%;
+  height: 5%;
+  color: black;
+  padding: 5px 5px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.myStatusButton{
+  width: 100%;
+  height: 5%;
+  color: black;
+  padding: 5px 5px;
+  text-align: center;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.tdClass {
+  	border: 0px solid black;
+  	padding: 10px;
+}
