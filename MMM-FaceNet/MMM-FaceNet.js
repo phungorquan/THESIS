@@ -7,16 +7,32 @@ Module.register("MMM-FaceNet", {
     },
     socketNotificationReceived: function(notification, payload) {
         if (notification == "FACENET_RESULT") {
-            // Split string "user - rate" from Python
-            var result = payload.split('-');
-            //console.log(result[0]); // getUser
-            console.log(result);
-            if (result.length != 0) {
-                document.getElementById("facenetresult").innerHTML = "Hello: ";
-                for (var i = 0; i < result.length; i++) {
-                    document.getElementById("facenetresult").innerHTML += result[i] + "-";
-                }
+            var splitSpecificUser = payload.split('/');
+            var userArr = [];
+            var rateArr = [];
+            var strCombine = "";
+
+            for(index in splitSpecificUser)
+            {
+                strCombine += splitSpecificUser[index] + "<br>";
             }
+
+            this.sendNotification("SHOW_ALERT",{type: "notification",title: "Hello" , message:"<h1>"+strCombine+"</h1>", timer : 2000});
+
+
+            // Only display text
+
+            // document.getElementById("facenetresult").innerHTML = "";
+            // for(index in splitSpecificUser)
+            // {
+            //     document.getElementById("facenetresult").innerHTML += splitSpecificUser[index] + "<br>";
+                
+                
+            //     //Uncomment if you want to do something
+            //     // var tmp = splitSpecificUser[index].split(',');
+            //     //userArr.push(tmp[0]);
+            //     //rateArr.push(tmp[1]); 
+            // }
         }
     },
     // Override dom generator.
@@ -24,7 +40,7 @@ Module.register("MMM-FaceNet", {
         var wrapper = document.createElement("div");
         var userRecog = document.createElement("span");
         userRecog.setAttribute("id", "facenetresult");
-        userRecog.innerHTML = "Chào Quân - Khánh";
+        userRecog.innerHTML = "...";
         userRecog.style.color = "pink";
         wrapper.appendChild(userRecog);
         return wrapper;
