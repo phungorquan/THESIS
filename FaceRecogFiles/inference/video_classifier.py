@@ -12,15 +12,18 @@ import time
 
 def main():
 
-    URL_STREAM = "/home/xiu/Facenet/face-recognition/TestVideo2.mp4"
-    #URL_STREAM = "http://192.168.1.20:8081"
+    URL_STREAM = "/home/xiu/Facenet/face-recognition/DatasetAtUitLab.mp4"
+    # URL_STREAM = "/home/xiu/Facenet/face-recognition/Untitled.png"
+
+    #URL_STREAM = "http://192.168.1.20:8081" // tren ras 
     cap = cv2.VideoCapture(URL_STREAM)
 
     face_recogniser = joblib.load(MODEL_PATH)
     preprocess = preprocessing.ExifOrientationNormalize()
-    faceReceived = ""
+    strCombine = "" # String to combine all data which were recognized
+    
     # Raspberry url to get DATA
-    URL = "http://192.168.1.30:8080/facenetroute"
+    URL = "http://192.168.1.24:8080/facenetroute" # magicmirror
     while True:
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -28,32 +31,57 @@ def main():
             img = Image.fromarray(frame)
             faces = face_recogniser(preprocess(img))
             if faces is not None:
-                for face in faces:
-                    _user = face.top_prediction.label.upper()
-                    _rate = face.top_prediction.confidence * 100
-                    if faceReceived != _user:
-                        if _rate > 50 :
-                            faceReceived = _user
-                            getNumOfUsers = str(len(faces))
-                            getUser = str(faceReceived)
-                            getRate = str(_rate)
-                            print("\x1b[6;30;42m [OK] \x1b[0m -- num: "+getNumOfUsers + ", id: "  + getUser + ", rate: " +getRate)
-                            PARAMS = {'user': getUser,'rate':getRate,'quantity':getNumOfUsers} 
-                            #requests.get(url = URL, params = PARAMS) 
-                        else:
-                            faceReceived = _user
-                            getNumOfUsers = str(len(faces))
-                            getUser = "Unknown"
-                            getRate = str(_rate)
-                            print("\x1b[0;30;41m [ERR] \x1b[0m -- num: "+getNumOfUsers + ", id: "  + getUser + ", rate: " +getRate)
-                            PARAMS = {'user': getUser,'rate':getRate,'quantity':getNumOfUsers} 
-                            #requests.get(url = URL, params = PARAMS) 
-                    # else:
-                    #     print("...")
+                userArr = [] # All users name which were recognized 
+                rateArr = [] # All users rate which were recognized 
 
-                # No need to draw if you are not debugging
-                draw_bb_on_img(faces, img)
+                for face in faces:
+                    _user = face.top_prediction.label # Get name
+                    _rate = float("{:.2f}".format(face.top_prediction.confidence)) # Get rate
+
+                    if _rate > 0.5:
+                        flagExist = True
+                        # Assign user to userArr if not exist
+                        # Assign greater rate to user who was existed
+                        if len(userArr) > 0:
+                            for index in range(len(userArr)):
+                                if _user == userArr[index]:
+                                    if _rate > rateArr[index]:
+                                        rateArr[index] = _rate # Re-assign rate
+                                    
+                                    flagExist = True
+                                    break
+                                else:
+                                    flagExist = False
+                        else:
+                            userArr.append(_user)
+                            rateArr.append(_rate)
     
+                        if flagExist == False:
+                            userArr.append(_user)
+                            rateArr.append(_rate)
+                    else:
+                        userArr.append("UNKNOWN")
+                        rateArr.append(_rate)
+
+                # Combine data        
+                currentData = ""
+                for index in range(len(userArr)):
+                    if index != (len(userArr) - 1):
+                        currentData = currentData + userArr[index] + "," + str(rateArr[index]) + "/"
+                    else:
+                        currentData = currentData + userArr[index] + "," + str(rateArr[index])
+
+                if currentData != strCombine:
+                    strCombine = currentData
+                    print(strCombine)
+
+                    # Prepare data with feild 'data'
+                    PARAMS = {'data':strCombine}
+                    requests.get(url = URL, params = PARAMS) 
+                    
+                # No need to draw if you are not debugging
+                # draw_bb_on_img(faces, img)
+
             # Display the resulting frame
             cv2.imshow('video', np.array(img))
         else:
