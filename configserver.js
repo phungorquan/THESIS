@@ -12,6 +12,9 @@ var db = require(path.resolve("db.js")); // Include file db.js để dùng các 
 
 server.listen(7777);
 var configFilename = path.resolve("../config/config.js");
+var genConfigFilename = path.resolve("../config/genConfig.js");
+var jsonDir = path.resolve("../configserver/json") + "/";
+
 var c = require(configFilename);
 var allModules = [];
 
@@ -80,7 +83,7 @@ io.on("connection", function(socket)
   });
 
   // Combine all .js file to a dummy config file
-  socket.on("GEN_MODULES_CONFIG", function(msg) {
+  socket.on("GEN_MODULES_CONFIG", function() {
     c = require(configFilename);
     c.modules = [];
     function genNewModules(dir,index) {
@@ -120,15 +123,15 @@ io.on("connection", function(socket)
       }
     }
 
-    if(fs.existsSync("../config/genConfig.js"))
+    if(fs.existsSync(genConfigFilename))
     {
       // Write file after assign new config
-      fs.writeFileSync(path.resolve("../config/genConfig.js"), beautify(JSON.stringify(c), {brace_style: "expand" }));
+      fs.writeFileSync(path.resolve(genConfigFilename), beautify(JSON.stringify(c), {brace_style: "expand" }));
       socket.emit("ALERT_OK","READY_TO_COMBINE_CONFIG_COMPONENTS");
     }
     else
     {
-      console.log("NOT EXIST DIRECTORY: ../config/genConfig.js");
+      console.log("NOT EXIST DIRECTORY: ",genConfigFilename);
       socket.emit("ALERT_ERROR","NOT EXIST DIRECTORY");
     }
     
@@ -137,17 +140,17 @@ io.on("connection", function(socket)
   // Combine all the other component of .js file
   socket.on("COMBINE_CONFIG_COMPONENTS", function(id) {
     function combineComponents() {
-      if(fs.existsSync("../config/genConfig.js"))
+      if(fs.existsSync(genConfigFilename))
       {
-        var getGenConfig = fs.readFileSync(path.join('../config/genConfig.js'),"utf8");
-        fs.writeFileSync(path.resolve("../config/config.js"), "var config =");
-        fs.appendFileSync(path.resolve("../config/config.js"), getGenConfig);
-        fs.appendFileSync(path.resolve("../config/config.js"), ";if (typeof module !== 'undefined') module.exports = config;");
+        var getGenConfig = fs.readFileSync(path.join(genConfigFilename),"utf8");
+        fs.writeFileSync(path.resolve(configFilename), "var config =");
+        fs.appendFileSync(path.resolve(configFilename), getGenConfig);
+        fs.appendFileSync(path.resolve(configFilename), ";if (typeof module !== 'undefined') module.exports = config;");
         socket.emit("ALERT_OK","READY_TO_RESET");
       }
       else
       {
-        console.log("NOT EXIST DIRECTORY: ../config/genConfig.js");
+        console.log("NOT EXIST DIRECTORY: ", genConfigFilename);
         socket.emit("ALERT_ERROR","NOT EXIST DIRECTORY");
       }
     }
@@ -155,8 +158,11 @@ io.on("connection", function(socket)
   });
 
   socket.on("EXEC_COMMAND", function(msg) {
+  // msg[0]: cmdIndex
+  // msg[1]: name of json file
+  console.log(msg);
   var result = "";
-    switch(msg)
+    switch(msg[0])
     {
       case 0: result = "pm2 restart mm"; break;
       case 1: result = "pm2 start ~/mm.sh"; break;
@@ -164,6 +170,22 @@ io.on("connection", function(socket)
       case 3: result = "echo '1' | sudo -S reboot now"; break;
       case 4: result = "echo '1' | sudo -S shutdown -h now"; break;
       case 5: result = "cp ~/MagicMirror/THESIS/config/Backupconfig.js ~/MagicMirror/THESIS/config/config.js && pm2 restart mm"; break;
+      case 6: {
+
+        var getFileBKName = jsonDir + msg[1] + '/' + msg[1] + 'BK.js';
+        var getFileName = jsonDir + msg[1] + '/' + msg[1] + '.js';
+
+        if(fs.existsSync(getFileBKName) && fs.existsSync(getFileName))
+        {
+          result = "cp " + getFileBKName + " " + getFileName + " && pm2 restart mm";
+        }
+        else
+        {
+          console.log("NOT EXIST DIRECTORY: " + getFileBKName + " OR " + getFileName);
+          result = "ERROR";
+        }
+        break;
+      }
       //case 5: result = "curl -X POST 'http://localhost:5000/face-recognition?include_predictions=false' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F 'image=@/home/xiu/Desktop/therock.jpg'";break;//'image=@/home/xiu/Facenet/face-recognition/test.jpg'"; break;
       
       default: result = "ERROR"; break;
@@ -172,20 +194,27 @@ io.on("connection", function(socket)
       myProcess.exec(result,function (err,stdout,stderr) {
         var execResult = "";
         if (err) {
-          console.log("*** ERROR EXEC - " + msg + " ***\n" + stderr);
+          console.log("*** ERROR EXEC - " + msg[0] + " ***\n" + stderr);
         } 
         else {
-          console.log("*** RUN " + msg +" OK ***");
-          if(msg == 5)
+          console.log("*** RUN " + msg[0] +" OK ***");
+          if(msg[0] == 5)
           {
             io.sockets.emit("REFRESH_ALL_DEVICES");
+          }
+          else if(msg[0] == 6)
+          {
+            io.sockets.emit("ALERT_OK","REQUEST_GEN_JSON_ALL_DEVICES");   
           }
           if(stdout)
             console.log(stdout);
         }
       });
     }
-    else socket.emit("ALERT_ERROR","ERROR - " + msg);
+    else {
+      console.log("ERROR COMMAND: .", msg[0]);
+      socket.emit("ALERT_ERROR", msg[0]);
+    }
   });
 
   // Update modules status

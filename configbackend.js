@@ -2,7 +2,7 @@ var mySocketIO = io(); // Create my socket
 var ns_ConfigServer = {
     ON: 1,
     OFF: 0,
-    OnTitleOption:"Select modules" ,
+    OnDisableOption:"Select modules" ,
     numOfModules:0
 };
 
@@ -26,7 +26,13 @@ mySocketIO.on("ALERT_OK",function(msg){
     }
     else if(msg == "READY_TO_RESET")
     {
-        mySocketIO.emit("EXEC_COMMAND",0);
+        var arrTmp = [];
+        arrTmp[0] = 0;
+        mySocketIO.emit("EXEC_COMMAND",arrTmp);
+    }
+    else if (msg == "REQUEST_GEN_JSON_ALL_DEVICES")
+    {
+        mySocketIO.emit("GEN_MODULES_CONFIG");
     }
     else
     {
@@ -48,8 +54,14 @@ mySocketIO.on("RES_MODULE_CONTENT",function(msg){
 function dropONModules(){
     var selection = document.getElementById("dropONModules");
     var value = selection.options[selection.selectedIndex].value;
-    // Emit to get module content
-    mySocketIO.emit("GET_MODULE_CONTENT",value); 
+    if(value != ns_ConfigServer.OnDisableOption)
+    {   // Emit to get module content
+        mySocketIO.emit("GET_MODULE_CONTENT",value); 
+    }
+    else 
+    {
+        alert("Please select modules!");
+    }
 }
 
 // Save content 
@@ -66,7 +78,7 @@ function saveModuleContent(){
 
 // Gen all .js file to genConfig
 function genModuleContent(){
-    mySocketIO.emit("GEN_MODULES_CONFIG","DUMMY");
+    mySocketIO.emit("GEN_MODULES_CONFIG");
 }
 
 // Add to ON option all ON modules, and display ON/OFF modules status table
@@ -85,7 +97,7 @@ mySocketIO.on("RES_ALL_MODULES",function(msg){
     var option = document.createElement("option");
     option.selected = true;
     option.disabled = true;
-    option.text = ns_ConfigServer.OnTitleOption;
+    option.text = ns_ConfigServer.OnDisableOption;
     getONOption.add(option);
 
     
@@ -114,7 +126,6 @@ mySocketIO.on("RES_ALL_MODULES",function(msg){
         optionAllModules.value = parseInt(index);
         optionAllModules.text = msg[index].MASKNAME;
         getAllModulesOption.add(optionAllModules);
-
     }
 });
 
@@ -131,17 +142,35 @@ function updateStatus()
     mySocketIO.emit("UPDATE_MODULES_STATUS",value);
 }
 
-function cmdButton(commandIndex)
+function cmdButton(cmdIndex)
 {
     // 0: RESET_SMARTMIRROR
     // 1: START_SMARTMIRROR
     // 2: STOP_SMARTMIRROR
-    // 3: REBOOT_SMARTMIRROR
-    // 4: SHUTDOWN_SMARTMIRROR
-    // 5: BACKUP_SMARTMIRROR
-    if(typeof commandIndex == 'number')
+    // 3: REBOOT_RASPBERRY
+    // 4: SHUTDOWN_RASPBERRY
+    // 5: BACKUP_CONFIG_FILE
+    // 6: BACKUP_A_MODULE_JSON
+    
+    var selection = document.getElementById("dropONModules");
+    var value = selection.options[selection.selectedIndex].value;
+    var cmdArr = [];
+    cmdArr[0] = cmdIndex;
+
+    if(value != ns_ConfigServer.OnDisableOption && cmdArr[0] == 5)
+    {       
+        if(typeof cmdIndex == 'number')
+        {
+            cmdArr[0] = 6;
+            // Get name to trace to backup file to backup that module
+            cmdArr[1] = value.replace("-","").toLowerCase();
+            mySocketIO.emit("EXEC_COMMAND",cmdArr);
+        } 
+    }    
+    else
     {
-      console.log("You click - " + commandIndex);
-      mySocketIO.emit("EXEC_COMMAND",commandIndex);
-    }  
+        // Execute normal commands
+        mySocketIO.emit("EXEC_COMMAND",cmdArr);
+    }
+ 
 }
