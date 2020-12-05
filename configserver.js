@@ -5,6 +5,7 @@ var express = require("express");
 var app = express();
 app.use(express.static(path.join(__dirname, '../'))); // Set global folder is THESIS folder
 var server = require("http").Server(app);
+var myProcess = require('child_process');
 
 var io = require("socket.io")(server);
 var db = require(path.resolve("db.js")); // Include file db.js để dùng các function truy xuất db (library tự tạo)
@@ -36,8 +37,24 @@ io.on("connection", function(socket)
   socket.on("GET_MODULE_CONTENT", function(file) {
     function getModuleContent() {
       var combineFileName = 'json/' + file + '/' + file + '.js';
-      var getContent = fs.readFileSync(path.join(combineFileName),"utf8");
-      socket.emit("RES_MODULE_CONTENT",getContent);
+      if(fs.existsSync(combineFileName))
+      {
+        var getContent = fs.readFileSync(path.join(combineFileName),"utf8");
+        if(getContent.length > 0)
+        {
+          socket.emit("RES_MODULE_CONTENT",getContent);
+        }
+        else
+        {
+          console.log("EMPTY FILE: ",file);
+          socket.emit("ALERT_ERROR","EMPTY FILE");
+        }
+      }
+      else
+      {
+        console.log("NOT EXIST DIRECTORY: ",combineFileName);
+        socket.emit("ALERT_ERROR","NOT EXIST DIRECTORY");
+      }
     }
     getModuleContent(); 
   });
@@ -48,8 +65,16 @@ io.on("connection", function(socket)
       var getModuleFromJSON = JSON.parse(msg);
       var getFileName = getModuleFromJSON.module.replace("-","").toLowerCase();
       var combineFileName = 'json/' + getFileName + '/' + getFileName + '.js';
-      fs.writeFileSync(path.resolve(combineFileName), msg);
-      io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");
+      if(fs.existsSync(combineFileName))
+      {
+        fs.writeFileSync(path.resolve(combineFileName), msg);
+        io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");
+      }
+      else
+      {
+        console.log("NOT EXIST DIRECTORY: ",combineFileName);
+        socket.emit("ALERT_ERROR","NOT EXIST DIRECTORY");
+      }
     }
     saveModuleContent(); 
   });
@@ -57,24 +82,113 @@ io.on("connection", function(socket)
   // Combine all .js file to a dummy config file
   socket.on("GEN_MODULES_CONFIG", function(msg) {
     c = require(configFilename);
-    function genNewModules(url,index) {
-        var getGenConfig = fs.readFileSync(path.join(url),"utf8");
-        c.modules[index] = JSON.parse(getGenConfig);
-        fs.writeFileSync(path.resolve("../config/genConfig.js"), beautify(JSON.stringify(c), {brace_style: "expand" }));
+    c.modules = [];
+    function genNewModules(dir,index) {
+      var checkOK = false;
+      if(fs.existsSync(dir))
+      {
+        var getGenConfig = fs.readFileSync(path.join(dir),"utf8");
+        if(getGenConfig.length > 0)
+        {
+          c.modules[index] = JSON.parse(getGenConfig);
+          checkOK = true;
+        }
+        else
+        {
+          console.log("EMPTY FILE: ",getGenConfig);
+          socket.emit("ALERT_ERROR","EMPTY FILE");
+        }
+      }
+      else
+      {
+        console.log("NOT EXIST DIRECTORY: ",combineFileName);
+        socket.emit("ALERT_ERROR","NOT EXIST DIRECTORY");
+      }
+      return checkOK;
     }
 
+    var expectIndex = 0;
     for(var index in allModules)
     {
       if(allModules[index].STATUS == 1)
       {
         var combineFileName = 'json/' + allModules[index].NAME + '/' + allModules[index].NAME + '.js';
-        genNewModules(combineFileName,index);
+        if(genNewModules(combineFileName,expectIndex))
+        {
+          expectIndex++;  
+        }        
       }
     }
-    socket.emit("ALERT_OK","READY_TO_RESET");
+
+    if(fs.existsSync("../config/genConfig.js"))
+    {
+      // Write file after assign new config
+      fs.writeFileSync(path.resolve("../config/genConfig.js"), beautify(JSON.stringify(c), {brace_style: "expand" }));
+      socket.emit("ALERT_OK","READY_TO_COMBINE_CONFIG_COMPONENTS");
+    }
+    else
+    {
+      console.log("NOT EXIST DIRECTORY: ../config/genConfig.js");
+      socket.emit("ALERT_ERROR","NOT EXIST DIRECTORY");
+    }
+    
   });
 
-    // Update modules status
+  // Combine all the other component of .js file
+  socket.on("COMBINE_CONFIG_COMPONENTS", function(id) {
+    function combineComponents() {
+      if(fs.existsSync("../config/genConfig.js"))
+      {
+        var getGenConfig = fs.readFileSync(path.join('../config/genConfig.js'),"utf8");
+        fs.writeFileSync(path.resolve("../config/config.js"), "var config =");
+        fs.appendFileSync(path.resolve("../config/config.js"), getGenConfig);
+        fs.appendFileSync(path.resolve("../config/config.js"), ";if (typeof module !== 'undefined') module.exports = config;");
+        socket.emit("ALERT_OK","READY_TO_RESET");
+      }
+      else
+      {
+        console.log("NOT EXIST DIRECTORY: ../config/genConfig.js");
+        socket.emit("ALERT_ERROR","NOT EXIST DIRECTORY");
+      }
+    }
+    combineComponents(); 
+  });
+
+  socket.on("EXEC_COMMAND", function(msg) {
+  var result = "";
+    switch(msg)
+    {
+      case 0: result = "pm2 restart mm"; break;
+      case 1: result = "pm2 start ~/mm.sh"; break;
+      case 2: result = "pm2 stop mm"; break;
+      case 3: result = "echo '1' | sudo -S reboot now"; break;
+      case 4: result = "echo '1' | sudo -S shutdown -h now"; break;
+      case 5: result = "cp ~/MagicMirror/THESIS/config/Backupconfig.js ~/MagicMirror/THESIS/config/config.js && pm2 restart mm"; break;
+      //case 5: result = "curl -X POST 'http://localhost:5000/face-recognition?include_predictions=false' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F 'image=@/home/xiu/Desktop/therock.jpg'";break;//'image=@/home/xiu/Facenet/face-recognition/test.jpg'"; break;
+      
+      default: result = "ERROR"; break;
+    }
+    if(result != "ERROR"){
+      myProcess.exec(result,function (err,stdout,stderr) {
+        var execResult = "";
+        if (err) {
+          console.log("*** ERROR EXEC - " + msg + " ***\n" + stderr);
+        } 
+        else {
+          console.log("*** RUN " + msg +" OK ***");
+          if(msg == 5)
+          {
+            io.sockets.emit("REFRESH_ALL_DEVICES");
+          }
+          if(stdout)
+            console.log(stdout);
+        }
+      });
+    }
+    else socket.emit("ALERT_ERROR","ERROR - " + msg);
+  });
+
+  // Update modules status
   socket.on("UPDATE_MODULES_STATUS", function(id) {
     async function updateStatus() {
       // Get status of module [id-1]
@@ -91,20 +205,17 @@ io.on("connection", function(socket)
     updateStatus(); 
   });
 
-  socket.on("RESET_MMM", function(id) {
-    function resetMMM() {
-      var getGenConfig = fs.readFileSync(path.join('../config/genConfig.js'),"utf8");
-      fs.writeFileSync(path.resolve("../config/config.js"), "var config =");
-      fs.appendFileSync(path.resolve("../config/config.js"), getGenConfig);
-      fs.appendFileSync(path.resolve("../config/config.js"), ";if (typeof module !== 'undefined') module.exports = config;");
-      socket.emit("ALERT_OK","DUMMY");
-    }
-    resetMMM(); 
-  });
 });
+
+
+
 
 app.get('/config',function(req,res){
 
+  var id = req.param('id');
+  var pass = req.param('pass');
+  if(id == "MMM" && pass == "1")
+  {
     fs.readFile('view/configserver.html', null, function (error, data) {
       if (error) {
           res.writeHead(404);
@@ -114,4 +225,5 @@ app.get('/config',function(req,res){
       }
       res.end();
     });
+  }
 });

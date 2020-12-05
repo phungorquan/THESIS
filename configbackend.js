@@ -20,14 +20,22 @@ mySocketIO.on("ALERT_OK",function(msg){
         getContentArea.innerHTML = "";
         location.reload();
     }
+    else if(msg == "READY_TO_COMBINE_CONFIG_COMPONENTS")
+    {
+        mySocketIO.emit("COMBINE_CONFIG_COMPONENTS");
+    }
     else if(msg == "READY_TO_RESET")
     {
-        mySocketIO.emit("RESET_MMM");
+        mySocketIO.emit("EXEC_COMMAND",0);
     }
     else
     {
         alert("OK");
     }
+});
+
+mySocketIO.on("REFRESH_ALL_DEVICES",function(){ 
+    location.reload();
 });
 
 // Display content of modules
@@ -121,4 +129,19 @@ function updateStatus()
     var selection = document.getElementById("dropAllModules");
     var value = selection.options[selection.selectedIndex].value;
     mySocketIO.emit("UPDATE_MODULES_STATUS",value);
+}
+
+function cmdButton(commandIndex)
+{
+    // 0: RESET_SMARTMIRROR
+    // 1: START_SMARTMIRROR
+    // 2: STOP_SMARTMIRROR
+    // 3: REBOOT_SMARTMIRROR
+    // 4: SHUTDOWN_SMARTMIRROR
+    // 5: BACKUP_SMARTMIRROR
+    if(typeof commandIndex == 'number')
+    {
+      console.log("You click - " + commandIndex);
+      mySocketIO.emit("EXEC_COMMAND",commandIndex);
+    }  
 }
