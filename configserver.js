@@ -255,4 +255,7 @@ app.get('/config',function(req,res){
       res.end();
     });
   }
+  else {
+    res.write('WRONG ID AND PASSWORD');
+  }
 });
