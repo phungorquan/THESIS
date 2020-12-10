@@ -1,4 +1,7 @@
 //python -m inference.video_classifier
+
+var currentUserDetected = "";
+
 Module.register("MMM-FaceNet", {
     requiresVersion: "2.1.0",
     start: function() {
@@ -11,28 +14,26 @@ Module.register("MMM-FaceNet", {
             var userArr = [];
             var rateArr = [];
             var strCombine = "";
-
-            for(index in splitSpecificUser)
+            if (splitSpecificUser[0].length > 0)
             {
-                strCombine += splitSpecificUser[index] + "<br>";
+                for(index in splitSpecificUser)
+                {
+                    strCombine += splitSpecificUser[index] + "<br>";
+                }
+
+                //this.sendNotification("SHOW_ALERT",{type: "notification",title: "Hello" , message:"<h1>"+strCombine+"</h1>", timer : 2000});
+
+                // Only display text
+                document.getElementById("facenetresult").innerHTML = strCombine ;//+= splitSpecificUser[index] + "<br>";
             }
-
-            this.sendNotification("SHOW_ALERT",{type: "notification",title: "Hello" , message:"<h1>"+strCombine+"</h1>", timer : 2000});
-
-
-            // Only display text
-
-            // document.getElementById("facenetresult").innerHTML = "";
-            // for(index in splitSpecificUser)
-            // {
-            //     document.getElementById("facenetresult").innerHTML += splitSpecificUser[index] + "<br>";
-                
-                
-            //     //Uncomment if you want to do something
-            //     // var tmp = splitSpecificUser[index].split(',');
-            //     //userArr.push(tmp[0]);
-            //     //rateArr.push(tmp[1]); 
-            // }
+            else{
+                document.getElementById("facenetresult").innerHTML = "...";
+            }
+        }
+        else if (notification == "CAMERA_STATUS")
+        {
+            console.log(payload);
+            document.getElementById("facenetresult").innerHTML = payload;
         }
     },
     // Override dom generator.

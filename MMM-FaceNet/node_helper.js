@@ -10,7 +10,10 @@ module.exports = NodeHelper.create({
         // Create server to receive data via GET method
         this.expressApp.get('/facenetroute', function(req, res) {
             var getData = req.param('data');
-            self.sendSocketNotification("FACENET_RESULT", getData);
+            if(getData != "CAMERA_ERROR")
+                self.sendSocketNotification("FACENET_RESULT", getData);
+            else 
+                self.sendSocketNotification("CAMERA_STATUS", getData);
             res.send("OK"); // Don't delete, because it will help Python can send another GET requests
         });
     },
