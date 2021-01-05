@@ -2,7 +2,7 @@ var mySocketIO = io(); // Create my socket
 var ns_ConfigServer = {
     ON: 1,
     OFF: 0,
-    OnDisableOption:"Select modules" ,
+    OnDisableOption:"Chọn mô-đun" ,
     numOfModules:0
 };
 

@@ -12,42 +12,48 @@
       
       <table cellspacing = "50" style = "margin-left: auto;  margin-right: auto;  margin-top: auto;  margin-bottom: auto; padding: 5px">
         <tr>
-        <td style = "border: 0px solid black; border-radius: 10px;"> 
-          <select id ="dropONModules" style = "text-align: center; width: 100%;" onchange="dropONModules()"></select><br><br>
-          <textarea id = "modulesContent" style = "width:300px; height:400px;"></textarea><br><br>
-          <button id = "buttonSavePro" class = "myButton" onclick="saveModuleContent()">Save</button><br><br>
-          <button id = "buttonGenPro" class = "myButton" onclick="genModuleContent()">Apply and restart</button>
-        </td>
-        <td><div style = "border-left: 1px solid black;height: 500px;"></div></td>
-        <td style = "border: 0px solid black; border-radius: 10px;"> 
-          <p style = "text-align: center; float: center;">ALL MODULES</p>
-          <table id="allModulesStatus" style = "width:100%; text-align: center;"></table><br>
-          <table>
-            <select id ="dropAllModules" style = "text-align: center; width: 100%;"></select><br><br>
-            <button id = "buttonApplyStatus" class = "myStatusButton" onclick="updateStatus()">Change</button>
-          </table>
-        </td>
+          <td style = "border: 0px solid black; border-radius: 10px;"> 
+            <select id ="dropONModules" style = "text-align: center; width: 100%;" onchange="dropONModules()"></select><br><br>
+            <textarea id = "modulesContent" style = "width:350px; height:400px;"></textarea><br><br>
+            <button id = "buttonSavePro" class = "myButton" onclick="saveModuleContent()">Lưu</button><br><br>
+            <button id = "buttonGenPro" class = "myButton" onclick="genModuleContent()">Áp dụng và khởi động lại</button>
+          </td>
+          <td><div style = "border-left: 1px solid black;height: 550px;"></div></td>
+          <td style = "border: 0px solid black; border-radius: 10px; width: 250px;"> 
+            <p style = "text-align: center; float: center;">TRẠNG THÁI</p>
+            <table id="allModulesStatus" style = "width:100%; text-align: center;"></table><br>
+            <table>
+              <select id ="dropAllModules" style = "text-align: center; width: 100%;"></select><br><br>
+              <button id = "buttonApplyStatus" class = "myStatusButton" onclick="updateStatus()">Tắt/Mở</button>
+            </table>
+          </td>
       </tr>
       <tr>
-          <td colspan="3">
-              <button class="myCmdButton" id="btnReset" onclick="cmdButton(0)">
-                  Reset
-              </button>
+          <td  style = "text-align:center;">
+             <p><b>Điều khiển hệ thống gương</p>
               <button class="myCmdButton" id="btnStart" onclick="cmdButton(1)">
                   Start
               </button>
               <button class="myCmdButton" id="btnStop" onclick="cmdButton(2)">
                   Stop
               </button>
-              <button class="myCmdButton" id="btnReboot" onclick="cmdButton(3)">
-                  Reboot
-              </button>
-              <button class="myCmdButton" id="btnShutdown" onclick="cmdButton(4)">
-                  Shutdown
+              <button class="myCmdButton" id="btnReset" onclick="cmdButton(0)">
+                  Reset
               </button>
               <button class="myCmdButton" id="btnBackup" onclick="cmdButton(5)">
                   Backup
               </button>
+              
+          </td>
+          <td><div style = "border-left: 1px solid black; height: 100px;"></div></td>
+          <td  style = "text-align:center;">
+            <p><b>Điều khiển Raspberry</p>
+            <button class="myCmdButton" id="btnReboot" onclick="cmdButton(3)">
+                Reboot
+            </button>
+            <button class="myCmdButton" id="btnShutdown" onclick="cmdButton(4)">
+                Shutdown
+            </button>
           </td>
       </tr>
       </table>
