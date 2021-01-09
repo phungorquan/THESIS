@@ -3,20 +3,29 @@ var fs = require('fs');
 var path = require('path');
 var express = require("express");
 var app = express();
+const session = require('express-session');
 app.use(express.static(path.join(__dirname, '../'))); // Set global folder is THESIS folder
+app.use(session({secret: 'xiu',saveUninitialized: true,resave: true}));
+// Parse URL-encoded bodies (as sent by HTML forms)
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.urlencoded({extended: true}))
 var server = require("http").Server(app);
 var myProcess = require('child_process');
 
 var io = require("socket.io")(server);
+var clients = {};
 var db = require(path.resolve("db.js")); // Include file db.js để dùng các function truy xuất db (library tự tạo)
 
-server.listen(7777);
+server.listen(7717);
 var configFilename = path.resolve("../config/config.js");
 var genConfigFilename = path.resolve("../config/genConfig.js");
 var jsonDir = path.resolve("../configserver/json") + "/";
 
 var c = require(configFilename);
 var allModules = [];
+
+var globSessionArr = [];
 
 // Get all modules name + config
 async function getAllModulesStatus() {
@@ -29,10 +38,18 @@ async function getAllModulesStatus() {
   // Get all modules name + config , when first run server
   getAllModulesStatus(); 
 
-io.on("connection", function(socket)
+io.sockets.on("connection", function(socket)
 { 
+    console.log("New connection: ",socket.id);
+    clients[socket.id] = socket;
+  socket.on("disconnect",function(data){
+    console.log("Close connection: ", socket.id);
+    delete clients[socket.id];
+  });
+
   // Response modules name + status
   socket.on("GET_ALL_MODULES", function(msg) {
+    getAllModulesStatus(); 
     socket.emit("RES_ALL_MODULES",allModules);
   });
 
@@ -66,8 +83,17 @@ io.on("connection", function(socket)
   socket.on("SAVE_MODULE_CONTENT", function(msg) {
     function saveModuleContent() {
       var getModuleFromJSON = JSON.parse(msg);
-      var getFileName = getModuleFromJSON.module.replace("-","").toLowerCase();
-      var combineFileName = 'json/' + getFileName + '/' + getFileName + '.js';
+      var combineFileName = "";
+      for(var index in allModules)
+      {
+        if(allModules[index].REALNAME == getModuleFromJSON.module)
+          {
+            combineFileName = 'json/' + allModules[index].NAME + '/' + allModules[index].NAME + '.js';
+            break;
+          }
+      }
+      //var getFileName = getModuleFromJSON.module.replace("-","").toLowerCase();
+      //var combineFileName = 'json/' + getFileName + '/' + getFileName + '.js';
       if(fs.existsSync(combineFileName))
       {
         fs.writeFileSync(path.resolve(combineFileName), msg);
@@ -169,6 +195,8 @@ io.on("connection", function(socket)
       case 2: result = "pm2 stop mm"; break;
       case 3: result = "echo '1' | sudo -S reboot now"; break;
       case 4: result = "echo '1' | sudo -S shutdown -h now"; break;
+      // 5 is used for all
+      // 6 is used for specific module
       case 5: result = "cp ~/MagicMirror/THESIS/config/Backupconfig.js ~/MagicMirror/THESIS/config/config.js && pm2 restart mm"; break;
       case 6: {
 
@@ -186,7 +214,6 @@ io.on("connection", function(socket)
         }
         break;
       }
-      //case 5: result = "curl -X POST 'http://localhost:5000/face-recognition?include_predictions=false' -H 'accept: application/json' -H 'Content-Type: multipart/form-data' -F 'image=@/home/xiu/Desktop/therock.jpg'";break;//'image=@/home/xiu/Facenet/face-recognition/test.jpg'"; break;
       
       default: result = "ERROR"; break;
     }
@@ -200,7 +227,8 @@ io.on("connection", function(socket)
           console.log("*** RUN " + msg[0] +" OK ***");
           if(msg[0] == 5)
           {
-            io.sockets.emit("REFRESH_ALL_DEVICES");
+            // Backup all
+            io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");
           }
           else if(msg[0] == 6)
           {
@@ -234,18 +262,72 @@ io.on("connection", function(socket)
     updateStatus(); 
   });
 
+  socket.on("CHECKING_LOGIN", function(data){
+  if(data[0] == "MMM" && data[1] == "1")
+  {
+    globSessionArr = [{
+      id: data[0],
+      pass: data[1],
+    }];
+    var destination = '/config';
+    socket.emit("OK_CREDENTIAL",destination);
+  } 
+  else 
+  {
+    socket.emit("WRONG_CREDENTIAL");
+  }
+  });
+
 });
 
-
-
-
 app.get('/config',function(req,res){
-
-  var id = req.param('id');
-  var pass = req.param('pass');
-  if(id == "MMM" && pass == "1")
+  if(globSessionArr.length > 0){
+      if(globSessionArr[0].id = "MMM" && globSessionArr[0].pass == "1")
+      {
+          req.session.User = {
+            id: 'MMM',
+            pass: '1',
+          }
+          globSessionArr = [];
+      }
+      console.log("CREATE USER SESSION: ", req.session.User);
+  }
+  else 
   {
-    fs.readFile('view/configserver.html', null, function (error, data) {
+    if(req.session.User){
+      console.log("SESSION STILL ALIVE");
+    }
+    else {
+      console.log("DIE SESSION");
+      res.redirect('/MMM');
+    }
+  }
+
+  if(req.session.User){
+      if(req.session.User.id == "MMM" && req.session.User.pass == "1")
+      {
+        fs.readFile('view/configserver.html', null, function (error, data) {
+          if (error) {
+            res.writeHead(404);
+            res.write('Whoops! Something was error');
+          } else {
+            res.write(data);
+          }
+          res.end();
+        });
+      }
+    }
+});
+
+app.get("/MMM",function(req,res)
+{
+  if(req.session.User) 
+  {
+    res.redirect('/config');
+  }
+  else 
+  { 
+    fs.readFile('view/login.html', null, function (error, data) {
       if (error) {
           res.writeHead(404);
           res.write('Whoops! Something was error');
@@ -254,8 +336,5 @@ app.get('/config',function(req,res){
       }
       res.end();
     });
-  }
-  else {
-    res.write('WRONG ID AND PASSWORD');
   }
 });
