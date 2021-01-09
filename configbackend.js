@@ -1,4 +1,4 @@
-var mySocketIO = io(); // Create my socket
+var mySocketIO = io({transports: ['websocket'], upgrade: false});
 var ns_ConfigServer = {
     ON: 1,
     OFF: 0,
@@ -16,9 +16,18 @@ mySocketIO.on("ALERT_ERROR",function(msg){
 mySocketIO.on("ALERT_OK",function(msg){ 
     if(msg == "UPDATE_MODULES_OK")
     {
+        // var getContentArea = document.getElementById("modulesContent");
+        // getContentArea.innerHTML = "";
+        // window.location=window.location; 
         var getContentArea = document.getElementById("modulesContent");
-        getContentArea.innerHTML = "";
-        location.reload();
+        getContentArea.value = "";
+        var tableContain = document.getElementById("allModulesStatus");
+        tableContain.innerHTML = "";
+        var getAllModulesOption = document.getElementById("dropAllModules");
+        while (getAllModulesOption.options.length > 0) {                
+             getAllModulesOption.remove(0);
+        }  
+        mySocketIO.emit("GET_ALL_MODULES","DUMMY");
     }
     else if(msg == "READY_TO_COMBINE_CONFIG_COMPONENTS")
     {
@@ -29,6 +38,15 @@ mySocketIO.on("ALERT_OK",function(msg){
         var arrTmp = [];
         arrTmp[0] = 0;
         mySocketIO.emit("EXEC_COMMAND",arrTmp);
+        var getContentArea = document.getElementById("modulesContent");
+        getContentArea.value = "";
+        var tableContain = document.getElementById("allModulesStatus");
+        tableContain.innerHTML = "";
+        var getAllModulesOption = document.getElementById("dropAllModules");
+        while (getAllModulesOption.options.length > 0) {                
+             getAllModulesOption.remove(0);
+        }  
+        mySocketIO.emit("GET_ALL_MODULES","DUMMY");
     }
     else if (msg == "REQUEST_GEN_JSON_ALL_DEVICES")
     {
@@ -40,14 +58,11 @@ mySocketIO.on("ALERT_OK",function(msg){
     }
 });
 
-mySocketIO.on("REFRESH_ALL_DEVICES",function(){ 
-    location.reload();
-});
-
 // Display content of modules
 mySocketIO.on("RES_MODULE_CONTENT",function(msg){ 
     var getContentArea = document.getElementById("modulesContent");
-    getContentArea.innerHTML = msg;
+    getContentArea.value = "";
+    getContentArea.value = msg;
 });
 
 // Get all modules name when select ON option
@@ -163,7 +178,7 @@ function cmdButton(cmdIndex)
         {
             cmdArr[0] = 6;
             // Get name to trace to backup file to backup that module
-            cmdArr[1] = value.replace("-","").toLowerCase();
+            cmdArr[1] = value;
             mySocketIO.emit("EXEC_COMMAND",cmdArr);
         } 
     }    
