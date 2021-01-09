@@ -7,7 +7,7 @@
     "maximumNumberOfDays": 365,
     "showLocation": true,
     "maxTitleLength": 25,
-    "wrapEvents": false,
+    "wrapEvents": true,
     "maxTitleLines": 3,
     "fetchInterval": 60000,
     "animationSpeed": 500,
