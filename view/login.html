@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SmartMirror</title> <!-- Tên Tab -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <link rel="icon" type="image/png" href="../configserver/images/tabicon.png"><!--  Hiển thị hình cho tab -->
+        <link rel="stylesheet" href="../configserver/css/configserver.css">  <!-- include File CSS tự tạo -->
+        <link rel="stylesheet" href="../configserver/css/login.css">  <!-- include File CSS tự tạo -->
+        <style>
+        </style>
+    </head>
+    <body>
+      
+
+    <div id="idLogin" class="modalLogin">
+    <form class="modalLogin-content" name = "loginform">
+      <div class="imgcontainer">
+             <table cellspacing=""  style="margin-left:auto;margin-right:auto; margin-top: auto; margin-bottom: auto;">
+  <tr>
+    <td style = "text-align: left;"> 
+      <img width="120px" height="100px" style="cursor: pointer; float: left;" src="../configserver/images/logo-uit.png">
+    </td>
+    <td><h1 style="font-size: 30px;color:blue; float: center;">SMART MIRROR LOGIN</h1></td>
+    <td style = "text-align: left;"> 
+      <img width="160px" height="160px" style="cursor: pointer; float: left;" src="../configserver/images/Logo_CE.png">
+    </td>
+  </tr>
+</table>
+      </div>
+
+      <div class="containerLogin">
+          <label><b>ID</b></label>
+          <input id ="idUsr" type="text" placeholder="Enter Username" name="uname" required>
+          <label><b>Password</b></label> 
+          <input id ="idPsw" type="password" placeholder="Enter Password" name="psw" required>
+
+          <button id ="idBtn" class = "buttonLogin" type="button" onclick= "Login()">Login</button>
+      </div>
+          <br><br><br><br><br><br>
+
+<h1 style="font-size: 30px;color:blue; float: center;">
+  <b>GVHD: PGS.TS. Vũ Đức Lung <br>
+  <b>GVHD: ThS. Phan Đình Duy <br>
+  SVTH: Tống Anh Quân - 16520985 <br>
+  SVTH: Nguyễn Lương Duy Khánh - 16520584 <br>
+</b></h1>
+    </form>
+  </div>
+      
+    </body>
+    <!-- <script src="/configserver/beauty/beautify.js"> -->
+    </script>
+    <script src="/socket.io/socket.io.js">
+    </script>
+    <script src="/configserver/login.js">
+    </script>
+</html>
