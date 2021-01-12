@@ -1,12 +1,10 @@
 const NodeHelper = require('node_helper');
-var currentUser = "";
-var result = "";
-var index = 0;
-var userArr = Array();
+
 module.exports = NodeHelper.create({
     start: function() {
         var self = this;
         console.log('[Xiu MMM-FACENET] Starting node_helper');
+        
         // Create server to receive data via GET method
         this.expressApp.get('/facenetroute', function(req, res) {
             var getData = req.param('data');
