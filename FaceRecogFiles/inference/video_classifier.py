@@ -10,20 +10,22 @@ from .constants import MODEL_PATH
 import requests
 import time
 
+# Command to run image process on Server: python -m inference.video_classifier
+
 def main():
 
-    URL_STREAM = "/home/xiu/Facenet/face-recognition/DatasetAtUitLab.mp4"
-    # URL_STREAM = "/home/xiu/Facenet/face-recognition/Untitled.png"
+    #URL_STREAM = "/home/xiu/Facenet/face-recognition/DatasetAtUitLab1.mp4" # Local video from your computer
+    URL_STREAM = "http://192.168.1.18:8081" # Get image from Ras
 
-    #URL_STREAM = "http://192.168.1.26:8081" # tren ras 
     cap = cv2.VideoCapture(URL_STREAM)
 
     face_recogniser = joblib.load(MODEL_PATH)
     preprocess = preprocessing.ExifOrientationNormalize()
     strCombine = "" # String to combine all data which were recognized
     
-    # Raspberry url to get DATA
-    URL = "http://192.168.1.24:8080/facenetroute" # magicmirror
+    # Raspberry url to receive result from Server
+    URL = "http://192.168.1.18:8080/facenetroute" # Host from MMM-FaceNet
+
     while True:
         # Capture frame-by-frame
         ret, frame = cap.read()
@@ -36,9 +38,9 @@ def main():
 
                 for face in faces:
                     _user = face.top_prediction.label # Get name
-                    _rate = float("{:.2f}".format(face.top_prediction.confidence)) # Get rate
+                    _rate = float("{:.2f}".format(face.top_prediction.confidence)) # Get rate with 2 digits
 
-                    if _rate > 0.90:
+                    if _rate > 0.85:
                         flagExist = True
                         # Assign user to userArr if not exist
                         # Assign greater rate to user who was existed
@@ -46,7 +48,7 @@ def main():
                             for index in range(len(userArr)):
                                 if _user == userArr[index]:
                                     if _rate > rateArr[index]:
-                                        rateArr[index] = _rate # Re-assign rate
+                                        rateArr[index] = _rate # Re-assign greater rate
                                     
                                     flagExist = True
                                     break
@@ -60,12 +62,13 @@ def main():
                             userArr.append(_user)
                             rateArr.append(_rate)
                     else:
-                        userArr.append("UNKNOWN")
+                        userArr.append(" ") # Assign un-recognized people with blank space to have correctly behaviors later
                         rateArr.append(_rate)
 
                 # Combine data        
                 currentData = ""
                 for index in range(len(userArr)):
+                    # With rate
                     if index != (len(userArr) - 1):
                         currentData = currentData + userArr[index] + "," + str(rateArr[index]) + "/"
                     else:
@@ -73,10 +76,12 @@ def main():
 
                 if currentData != strCombine:
                     strCombine = currentData
-                    print(strCombine)
+                    print("this is ", strCombine)
 
                     # Prepare data with feild 'data'
                     PARAMS = {'data':strCombine}
+
+                    # Send to host 
                     try:
                         requests.get(url = URL, params = PARAMS) 
                     except requests.ConnectionError as exception:
@@ -84,20 +89,21 @@ def main():
                     
                 # No need to draw if you are not debugging
                 draw_bb_on_img(faces, img)
-
-            # Display the resulting frame
-            cv2.imshow('video', np.array(img))
+                # Display the resulting frame
+                cv2.imshow('video', np.array(img))
         else:
             print("Camera not available")
+            # Send to host CAMERA_ERROR to inform user check camera again
             try:
                 requests.get(url = URL, params = {'data':"CAMERA_ERROR"}) 
             except requests.ConnectionError as exception:
-                print("URL is not exist, please check MMM")
+                print("CAMERA is ERROR, please check CAMERA")
             time.sleep(5)
             cap = cv2.VideoCapture(URL_STREAM)
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
-    # When everything done, release the captureq
+    # When everything done, release the capture
     cap.release()
     cv2.destroyAllWindows()
 
