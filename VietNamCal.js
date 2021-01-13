@@ -24,7 +24,7 @@ var DL = [
 ["02/09-Quốc Khánh"],
 ["01/10-Quốc tế Người cao tuổi","13/10-Ngày Doanh nhân VN","20/10-Ngày thành lập Hội Phụ nữ VN","31/10-Halloween Lễ hội hoá trang"],
 ["19/11-Quốc tế Nam giới","20/11-Ngày Nhà giáo VN"],
-["01/12-Quốc tế phòng chống AIDS","03/12-Quốc tế người khuyết tật","10/12-Quốc tế nhân quyền","22/12-Ngày thành lập QĐND VN","25/12-Noel - Lễ Giáng Sinh"]
+["01/12-Quốc tế phòng chống AIDS","03/12-Quốc tế người khuyết tật","10/12-Quốc tế nhân quyền","22/12-Ngày thành lập QĐND VN","25/12-Lễ Giáng Sinh"]
 ];
 
 // Lunar date and specialEvents will be added in findSpecialDay()

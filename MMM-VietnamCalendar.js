@@ -26,17 +26,37 @@ Module.register("MMM-VietnamCalendar", {
         fetchInterval: 1 * 60 * 1000, // Update every 1 minutes.
         animationSpeed: 500,
         displayButton: true, // Display button to switch between calendars
+        displayEndTime: false,
+        displayLunarDate: true,
+        displayPersonalEvents: true,
         dateEndFormat: "LT(DD/MM)",
         defaultColor: "White",
         lunarColor: "LightGreen",
         colored: true,
         tableClass: "xsmall",
-        lunarShow: true,
+        displayLunarEvents: true,
         calendars: [{
             url: "",
             color: "",
             name: ""
         }],
+        personalDateEvent:[
+            {
+                day: 7,
+                month: 7,
+                title: "- Sinh nhật Quân",
+            },
+            {
+                day: 12,
+                month: 1,
+                title: "- Sinh nhật Ai k biet",
+            },
+            {
+                day: 2,
+                month: 1,
+                title: "- Sinh nhật who:))",
+            }
+        ]
     },
 
     // Define required css.
@@ -58,6 +78,20 @@ Module.register("MMM-VietnamCalendar", {
         else return false;
     },
     start: function() {
+
+        // Add personal events into array and also sort INC
+        if(this.config.displayPersonalEvents)
+        {
+            var getPersonalEventsArr = this.config.personalDateEvent;
+            if(getPersonalEventsArr.length > 0)
+            {
+                for(index in getPersonalEventsArr)
+                {
+                    DL[getPersonalEventsArr[index].month - 1] = sortDayINC(getPersonalEventsArr[index].day,getPersonalEventsArr[index].month,getPersonalEventsArr[index].title);
+                }
+            }
+        }
+
         if (ns_VNCal.numOfUrls == 0) { // This condition will avoid do too much time when re-invoke start())
             Log.log("Starting module: " + this.name);
             // Set locale to setup time format environment.
@@ -155,6 +189,7 @@ Module.register("MMM-VietnamCalendar", {
                 var titleWrapper = document.createElement("td");
                 titleWrapper.innerHTML = this.titleTransform(event.title);
                 titleWrapper.style.fontFamily = "Roboto,bold";
+
                 // Time
                 var timeWrapper = document.createElement("td");
                 timeWrapper.style.fontFamily = "Roboto,bold"; // Xiu add font
@@ -195,9 +230,12 @@ Module.register("MMM-VietnamCalendar", {
                         timeWrapper.innerHTML += "<br>" + moment(event.startDate, "x").format("LT");
                     }
                     // Display endTime
-                    timeWrapper.innerHTML += " - " + moment(event.endDate, "x").format(this.config.dateEndFormat);
+                    if(this.config.displayEndTime)
+                    {
+                        timeWrapper.innerHTML += " - " + moment(event.endDate, "x").format(this.config.dateEndFormat);
+                    }
                 }
-                timeWrapper.className = "time light ";
+                timeWrapper.className = "time bold ";
                 eventWrapper.appendChild(timeWrapper);
                 wrapper.appendChild(eventWrapper);
                 // Location
@@ -207,7 +245,7 @@ Module.register("MMM-VietnamCalendar", {
                         myLocation = event.location;
                     }
                     var locationRow = document.createElement("tr");
-                    locationRow.className = "normal xxsmall";
+                    locationRow.className = "normal xsmall";
                     locationRow.style.fontFamily = "Courier New, monospace";
                     locationRow.style.fontStyle = "italic";
                     locationRow.style.letterSpacing = "0.5px";
@@ -218,7 +256,7 @@ Module.register("MMM-VietnamCalendar", {
                     locationRow.appendChild(descCell);
                     wrapper.appendChild(locationRow);
                     // Display a line to separate peronalCal and lunarCal
-                    if (this.config.lunarShow && ns_VNCal.currentCalIndex == 0 && e == events.length - 1) {
+                    if (this.config.displayLunarEvents && ns_VNCal.currentCalIndex == 0 && e == events.length - 1) {
                         var lineCol = document.createElement("td");
                         lineCol.colSpan = "2";
                         var getLine = document.createElement("hr");
@@ -249,7 +287,7 @@ Module.register("MMM-VietnamCalendar", {
         var getNow = new Date();
         var getMonth = ("0" + (getNow.getMonth() + 1)).slice(-2);
         var getYear = getNow.getFullYear();
-        if (this.config.lunarShow == true && (ns_VNCal.currentCalIndex == 0 || ns_VNCal.currentCalIndex == ns_VNCal.numOfUrls + 1)) {
+        if (this.config.displayLunarEvents == true && (ns_VNCal.currentCalIndex == 0 || ns_VNCal.currentCalIndex == ns_VNCal.numOfUrls + 1)) {
             var getVNEvent = getEvent(getNow.getMonth());
             var maxEntries = getVNEvent.length;
             if (this.config.maximumEntries <= maxEntries) {
@@ -270,13 +308,22 @@ Module.register("MMM-VietnamCalendar", {
                 var titleWrapper = document.createElement("td");
                 titleWrapper.innerHTML = this.titleTransform(getTitle[1]);
                 titleWrapper.style.fontFamily = "Roboto,bold";
+                //titleWrapper.style.cssFloat = "left";
                 eventWrapper.appendChild(titleWrapper);
                 wrapper.appendChild(eventWrapper);
                 // Time
                 var timeWrapper = document.createElement("td");
                 timeWrapper.style.fontFamily = "Roboto,bold"; // Xiu add font
-                timeWrapper.innerHTML = getDOW + ", "+ getTitle[0] + "<sup style = 'font-size: 10px; vertical-align: top; position: relative; top: 4px; '>(" + getLunarDay + "/" + getLunarMonth + ")</sup>";
-                timeWrapper.className = "time light ";
+                if(this.config.displayLunarDate)
+                {
+                    timeWrapper.innerHTML = getDOW + ", "+ getTitle[0] + "<sup style = 'font-size: 15px; vertical-align: top; position: relative; top: 4px; '>(" + getLunarDay + "/" + getLunarMonth + ")</sup>";    
+                }
+                else
+                {
+                    timeWrapper.innerHTML = getDOW + ", "+ getTitle[0];  
+                }
+                timeWrapper.style.cssFloat = "right";
+                timeWrapper.className = "time bold ";
                 eventWrapper.appendChild(timeWrapper);
                 wrapper.appendChild(eventWrapper);
             }
@@ -308,7 +355,7 @@ Module.register("MMM-VietnamCalendar", {
         // If the mirror has more than 1 calendar url
         if (ns_VNCal.numOfUrls > 0) {
             if (mode == "All") {
-                //this.config.lunarShow = true;
+                //this.config.displayLunarEvents = true;
                 for (var i = 0; i < ns_VNCal.numOfUrls; i++) {
                     this.config.calendars[i].url = ns_VNCal.arrUrls[i];
                 }
@@ -330,7 +377,7 @@ Module.register("MMM-VietnamCalendar", {
                 else if (ns_VNCal.currentCalIndex == ns_VNCal.numOfUrls) {
                     this.config.calendars[0].url = "DUMMY HIDEN";
                     ns_VNCal.currentCalIndex++;
-                    if (!this.config.lunarShow) {
+                    if (!this.config.displayLunarEvents) {
                         for (var i = 0; i < ns_VNCal.numOfUrls; i++) {
                             this.config.calendars[i].url = ns_VNCal.arrUrls[i];
                         }
@@ -355,7 +402,7 @@ Module.register("MMM-VietnamCalendar", {
         if (ns_VNCal.currentCalIndex == 0) {
             return this.translate("ALL EVENTS ARE COMING");
         } else {
-            if (this.config.lunarShow && ns_VNCal.currentCalIndex == ns_VNCal.numOfUrls + 1) {
+            if (this.config.displayLunarEvents && ns_VNCal.currentCalIndex == ns_VNCal.numOfUrls + 1) {
                 return this.translate("LUNAR CALENDAR");
             } else {
                 var myAvailableElement = ns_VNCal.currentCalIndex - 1; // We need to minus by 1 when using with arr[]

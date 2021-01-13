@@ -1,8 +1,9 @@
 # MODULE: VietNamCalendar
 ![image](MMM-VietnamCalendar.png)
 
-- This module will display your personal google calendar and VietNam events
-- We can edit events in VietNamCal.js
+- This module will display your personal google calendar and VietNam events or your events
+- We can edit VietNam events in VietNamCal.js
+
 # CONFIG:
 ```
 {
@@ -20,6 +21,13 @@
             "color": "PowderBlue",
             "name": "Lịch cá nhân của quan.ng0anhin98"
         }, ]
+        personalDateEvent:[
+            {
+                day: 7,
+                month: 7,
+                title: "- Sinh nhật Quân",
+            }
+        ]
     }
 }
         
@@ -78,4 +86,5 @@
 51. Quốc tế nhân quyền
 52. Ngày thành lập QĐND VN
 53. Noel Lễ Giáng Sinh
+
 
