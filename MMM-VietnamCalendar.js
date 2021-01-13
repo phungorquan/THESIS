@@ -12,7 +12,6 @@ var ns_VNCal = {
     titleArr: [], // Save all event title to send notification once
     alertOnce: true, // Flag to support titleArr above
     currentCalIndex: 0, // This variable will save switch counter
-    getCalendar: "", // For DB
     getInterval: 0
 };
 Module.register("MMM-VietnamCalendar", {
@@ -27,7 +26,7 @@ Module.register("MMM-VietnamCalendar", {
         animationSpeed: 500,
         displayButton: true, // Display button to switch between calendars
         displayEndTime: false,
-        displayLunarDate: true,
+        displayLunarDate: false,
         displayPersonalEvents: true,
         dateEndFormat: "LT(DD/MM)",
         defaultColor: "White",
@@ -45,16 +44,6 @@ Module.register("MMM-VietnamCalendar", {
                 day: 7,
                 month: 7,
                 title: "- Sinh nhật Quân",
-            },
-            {
-                day: 12,
-                month: 1,
-                title: "- Sinh nhật Ai k biet",
-            },
-            {
-                day: 2,
-                month: 1,
-                title: "- Sinh nhật who:))",
             }
         ]
     },
@@ -85,9 +74,25 @@ Module.register("MMM-VietnamCalendar", {
             var getPersonalEventsArr = this.config.personalDateEvent;
             if(getPersonalEventsArr.length > 0)
             {
+                // Check whether events were added to array or not, because it will be overlaped after requested interval time
                 for(index in getPersonalEventsArr)
                 {
-                    DL[getPersonalEventsArr[index].month - 1] = sortDayINC(getPersonalEventsArr[index].day,getPersonalEventsArr[index].month,getPersonalEventsArr[index].title);
+                    var addDayDigit = ("0" + getPersonalEventsArr[index].day).slice(-2);
+                    var addMonthDigit = ("0" + getPersonalEventsArr[index].month).slice(-2);
+                    var existFlag = false;
+                    for(element in DL[getPersonalEventsArr[index].month - 1])
+                    {
+                        var strCombine = addDayDigit + "/" + addMonthDigit + getPersonalEventsArr[index].title;
+                        if(DL[getPersonalEventsArr[index].month - 1][element] == strCombine)
+                        {
+                            existFlag = true;
+                            break;
+                        }
+                    }
+                    if(!existFlag)
+                    {
+                        DL[getPersonalEventsArr[index].month - 1] = sortDayINC(getPersonalEventsArr[index].day,getPersonalEventsArr[index].month,getPersonalEventsArr[index].title);
+                    }
                 }
             }
         }
