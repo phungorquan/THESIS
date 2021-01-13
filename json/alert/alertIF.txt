@@ -1,0 +1,30 @@
+<h1 style = "color:blue;">DƯỚI ĐÂY LÀ THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - ALERT </h1>
+<br>
+
+<i>Module này giúp cho hệ thống gương hiển thị các tin nhắn cũng như thông báo đến người dùng</i>
+
+<br>
+<br><b>1. effect:</b>
+<br>Thông tin: Thay đổi cách hiển thị tin nhắn
+<br>Các cấu hình có thể lựa chọn:
+<br>slidefadingdown,scale,slide,genie,jelly,flip,bouncyflip,exploader
+<br>
+<br><b>2. alert_effect:</b>
+<br>Thông tin: Thay đổi cách hiển thị thông báo
+<br>Các cấu hình có thể lựa chọn:
+<br>slidefadingdown,scale,slide,genie,jelly,flip,bouncyflip,exploader
+<br>
+<br><b>3. display_time:</b>
+<br>Thông tin: Thời gian hiển thị
+<br>Để cấu hình 5s ta sẽ điền 5000
+<br>
+<br><b>4. position:</b>
+<br>Thông tin: Vị trí hiển thị trên màn hình
+<br>Các cấu hình có thể lựa chọn:
+<br>center, right, left, bottom, top_center,...
+<br>
+<br><b>5. welcome_message:</b>
+<br>Thông tin: Hiển thị lời chào khi khởi động gương
+<br>Ta chỉ có thể điền true hoặc false cho cấu hình này.
+
+

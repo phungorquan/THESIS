@@ -9,11 +9,22 @@
         <style>
         </style>
     </head>
-    <body>   
+    <body> 
+      <div id="modulesInfo" class="modal">
+        <div class="modal-content animate" style = "padding: 35px; width: 80%; height:70%">
+          <div style = "float:right;">
+            <img id = "closeInfo" width="20px" height="20px" style="cursor: pointer;" onclick="closeInfo()" src="../configserver/images/close.png">
+          </div>
+          <p class = "contentLimit" id = "informationContentWillBeShowedHere"></p>
+        </div>
+      </div>  
       <table cellspacing = "50" style = "margin-left: auto;  margin-right: auto;  margin-top: auto;  margin-bottom: auto; padding: 5px">
         <tr>
           <td style = "border: 0px solid black; border-radius: 10px;"> 
-            <select id ="dropONModules" style = "text-align: center; width: 100%;" onchange="dropONModules()"></select><br><br>
+            <select id ="dropONModules" style = "text-align: center; width: 90%;" onchange="dropONModules()"></select>
+            <img width="30px" height="30px" style="cursor: pointer; float: right;" src="../configserver/images/info.png"
+            onclick="showModulesInfo()">
+            <br><br>
             <textarea id = "modulesContent" style = "width:350px; height:400px;"></textarea><br><br>
             <button id = "buttonSavePro" class = "myButton" onclick="saveModuleContent()">Lưu</button><br><br>
             <button id = "buttonGenPro" class = "myButton" onclick="genModuleContent()">Áp dụng và khởi động lại</button>

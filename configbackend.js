@@ -65,6 +65,32 @@ mySocketIO.on("RES_MODULE_CONTENT",function(msg){
     getContentArea.value = msg;
 });
 
+// Show modules infomation when user click into information icon
+mySocketIO.on("RES_MODULE_INFO",function(info){ 
+    document.getElementById("informationContentWillBeShowedHere").innerHTML = info;
+    document.getElementById("modulesInfo").style.display = "block";
+});
+
+function showModulesInfo()
+{
+    var selection = document.getElementById("dropONModules");
+    var value = selection.options[selection.selectedIndex].value;
+    if(value != ns_ConfigServer.OnDisableOption)
+    {   // Emit to get module information
+        mySocketIO.emit("GET_MODULE_INFO",value); 
+    }
+    else 
+    {
+        alert("Please select modules!");
+    }
+}
+
+function closeInfo()
+{
+    document.getElementById("modulesInfo").style.display = "none";
+    document.getElementById("informationContentWillBeShowedHere").innerHTML = "";
+}
+
 // Get all modules name when select ON option
 function dropONModules(){
     var selection = document.getElementById("dropONModules");
@@ -144,11 +170,6 @@ mySocketIO.on("RES_ALL_MODULES",function(msg){
     }
 });
 
-String.prototype.replaceAll = function(str1, str2, ignore) 
-{
-    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
-} 
-
 // Update status of modules (ON/OFF)
 function updateStatus()
 {
@@ -156,6 +177,8 @@ function updateStatus()
     var value = selection.options[selection.selectedIndex].value;
     mySocketIO.emit("UPDATE_MODULES_STATUS",value);
 }
+
+// 
 
 function cmdButton(cmdIndex)
 {

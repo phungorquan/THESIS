@@ -262,6 +262,32 @@ io.sockets.on("connection", function(socket)
     updateStatus(); 
   });
 
+  // Get modules information
+  socket.on("GET_MODULE_INFO", function(infoFileName) {
+    function getModuleInfo() {
+    var getFileIFName = jsonDir + infoFileName + '/' + infoFileName + 'IF.txt';
+      if(fs.existsSync(getFileIFName))
+      {
+        var getContent = fs.readFileSync(path.join(getFileIFName),"utf8");
+        if(getContent.length > 0)
+        {
+          socket.emit("RES_MODULE_INFO",getContent);
+        }
+        else
+        {
+          console.log("EMPTY FILE: ",getFileIFName);
+          socket.emit("ALERT_ERROR","EMPTY FILE");
+        }
+      }
+      else
+      {
+        console.log("NOT EXIST DIRECTORY: ",getFileIFName);
+        socket.emit("ALERT_ERROR","NOT EXIST DIRECTORY");
+      }
+    }
+    getModuleInfo(); 
+  });
+
   socket.on("CHECKING_LOGIN", function(data){
   if(data[0] == "MMM" && data[1] == "1")
   {
