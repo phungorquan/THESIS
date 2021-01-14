@@ -3,7 +3,9 @@
 	"module": "MMM-Snow",
 	"config":
 	{
-		"flakeCount": 20,
-		"theme": "custom"
+		"flakeCount": 30,
+		"theme": "custom",
+		"sizeFactor": 4,
+		"downwards": true
 	}
 }

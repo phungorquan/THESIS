@@ -4,6 +4,8 @@
 	"config":
 	{
 		"flakeCount": 30,
-		"theme": "custom"
+		"theme": "custom",
+		"sizeFactor": 4,
+		"downwards": true
 	}
 }

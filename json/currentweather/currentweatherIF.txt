@@ -1,0 +1,88 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - CURRENTWEATHER </h1>
+<br>
+
+<i style = "color:green;">Module này giúp cho hệ thống gương hiển thị thời tiết hiện tại
+<br><a href="https://docs.magicmirror.builders/modules/currentweather.html" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. location:</b>
+<br>Thông tin: Tên thành phố, tải danh sách thành phố ở đây: bulk.openweathermap.org/sample/city.list.json.gz
+<br>Điền vào tên thành phố với dấu nháy: "Thành phố Hồ Chí Minh"
+<br>
+<br><b>2. locationID:</b>
+<br>Thông tin: ID của thành phố, xem danh sách ở trên
+<br>Điền vào ID thành phố với dấu nháy: "1566083"
+<br>
+<br><b>3. updateInterval:</b>
+<br>Thông tin: Thời gian cập nhật lại 
+<br>Điền vào số không có dấu nháy: 600000 (10')
+<br>
+<br><b>4. animationSpeed:</b>
+<br>Thông tin: Tốc độ hiển thị
+<br>Điền vào số không có dấu nháy: 1000 (1s)
+<br>
+<br><b>5. showPeriod:</b>
+<br>Thông tin: Hiển thị am/pm đối với định dạng 12h
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>6. showPeriodUpper:</b>
+<br>Thông tin: Hiển thị AM/PM đối với định dạng 12h
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>7. showWindDirection:</b>
+<br>Thông tin: Hiển thị hướng gió
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>8. showWindDirectionAsArrow:</b>
+<br>Thông tin: Hiển thị hướng gió với dấu mũi tên
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>9. useBeaufort:</b>
+<br>Thông tin: Hiển thị đơn vị gió hoặc biểu đồ gió
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>10. appendLocationNameToHeader:</b>
+<br>Thông tin: Lấy tên thành phố làm tên tiêu đề
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>11. useKMPHwind:</b>
+<br>Thông tin: Sử dụng đơn vị gió 
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>12. decimalSymbol:</b>
+<br>Thông tin: Ký tự dấu phẩy
+<br>Điền vào cấu hình với dấu nháy: "."
+<br>
+<br><b>13. showHumidity:</b>
+<br>Thông tin: Hiển thị độ ẩm
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>14. degreeLabel:</b>
+<br>Thông tin: Hiển thị độ 
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>15. showIndoorTemperature:</b>
+<br>Thông tin: Hiển thị nhiệt độ phòng
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>16. showIndoorHumidity:</b>
+<br>Thông tin: Hiển thị độ ẩm phòng
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>17. showFeelsLike:</b>
+<br>Thông tin: Hiển thị cảm giác như nhiệt độ thời tiết
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>18. initialLoadDelay:</b>
+<br>Thông tin: Thời gian module khởi tạo
+<br>Điền vào số không có dấu nháy: 1000 (1s)
+<br> 
+<br><b>19. retryDelay:</b>
+<br>Thông tin: Thời gian tải lại
+<br>Điền vào số không có dấu nháy: 2500 (2.5s)
+<br> 
+<br><b>20. roundTemp:</b>
+<br>Thông tin: Làm tròn số nhiệt độ
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br> 

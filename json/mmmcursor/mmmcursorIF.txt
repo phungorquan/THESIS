@@ -1,0 +1,6 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - CLOCK </h1>
+<br>
+
+<i style = "color:green;">Module này giúp cho hệ thống gương hiển thị đồng hồ và ngày tháng tương ứng hiện tại
+<br><a href="https://github.com/evghenix/MMM-Cursor" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>

@@ -1,0 +1,7 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-GROVEGESTURES </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ kích hoạt và điều khiển các thiết bị ngoại vi, module khác thông qua cảm biến cử chỉ PAJ7620U
+<br><a href="https://github.com/eouia/MMM-GroveGestures" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+

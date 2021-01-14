@@ -24,13 +24,6 @@
 		"showFeelsLike": false,
 		"initialLoadDelay": 0,
 		"retryDelay": 2500,
-		"apiVersion": "2.5",
-		"apiBase": "https://api.openweathermap.org/data/",
-		"weatherEndpoint": "weather",
-		"appendLocationNameToHeader": true,
-		"calendarClass": "calendar",
-		"tableClass": "large",
-		"hideTemp": false,
 		"roundTemp": false
 	}
 }

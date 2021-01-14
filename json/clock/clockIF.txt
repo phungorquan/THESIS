@@ -1,0 +1,83 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - CLOCK </h1>
+<br>
+
+<i style = "color:green;">Module này giúp cho hệ thống gương hiển thị đồng hồ và ngày tháng tương ứng hiện tại
+<br><a href="https://docs.magicmirror.builders/modules/clock.html" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. displayType:</b>
+<br>Thông tin: Loại đồng hồ, điện tử, kim hay cả
+<br>Điền vào loại đồng hồ với dấu nháy: "digital", "analog", "both"
+<br>
+<br><b>2. displaySeconds:</b>
+<br>Thông tin: Hiển thị giây
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>3. showPeriod:</b>
+<br>Thông tin: Hiển thị am/pm đối với định dạng 12h
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>4. showPeriodUpper:</b>
+<br>Thông tin: Hiển thị AM/PM đối với định dạng 12h
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>5. clockBold:</b>
+<br>Thông tin: Bỏ dấu phẩy và tô đậm phút
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>6. showDate</b>
+<br>Thông tin: Hiển thị ngày
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>7. showWeek:</b>
+<br>Thông tin: Hiển thị tuần
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>8. dateFormat:</b>
+<br>Thông tin: Định dạng ngày tháng
+<br>Xem thêm tại đây: https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format/
+<br>
+<br><b>9. lunarShow:</b>
+<br>Thông tin: Hiển thị ngày âm lịch, năm
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>9. timeFormat:</b>
+<br>Thông tin: Định dạng giờ 12h hay 24h
+<br>Điền vào số: 12, 24
+<br>
+<br><b>10. analogSize:</b>
+<br>Thông tin: Kích thước đồng hồ kim
+<br>Điền vào kích thước với đơn vị là px với dấu nháy: "200px"
+<br>
+<br><b>11. analogFace:</b>
+<br>Thông tin: Giao diện mặt đồng hồ
+<br>Điền vào giao diện đồng hồ với dấu nháy: "none", "simple", "face-XXX" (XXX từ 001->012)
+<br>
+<br><b>12. analogPlacement:</b>
+<br>Thông tin: Vị trí đặt đồng hồ
+<br>Điền vào vị trí đặt đồng hồ với dấu nháy: "top", bottom", "left", "right"
+<br>
+<br><b>13. analogShowDate:</b>
+<br>Thông tin: Hiển thị ngày
+<br>Điền vào vị trí hiển thị ngày với dấu nháy: "top", "bottom", false (false không cần dấu nháy)
+<br>
+<br><b>14. secondsColor:</b>
+<br>Thông tin: Đổi màu giây
+<br>Điền vào màu sắc theo hệ RGB với # ở đầu và dấu nháy: "#888888"
+<br>
+<br><b>15. showSunTimes:</b>
+<br>Thông tin: Hiển thị giờ mặt trời mọc/lặn
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>16. showMoonTimes:</b>
+<br>Thông tin: Hiển thị giờ mặt trăng lên/tà
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>17. lat:</b>
+<br>Thông tin: Vĩ độ, dành cho giờ mặt trời/mặt trăng
+<br>Điền vào vĩ độ không có dấu nháy: 10.8698797
+<br> 
+<br><b>18. lon:</b>
+<br>Thông tin: Kinh độ, dành cho giờ mặt trời/mặt trăng
+<br>Điền vào kinh độ không có dấu nháy: 106.8016022

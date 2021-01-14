@@ -1,0 +1,96 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-VIETNAMCALENDAR </h1>
+<br>
+
+<i style = "color:green;">Module này hiển thị các sự kiện lịch từ Google Calendar, hơn 50 sự kiện lịch âm, dương và quốc tế
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. maximumEntries:</b>
+<br>Thông tin: Số lượng sự kiện tối đa sẽ được hiển thị (độc lập 2 lịch - tức 14 sự kiện)
+<br>Điền vào số lượng không có dấu nháy: 7
+<br>
+<br><b>2. maximumNumberOfDays:</b>
+<br>Thông tin: Số lượng ngày tối đa trong năm
+<br>Điền vào số lượng không có dấu nháy: 365
+<br>
+<br><b>3. showLocation:</b>
+<br>Thông tin: Hiển thị địa điểm xảy ra sự kiện (GoogleCalendar)
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>4. maxTitleLength:</b>
+<br>Thông tin: Độ dài ký tự tối đa tên sự kiện
+<br>Điền vào độ dài không có dấu nháy: 25
+<br>
+<br><b>5. wrapEvents:</b>
+<br>Thông tin: Bao chữ nếu dài quá độ dài cho phép, kết hợp với maxTitileLines bên dưới
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>6. maxTitleLines</b>
+<br>Thông tin: Số lượng dòng tối đa khi bao chữ
+<br>Điền vào số lượng không có dấu nháy: 3
+<br>
+<br><b>7. fetchInterval:</b>
+<br>Thông tin: Thời gian tải lại sự kiện
+<br>Điền vào thời gian không có dấu nháy: 60000 (1')
+<br>
+<br><b>8. animationSpeed:</b>
+<br>Thông tin: Tốc độ chuyển động
+<br>Điền vào thời gian không có dấu nháy: 500 (0.5s)
+<br>
+<br><b>9. displayButton:</b>
+<br>Thông tin: Hiển thị nút nhấn để chuyển qua các lịch riêng lẻ để dễ nhìn
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>9. displayEndTime:</b>
+<br>Thông tin: Hiển thị thời gian kết thúc
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>10. displayLunarDate:</b>
+<br>Thông tin: Hiển thị ngày âm
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>11. displayPersonalEvents:</b>
+<br>Thông tin: Hiển thị sự kiện cá nhân
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>12. dateEndFormat:</b>
+<br>Thông tin: Định dạng giờ cho thời gian kết thúc
+<br><a href="https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format/" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>
+<br><b>13. defaultColor:</b>
+<br>Thông tin: Màu mặc định khi người dùng không thêm màu ở lịch cá nhân
+<br>Điền vào hệ màu RGB với # ở đầu với dấu nháy: "White", "#ffffff"
+<br>
+<br><b>14. lunarColor:</b>
+<br>Thông tin: Màu cho sự kiện âm,dương,quốc tế, cá nhân
+<br>Điền vào màu sắc theo hệ RGB với # ở đầu và dấu nháy: "LightGreen", "#888888"
+<br>
+<br><b>15. colored:</b>
+<br>Thông tin: Hiển thị màu cho lịch cá nhân
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>16. tableClass:</b>
+<br>Thông tin: Các class để thay đổi kích thước cho toàn thể sự kiện
+<br>Điền vào class vói dấu nháy: "xxsmall", "xsmall", "small", "large",...
+<br>
+<br><b>17. displayLunarEvents:</b>
+<br>Thông tin: Hiển thị các sự kiện âm, dương, quốc tế, cá nhân
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br> 
+<br><b>18. calendars:</b>
+<br>Thông tin: Mảng các lịch cá nhân từ Google Calendar
+<br>"url": url từ Google Calendar
+<br>"color": Màu sắc theo hệ RGB đã được đề cập ở trên
+<br>"name": Tên người dùng muốn đặt cho tiêu đề của lịch
+<br>Điền vào "url" với dấu nháy: "https://calendar.google.com/calendar/ical/anhquantong77%40gmail.com/public/basic.ics"
+<br>Điền vào "color" với dấu nháy: "Violet"
+<br>Điền vào "name" với dấu nháy: "Lịch cá nhân của Xiu"
+<br>
+<br><b>19. personalDateEvent:</b>
+<br>Thông tin: Mảng các sự kiện cá nhân người dùng
+<br>"day": Ngày diễn ra sự kiện, không cần thêm số 0 khi ngày bé hơn 10
+<br>"month": Tháng diễn ra sự kiện, không cần thêm số 0 khi tháng bé hơn 10
+<br>"title": Tên sự kiện
+<br>Điền vào "day" không có dấu nháy: 7
+<br>Điền vào "color" không có dấu nháy: 7
+<br>Điền vào "name" với dấu nháy: "- Sinh nhật Xiu"
