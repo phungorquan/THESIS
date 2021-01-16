@@ -16,9 +16,7 @@ mySocketIO.on("ALERT_ERROR",function(msg){
 mySocketIO.on("ALERT_OK",function(msg){ 
     if(msg == "UPDATE_MODULES_OK")
     {
-        // var getContentArea = document.getElementById("modulesContent");
-        // getContentArea.innerHTML = "";
-        // window.location=window.location; 
+        // Reset content, drop list
         var getContentArea = document.getElementById("modulesContent");
         getContentArea.value = "";
         var tableContain = document.getElementById("allModulesStatus");
@@ -34,10 +32,11 @@ mySocketIO.on("ALERT_OK",function(msg){
         mySocketIO.emit("COMBINE_CONFIG_COMPONENTS");
     }
     else if(msg == "READY_TO_RESET")
-    {
+    {   
         var arrTmp = [];
         arrTmp[0] = 0;
         mySocketIO.emit("EXEC_COMMAND",arrTmp);
+        // Reset content, drop list
         var getContentArea = document.getElementById("modulesContent");
         getContentArea.value = "";
         var tableContain = document.getElementById("allModulesStatus");
@@ -65,7 +64,7 @@ mySocketIO.on("RES_MODULE_CONTENT",function(msg){
     getContentArea.value = msg;
 });
 
-// Show modules infomation when user click into information icon
+// Show modules information when user click into information icon
 mySocketIO.on("RES_MODULE_INFO",function(info){ 
     document.getElementById("informationContentWillBeShowedHere").innerHTML = info;
     document.getElementById("modulesInfo").style.display = "block";
@@ -76,12 +75,14 @@ function showModulesInfo()
     var selection = document.getElementById("dropONModules");
     var value = selection.options[selection.selectedIndex].value;
     if(value != ns_ConfigServer.OnDisableOption)
-    {   // Emit to get module information
+    {   
+        // Emit to get module information
         mySocketIO.emit("GET_MODULE_INFO",value); 
     }
     else 
     {
-        alert("Please select modules!");
+        // Emit to get information of this Smart Mirror system and User manual
+        mySocketIO.emit("GET_MODULE_INFO","thongtinchung"); 
     }
 }
 
@@ -202,13 +203,33 @@ function cmdButton(cmdIndex)
             cmdArr[0] = 6;
             // Get name to trace to backup file to backup that module
             cmdArr[1] = value;
-            mySocketIO.emit("EXEC_COMMAND",cmdArr);
         } 
     }    
-    else
+
+    // Get confirm from user before execute a command
+    var getConfirmStr = "";
+    switch(cmdArr[0])
     {
-        // Execute normal commands
-        mySocketIO.emit("EXEC_COMMAND",cmdArr);
+        case 0: getConfirmStr = "Bạn muốn khởi động lại động Gương thông minh hông?"; break;
+        case 1: getConfirmStr = "Bạn muốn khởi động Gương thông minh hông?"; break;
+        case 2: getConfirmStr = "Bạn muốn dừng Gương thông minh hông?"; break;
+        case 3: getConfirmStr = "Bạn muốn khởi động lại Raspberry hông?"; break;
+        case 4: getConfirmStr = "Bạn muốn tắt Raspberry hông?"; break;
+        case 5: getConfirmStr = "Bạn muốn cập nhật lại toàn bộ module về trạng thái mặc định hông?"; break;
+        case 6: getConfirmStr = "Bạn muốn cập nhật lại module " + value + " về trạng thái mặc định hông?"; break;
+        default: break;
     }
  
+    if(getConfirmStr != "CONFIRM_ERROR")
+    {
+        var isConfirmed = confirm(getConfirmStr);
+        if(isConfirmed)
+        {
+            // Send command
+            mySocketIO.emit("EXEC_COMMAND",cmdArr);
+        }
+    }
+    else{
+        alert("COMMAND_ERROR");
+    }
 }

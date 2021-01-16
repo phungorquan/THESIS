@@ -265,7 +265,15 @@ io.sockets.on("connection", function(socket)
   // Get modules information
   socket.on("GET_MODULE_INFO", function(infoFileName) {
     function getModuleInfo() {
-    var getFileIFName = jsonDir + infoFileName + '/' + infoFileName + 'IF.txt';
+      var getFileIFName = "";
+      if(infoFileName != "thongtinchung")
+      {
+        getFileIFName = jsonDir + infoFileName + '/' + infoFileName + 'IF.txt';
+      }
+      else
+      {
+        getFileIFName = jsonDir + infoFileName + '.txt';
+      }
       if(fs.existsSync(getFileIFName))
       {
         var getContent = fs.readFileSync(path.join(getFileIFName),"utf8");
