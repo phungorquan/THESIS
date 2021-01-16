@@ -1,0 +1,20 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-PAGES </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ giúp tạo ra một hệ thống phân trang cho các module
+<br><b style = "color:red;">(Nên dùng chung với module MMM-page-indicator)</b>
+<br><a href="https://github.com/edward-shen/MMM-pages" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. modules:</b>
+<br>Thông tin: Mảng chứa các module sẽ được hiển thị, mỗi phần tử là mỗi trang tương ứng
+<br>Điền vào các module với dấu nháy: ["MMM-VietnamCalendar","weatherforecast"],["MMM-Tools", "MMM-FaceNet", "currentweather"]
+<br>
+<br><b>2. fixed:</b>
+<br>Thông tin: Mảng chứa các module sẽ được hiển thị ở tất cả các trang
+<br>Điền vào các module với dấu nháy: ["MMM-Snow", "MMM-GroveGestures", "newsfeed", "MMM-News-QR", "clock", "MMM-Assistant2Display", "MMM-GoogleAssistant", "MMM-pages", "MMM-page-indicator"]
+<br>
+<br><b>3. animationTime:</b>
+<br>Thông tin: Thời gian chuyển đổi giữa các trang
+<br>Điền vào thời gian không có dấu nháy: 1000 (1s)

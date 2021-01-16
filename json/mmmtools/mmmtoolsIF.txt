@@ -1,0 +1,11 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-TOOLS </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ hiển thị thông tin về phần cứng của hệ thống như cpu, ram,...
+<br><a href="https://github.com/bugsounet/MMM-Tools" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. refresh_interval_ms:</b>
+<br>Thông tin: Thời gian cập nhật thông tin của hệ thống
+<br>Điền vào thời gian không có dấu nháy: 10000 (10s)

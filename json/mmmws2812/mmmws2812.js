@@ -1,3 +1,3 @@
 {
-	"module": "MMM-WS2812"
+  "module": "MMM-WS2812"
 }

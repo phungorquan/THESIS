@@ -1,4 +1,4 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-NEWSQR </h1>
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-NEWS-QR </h1>
 <br>
 
 <i style = "color:green;">Module này sẽ hiển thị mã QR ứng với tin tức

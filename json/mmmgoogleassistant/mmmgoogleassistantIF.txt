@@ -1,0 +1,21 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-GOOGLEASSISTANT </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ giúp cho gương có thể chơi Youtube, điều khiển các thiết bị hoặc module thông qua trợ lý ảo Google Assistant
+<br><b style = "color:red;">(Nên dùng chung với module MMM-Assistant2Display)</b>
+<br><a href="https://github.com/bugsounet/MMM-GoogleAssistant" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. snowboy:</b>
+<br>Thông tin: Một object chứa các thông tin con để đổi câu lệnh hotword kích hoạt Google Assistant
+<br>"usePMDL": Dùng từ khoá riêng từ một model tự tạo
+<br>"audioGain": Gain của microphone, không cần sửa
+<br>"Frontend": Tiền xử lý hotword với snow_boy và smart_mirror thì nên để false
+<br>"Model": Tên model, cũng là hotword để kích hoạt G.A
+<br>"Sensitivity": Độ nhạy ứng với model 
+<br>Điền vào "usePMDL" cấu hình không có dấu nháy: true, false
+<br>Điền vào "audioGain" độ nhạy không có dấu nháy: 2.0
+<br>Điền vào "Frontend" không có dấu nháy: true, false
+<br>Điền vào "model" với dấu nháy: "smart_mirror", "jarvis", "computer", "snowboy", "subex", "neo_ya", "hey_extreme", "view_glass", "alexa"
+<br>Điền vào "Sensitivity" độ nhạy không có dấu nháy: null <b style = "color:red;">(Để null nếu không biết độ nhạy tương ứng)</b>

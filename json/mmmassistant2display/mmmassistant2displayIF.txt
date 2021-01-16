@@ -1,0 +1,7 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-ASSISTANT2DISPLAY </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ hỗ trợ module MMM-GoogleAssistant hiển thị được Youtube
+<br><b style = "color:red;">(Nên dùng chung với module MMM-GoogleAssistant)</b>
+<br><a href="https://github.com/bugsounet/MMM-Assistant2Display" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>

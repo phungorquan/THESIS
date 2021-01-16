@@ -1,4 +1,4 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - CLOCK </h1>
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-CURSOR </h1>
 <br>
 
 <i style = "color:green;">Module này giúp cho hệ thống gương hiển thị đồng hồ và ngày tháng tương ứng hiện tại
