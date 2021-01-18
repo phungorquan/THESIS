@@ -228,7 +228,17 @@ io.sockets.on("connection", function(socket)
           if(msg[0] == 5)
           {
             // Backup all
-            io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");
+            async function updateAllStatus() {
+              result = await db.queryUpdateAllStatus(); 
+              if(result != "queryUpdateAllStatus-ERROR")
+              {
+                getAllModulesStatus();
+                io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");
+              }
+              else 
+                socket.emit("ALERT_ERROR","updateAllStatus");
+            }
+            updateAllStatus(); 
           }
           else if(msg[0] == 6)
           {

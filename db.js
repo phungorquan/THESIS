@@ -36,3 +36,16 @@ exports.queryUpdateStatus = function (id, stt) {
 	});
 }
 
+// Update status of all modules
+exports.queryUpdateAllStatus = function () {
+	return new Promise (function (resolve, reject) {
+		pool.query("UPDATE allmodules SET STATUS = '1';", function(err, rows, fields) { // Truy vấn
+			if (err){
+				resolve("queryUpdateAllStatus-ERROR");
+				return;
+			}
+			resolve("queryUpdateAllStatus-OK");
+		});
+	});
+}
+
