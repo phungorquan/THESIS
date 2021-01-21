@@ -21,7 +21,7 @@ server.listen(7717);
 var configFilename = path.resolve("../config/config.js");
 var genConfigFilename = path.resolve("../config/genConfig.js");
 var jsonDir = path.resolve("../configserver/json") + "/";
-
+var googlePhotoDir = path.resolve("../modules/MMM-GoogleDriveSlideShow/.cache");
 var c = require(configFilename);
 var allModules = [];
 
@@ -190,14 +190,23 @@ io.sockets.on("connection", function(socket)
   var result = "";
     switch(msg[0])
     {
-      case 0: result = "pm2 restart mm"; break;
-      case 1: result = "pm2 start ~/mm.sh"; break;
-      case 2: result = "pm2 stop mm"; break;
+      case 0: result = "pm2 restart pm2_mm"; 
+      if(fs.existsSync(googlePhotoDir))
+      {
+        var cmdStr = "rm -rf " + googlePhotoDir;
+        myProcess.exec(cmdStr); 
+      }
+      else{
+        console.log(".cache photoGoogle not exist");
+      }
+      break;
+      case 1: result = "pm2 start ~/pm2_mm.sh"; break;
+      case 2: result = "pm2 stop pm2_mm"; break;
       case 3: result = "echo '1' | sudo -S reboot now"; break;
       case 4: result = "echo '1' | sudo -S shutdown -h now"; break;
       // 5 is used for all
       // 6 is used for specific module
-      case 5: result = "cp ~/MagicMirror/THESIS/config/Backupconfig.js ~/MagicMirror/THESIS/config/config.js && pm2 restart mm"; break;
+      case 5: result = "cp ~/MagicMirror/THESIS/config/Backupconfig.js ~/MagicMirror/THESIS/config/config.js && pm2 restart pm2_mm"; break;
       case 6: {
 
         var getFileBKName = jsonDir + msg[1] + '/' + msg[1] + 'BK.js';
@@ -205,7 +214,7 @@ io.sockets.on("connection", function(socket)
 
         if(fs.existsSync(getFileBKName) && fs.existsSync(getFileName))
         {
-          result = "cp " + getFileBKName + " " + getFileName + " && pm2 restart mm";
+          result = "cp " + getFileBKName + " " + getFileName + " && pm2 restart pm2_mm";
         }
         else
         {

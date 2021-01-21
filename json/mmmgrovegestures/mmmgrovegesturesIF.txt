@@ -5,3 +5,40 @@
 <br><a href="https://github.com/eouia/MMM-GroveGestures" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
 <br>-----------------<br></i>
 
+<h2 style = "color:orange;"> CÁC CỬ CHỈ HIỆN CÓ CỦA HỆ THỐNG</h2>
+<br><b> Ẩn hiện thông tin gương</b>
+<br>"WAVE": Ẩn thông tin gương
+<br>"FORWARD-BACKWARD": Hiện lại thông tin gương
+<br>
+<br><b> Chuyển trang</b>
+<br>"LEFT": Chuyển trang trái
+<br>"RIGHT": Chuyển trang phải
+<br>
+<br><b> Điều khiển mô-đun tin tức</b>
+<br>"CLOCKWISE": Chuyển đến trang báo tiếp theo
+<br>"ANTICLOCKWISE": Chuyển về trang báo trước đó
+<br>"RIGHT-LEFT": Mở trang báo dạng web để xem chi tiết
+<br>"DOWN": Cuộn trang báo xuống
+<br>"UP": Cuộn trang báo lên
+<br>
+<br><b> Điều khiển âm lượng của hệ thống</b>
+<br>"UP-DOWN": Mở âm lượng tối đa
+<br>"DOWN-UP": Tắt âm thanh
+<br>
+<br><b> Điều khiển mô-đun lịch</b>
+<br>"LEFT-DOWN": Chuyển lịch
+<br>    
+<br><b> Điều khiển led WS2812B</b>
+<br>"DOWN-RIGHT": Bật đèn đơn giản
+<br>"DOWN-LEFT": Tắt đèn
+<br>"RIGHT-LEFT-RIGHT": Vào chế độ điều khiển đèn xịn hơn
+<br>
+<br><b> Điều khiển led WS2812B khi đang ở trong MODE xịn hơn</b>
+<br>"LEFT": Nháy đèn theo kiểu rạp phim classico
+<br>"RIGHT": Nháy đèn đỏ, xanh lá, xanh dương
+<br>"UP": Bật đèn đơn giản
+<br>"DOWN": Tắt đèn
+<br>"ANTICLOCKWISE": Nháy theo kiểu dạng nhịp thở 3 màu đỏ, xanh lá, xanh dương
+<br>"CLOCKWISE": Hiển thị theo màu cầu vồng chuyển động
+<br>"FORWARD-BACKWARD": Hiển thị màu cầu vồng đứng im
+<br>"LEFT-RIGHT-LEFT": Thoát chế độ điều khiển đèn xịn trở về dùng các cử chỉ như phía trên trước khi vào MODE này

@@ -19,3 +19,19 @@
 <br>Điền vào "Frontend" không có dấu nháy: true, false
 <br>Điền vào "model" với dấu nháy: "smart_mirror", "jarvis", "computer", "snowboy", "subex", "neo_ya", "hey_extreme", "view_glass", "alexa"
 <br>Điền vào "Sensitivity" độ nhạy không có dấu nháy: null <b style = "color:red;">(Để null nếu không biết độ nhạy tương ứng)</b>
+
+<h2 style = "color:purple;"> CÁC TỪ KHOÁ HIỆN CÓ CỦA HỆ THỐNG</h2>
+<br><b> Điều khiển Raspberry</b>
+<br>"power off please": Ẩn thông tin gương
+<br>"reboot please": Hiện lại thông tin gương
+<br>  
+<br><b> Chuyển trang</b>
+<br>"turn right please": Chuyển trang trái
+<br>"turn left please": Chuyển trang phải
+<br>"Chuyển trang đi": Chuyển đến trang báo tiếp theo
+<br>
+<br><b> Điều khiển đền</b>
+<br>"turn light on please": Chuyển về trang báo trước đó
+<br>"turn light off please": Mở trang báo dạng web để xem chi tiết
+<br>"nháy đèn chơi": Nháy đèn đỏ, xanh lá, xanh dương
+<br>"mở đèn cầu vồng": Hiển thị theo màu cầu vồng chuyển động
