@@ -57,6 +57,63 @@ mySocketIO.on("ALERT_OK",function(msg){
     }
 });
 
+
+function cmpType(obj)
+{
+    var objArr = {
+    "maximumEntries": "number",
+    "maximumNumberOfDays": "number",
+    "showLocation": "boolean",
+    "maxTitleLength": "number",
+    "wrapEvents": "boolean",
+    "maxTitleLines": "number",
+    "fetchInterval": "number",
+    "animationSpeed": "number",
+    "displayButton": "boolean",
+    "displayEndTime": "boolean",
+    "displayLunarDate": "boolean",
+    "displayPersonalEvents": "boolean",
+    "dateEndFormat": "string",
+    "defaultColor": "string",
+    "lunarColor": "string",
+    "colored": "boolean",
+    "tableClass": "string",
+    "displayLunarEvents": "boolean",
+    "userName": "object",
+    "ThayDuy":"string",
+    "ThayDuong":"string",
+    "Quan":"string",
+    "Khanh":"string",
+    "Bao":"string",
+    "BuiPhungHuuDuc":"string",
+    "ChauMinhDuc":"string",
+    "Dat":"string",
+    "Dung":"string",
+    "Duy":"string",
+    "Giang":"string",
+    "Huy":"string",
+    "LAnh":"string",
+    "Nhu":"string",
+    "Phong":"string",
+    "Quoc":"string",
+    "Tin":"string",
+    "Van":"string",
+    "calendars": "object",
+    "url": "string",
+    "color": "string",
+    "name": "string",
+    "personalDateEvent": "object",
+    "day": "number",
+    "month": "number",
+    "title": "string"
+};
+    if(objArr.hasOwnProperty(obj))
+    {
+        return objArr[obj];
+    }
+    else return false;
+}
+
 // Display content of modules
 mySocketIO.on("RES_MODULE_CONTENT",function(msg){ 
     var getContentArea = document.getElementById("modulesContent");
@@ -109,12 +166,78 @@ function dropONModules(){
 // Save content 
 function saveModuleContent(){
     var getContentArea = document.getElementById("modulesContent");
-    // Check JSON available or not
-    try {
-        JSON.parse(getContentArea.value);
-        mySocketIO.emit("SAVE_MODULE_CONTENT",getContentArea.value);
-    } catch (e) {
-        alert("PLEASE CHECK JSON AGAIN");
+
+    var configJSON = JSON.parse(getContentArea.value).config;
+    var isConfigOK = true;
+    for(index in configJSON)
+    {
+        if(cmpType(index) == typeof(configJSON[index]))
+        {
+            if(cmpType(index) == "object")
+            {
+                if(Array.isArray(configJSON[index]))
+                {
+                    for(subIndex in configJSON[index])
+                    {
+                        for(lastIndex in configJSON[index][subIndex])
+                        {
+                            if(cmpType(lastIndex) != typeof(configJSON[index][subIndex][lastIndex]))
+                            {
+                                isConfigOK = false;
+                                console.log("ERROR: ",lastIndex);
+                                console.log("EXPECT ", cmpType(lastIndex));
+                                console.log("ACTUALLY: ", typeof(configJSON[index][subIndex][lastIndex]));
+                                var alertStr = ("Sai cấu hình \nLỗi tại: " + lastIndex + "\nGiá trị đúng phải là dạng: " + cmpType(lastIndex) + " nhưng giá trị điền vào ở dạng: " + typeof(configJSON[index][subIndex][lastIndex]));
+                                alert(alertStr);
+                                break;
+                            }
+                            
+                        }
+                        if(isConfigOK == false)
+                        {
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    for(subIndex in configJSON[index])
+                    {
+                        if(cmpType(subIndex) != typeof(configJSON[index][subIndex]))
+                        {
+                            isConfigOK = false;
+                            console.log("ERROR: ", subIndex);
+                            console.log("EXPECT ", cmpType(subIndex));
+                            console.log("ACTUALLY: ", typeof(configJSON[index][subIndex]));
+                            var alertStr = ("Sai cấu hình \nLỗi tại: " + subIndex + "\nGiá trị đúng phải là dạng: " + cmpType(subIndex) + " nhưng giá trị điền vào ở dạng: " + typeof(configJSON[index][subIndex]));
+                            alert(alertStr);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else 
+        {
+            isConfigOK = false;
+            console.log("ERROR: ", index);
+            console.log("EXPECT ", cmpType(index));
+            console.log("EXPECT: ", typeof(configJSON[index]));
+            var alertStr = ("Sai cấu hình \nLỗi tại: " + index + "\nGiá trị đúng phải là dạng: " + cmpType(index) + " nhưng giá trị điền vào ở dạng: " + typeof(configJSON[index]));
+            alert(alertStr);
+            break;
+        }
+    }   
+
+    if(isConfigOK)
+    {
+        // Check JSON available or not
+        try {
+            JSON.parse(getContentArea.value);
+            mySocketIO.emit("SAVE_MODULE_CONTENT",getContentArea.value);
+        } catch (e) {
+            alert("Vui lòng kiểm tra lại, sai định dạng JSON (Kiểm tra lại các dấu ngoặc, hai chấm, phẩy,...)");
+        }
     }
 }
 
