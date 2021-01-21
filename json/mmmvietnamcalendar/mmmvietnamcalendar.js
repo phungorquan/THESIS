@@ -12,13 +12,13 @@
     "fetchInterval": 60000,
     "animationSpeed": 500,
     "displayButton": false,
-    "displayEndTime": false,
+    "displayEndTime": true,
     "displayLunarDate": false,
-    "displayPersonalEvents": true,
+    "displayPersonalEvents": false,
     "dateEndFormat": "LT(DD/MM)",
     "defaultColor": "White",
-    "lunarColor": "LightGreen",
-    "colored": true,
+    "lunarColor": "Red",
+    "colored": false,
     "tableClass": "xsmall",
     "displayLunarEvents": true,
     "calendars": [
@@ -34,9 +34,9 @@
     }],
     "personalDateEvent":[
     {
-      "day": 7,
-      "month": 7,
-      "title": "- Sinh nhật Quân",
+      "day": 1,
+      "month": 1,
+      "title": "- Sinh nhật Quân"
     }]
   }
 }
