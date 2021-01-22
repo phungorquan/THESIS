@@ -4,10 +4,10 @@ mySocketIO.on("WRONG_CREDENTIAL",function(error)
     alert("Sai tài khoản hoặc mật khẩu!");
 });
 
-mySocketIO.on("OK_CREDENTIAL",function(data)
+mySocketIO.on("OK_CREDENTIAL",function(url)
 { 
-    window.location.href = data;
-    //document.getElementById('idLogin').style.display = "none"; // Đóng form login
+	// Re-direct to url
+    window.location.href = url;
 });
 
 

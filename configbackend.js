@@ -1,4 +1,6 @@
-var mySocketIO = io({transports: ['websocket'], upgrade: false});
+var mySocketIO = io({transports: ['websocket'], upgrade: false}); // Procedure
+
+// Self-definition namespace
 var ns_ConfigServer = {
     ON: 1,
     OFF: 0,
@@ -6,17 +8,17 @@ var ns_ConfigServer = {
     numOfModules:0
 };
 
-// Alert ERR
+// Alert ERR function
 mySocketIO.on("ALERT_ERROR",function(msg){ 
-    alert("ERROR - " + msg);
+    alert("LỖI - " + msg);
     console.log(msg);
 });
 
-// Alert OK
+// Alert OK function
 mySocketIO.on("ALERT_OK",function(msg){ 
     if(msg == "UPDATE_MODULES_OK")
     {
-        // Reset content, drop list
+        // Reset content, drop lists to be empty
         var getContentArea = document.getElementById("modulesContent");
         getContentArea.value = "";
         var tableContain = document.getElementById("allModulesStatus");
@@ -25,18 +27,24 @@ mySocketIO.on("ALERT_OK",function(msg){
         while (getAllModulesOption.options.length > 0) {                
              getAllModulesOption.remove(0);
         }  
+        // Get all data of modules again
         mySocketIO.emit("GET_ALL_MODULES","DUMMY");
     }
     else if(msg == "READY_TO_COMBINE_CONFIG_COMPONENTS")
     {
+        // After GEN_MODULES_CONFIG file below, server will send to backend in order to receive inform one more. Then apply support file into config.js
+        // This is a procedure
         mySocketIO.emit("COMBINE_CONFIG_COMPONENTS");
     }
+    // This is only a solution in order to help system ready for reset after load file
     else if(msg == "READY_TO_RESET")
     {   
+        // To reset we will send as same we click RESET Button
         var arrTmp = [];
         arrTmp[0] = 0;
         mySocketIO.emit("EXEC_COMMAND",arrTmp);
-        // Reset content, drop list
+
+        // Reset content, drop lists to be empty
         var getContentArea = document.getElementById("modulesContent");
         getContentArea.value = "";
         var tableContain = document.getElementById("allModulesStatus");
@@ -45,10 +53,12 @@ mySocketIO.on("ALERT_OK",function(msg){
         while (getAllModulesOption.options.length > 0) {                
              getAllModulesOption.remove(0);
         }  
+        // Get all data of modules again
         mySocketIO.emit("GET_ALL_MODULES","DUMMY");
     }
     else if (msg == "REQUEST_GEN_JSON_ALL_DEVICES")
     {
+        // Gen all modules config and save to a support config file
         mySocketIO.emit("GEN_MODULES_CONFIG");
     }
     else
@@ -61,6 +71,10 @@ mySocketIO.on("ALERT_OK",function(msg){
 function cmpType(obj)
 {
     var objArr = {
+    "position": "string",
+    "header": "string",
+    "module": "string",
+    "config": "object",
     "maximumEntries": "number",
     "maximumNumberOfDays": "number",
     "showLocation": "boolean",
@@ -107,9 +121,10 @@ function cmpType(obj)
     "month": "number",
     "title": "string"
 };
+    // Check if obj is exist (it means user edit wrong obj)
     if(objArr.hasOwnProperty(obj))
     {
-        return objArr[obj];
+        return objArr[obj]; // return type of that object
     }
     else return false;
 }
@@ -117,39 +132,43 @@ function cmpType(obj)
 // Display content of modules
 mySocketIO.on("RES_MODULE_CONTENT",function(msg){ 
     var getContentArea = document.getElementById("modulesContent");
-    getContentArea.value = "";
+    getContentArea.value = ""; // Reset previous content
     getContentArea.value = msg;
 });
 
-// Show modules information when user click into information icon
+// Receive information content and display
 mySocketIO.on("RES_MODULE_INFO",function(info){ 
     document.getElementById("informationContentWillBeShowedHere").innerHTML = info;
     document.getElementById("modulesInfo").style.display = "block";
 });
 
+// When user click into information icon
 function showModulesInfo()
 {
     var selection = document.getElementById("dropONModules");
     var value = selection.options[selection.selectedIndex].value;
+
+    // Check if user select a specific module
     if(value != ns_ConfigServer.OnDisableOption)
     {   
-        // Emit to get module information
+        // Emit to get that module information
         mySocketIO.emit("GET_MODULE_INFO",value); 
     }
+    // If user didn't select any module -> Display full information about author, system, how to use,...
     else 
     {
-        // Emit to get information of this Smart Mirror system and User manual
-        mySocketIO.emit("GET_MODULE_INFO","thongtinchung"); 
+        mySocketIO.emit("GET_MODULE_INFO","thongtinchung");
     }
 }
 
+// Close information window when user click CLOSE button
 function closeInfo()
 {
     document.getElementById("modulesInfo").style.display = "none";
     document.getElementById("informationContentWillBeShowedHere").innerHTML = "";
 }
 
-// Get all modules name when select ON option
+// Get all modules name when select ON drop list
 function dropONModules(){
     var selection = document.getElementById("dropONModules");
     var value = selection.options[selection.selectedIndex].value;
@@ -157,86 +176,146 @@ function dropONModules(){
     {   // Emit to get module content
         mySocketIO.emit("GET_MODULE_CONTENT",value); 
     }
+    // If user don't select module
     else 
     {
-        alert("Please select modules!");
+        alert("Vui lòng chọn một mô-đun!");
     }
+}
+
+// Display alert
+function displayJSONErr(arr)
+{
+    var alertStr = "";
+    if(arr.expectType == false)
+    {
+        alertStr = "Không tồn tại cấu hình này: " + arr.objName;
+    }
+    else
+    {   
+        alertStr = ("Sai cấu hình \nLỗi tại: " + arr.objName + "\nGiá trị đúng phải là dạng: " + arr.expectType + " nhưng giá trị điền vào ở dạng: " + arr.errType);
+    }
+    console.log(alertStr);
+    alert(alertStr);
 }
 
 // Save content 
 function saveModuleContent(){
     var getContentArea = document.getElementById("modulesContent");
 
-    var configJSON = JSON.parse(getContentArea.value).config;
-    var isConfigOK = true;
-    for(index in configJSON)
+    var fullConfigJSON = "";
+    var jsonOK = true;
+    // Check JSON available or not
+    try {
+        fullConfigJSON = JSON.parse(getContentArea.value);
+    } catch (e) {
+        jsonOK = false;
+        alert("Vui lòng kiểm tra lại, sai định dạng JSON (Kiểm tra lại các dấu ngoặc, hai chấm, phẩy,...)");
+    }
+
+    if(jsonOK)
     {
-        if(cmpType(index) == typeof(configJSON[index]))
+        var isConfigOK = true;
+        var alertStr = "";
+
+        // Check some objects before check obj in config ("position","header","module","config" or the other ones in the future)
+        for(index in fullConfigJSON)
         {
-            if(cmpType(index) == "object")
+            var getType = cmpType(index);
+            if(getType != typeof(fullConfigJSON[index]))
             {
-                if(Array.isArray(configJSON[index]))
-                {
-                    for(subIndex in configJSON[index])
-                    {
-                        for(lastIndex in configJSON[index][subIndex])
-                        {
-                            if(cmpType(lastIndex) != typeof(configJSON[index][subIndex][lastIndex]))
-                            {
-                                isConfigOK = false;
-                                console.log("ERROR: ",lastIndex);
-                                console.log("EXPECT ", cmpType(lastIndex));
-                                console.log("ACTUALLY: ", typeof(configJSON[index][subIndex][lastIndex]));
-                                var alertStr = ("Sai cấu hình \nLỗi tại: " + lastIndex + "\nGiá trị đúng phải là dạng: " + cmpType(lastIndex) + " nhưng giá trị điền vào ở dạng: " + typeof(configJSON[index][subIndex][lastIndex]));
-                                alert(alertStr);
-                                break;
-                            }
-                            
-                        }
-                        if(isConfigOK == false)
-                        {
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    for(subIndex in configJSON[index])
-                    {
-                        if(cmpType(subIndex) != typeof(configJSON[index][subIndex]))
-                        {
-                            isConfigOK = false;
-                            console.log("ERROR: ", subIndex);
-                            console.log("EXPECT ", cmpType(subIndex));
-                            console.log("ACTUALLY: ", typeof(configJSON[index][subIndex]));
-                            var alertStr = ("Sai cấu hình \nLỗi tại: " + subIndex + "\nGiá trị đúng phải là dạng: " + cmpType(subIndex) + " nhưng giá trị điền vào ở dạng: " + typeof(configJSON[index][subIndex]));
-                            alert(alertStr);
-                            break;
-                        }
-                    }
-                }
+                isConfigOK = false;
+                var objErr = new Object;
+                objErr["objName"] = index;
+                objErr["expectType"] = getType;
+                objErr["errType"] = typeof(fullConfigJSON[index]);
+                displayJSONErr(objErr);
+                break;
             }
         }
-        else 
-        {
-            isConfigOK = false;
-            console.log("ERROR: ", index);
-            console.log("EXPECT ", cmpType(index));
-            console.log("EXPECT: ", typeof(configJSON[index]));
-            var alertStr = ("Sai cấu hình \nLỗi tại: " + index + "\nGiá trị đúng phải là dạng: " + cmpType(index) + " nhưng giá trị điền vào ở dạng: " + typeof(configJSON[index]));
-            alert(alertStr);
-            break;
-        }
-    }   
 
-    if(isConfigOK)
-    {
-        // Check JSON available or not
-        try {
-            JSON.parse(getContentArea.value);
-            mySocketIO.emit("SAVE_MODULE_CONTENT",getContentArea.value);
-        } catch (e) {
-            alert("Vui lòng kiểm tra lại, sai định dạng JSON (Kiểm tra lại các dấu ngoặc, hai chấm, phẩy,...)");
+        if(isConfigOK)
+        {
+            // Check objects in config JSON
+            var configJSON = JSON.parse(getContentArea.value).config;
+            // Check one by one obj
+            for(index in configJSON)
+            {
+                // If obj is OK (string, number, object)
+                var getType = cmpType(index);
+                if(getType == typeof(configJSON[index]))
+                {
+                    // If obj is an object (that is a subObject with {[]})
+                    if(getType == "object")
+                    {
+                        // If inside subObject is Array 
+                        if(Array.isArray(configJSON[index]))
+                        {
+                            // Get inside and get one by one element in Array
+                            for(subIndex in configJSON[index])
+                            {
+                                // Get obj in an element
+                                for(lastIndex in configJSON[index][subIndex])
+                                {
+                                    // If that obj is !OK - > ready to alert
+                                    var getType = cmpType(lastIndex);
+                                    if(getType != typeof(configJSON[index][subIndex][lastIndex]))
+                                    {
+                                        isConfigOK = false;
+                                        var objErr = new Object;
+                                        objErr["objName"] = lastIndex;
+                                        objErr["expectType"] = getType;
+                                        objErr["errType"] = typeof(configJSON[index][subIndex][lastIndex]);
+                                        displayJSONErr(objErr);
+                                        break;
+                                }
+                                    
+                                }
+                                // Out one more for loop when false
+                                if(isConfigOK == false)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        // If inside subObject only has data without Array
+                        else
+                        {
+                            // Check one by one obj
+                            for(subIndex in configJSON[index])
+                            {
+                                // If that obj is !OK -> ready to alert
+                                var getType = cmpType(subIndex);
+                                if(getType != typeof(configJSON[index][subIndex]))
+                                {
+                                    isConfigOK = false;
+                                    var objErr = new Object;
+                                    objErr["objName"] = subIndex;
+                                    objErr["expectType"] = getType;
+                                    objErr["errType"] = typeof(configJSON[index][subIndex]);
+                                    displayJSONErr(objErr);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                // If that obj is !OK -> ready to alert
+                else 
+                {
+                    isConfigOK = false;
+                    var objErr = new Object;
+                    objErr["objName"] = index;
+                    objErr["expectType"] = getType;
+                    objErr["errType"] = typeof(configJSON[index]);
+                    displayJSONErr(objErr);
+                    break;
+                }
+            }       
+            if(isConfigOK)
+            {
+                mySocketIO.emit("SAVE_MODULE_CONTENT",getContentArea.value);
+            }
         }
     }
 }
@@ -246,7 +325,7 @@ function genModuleContent(){
     mySocketIO.emit("GEN_MODULES_CONFIG");
 }
 
-// Add to ON option all ON modules, and display ON/OFF modules status table
+// Add to ON drop list all ON modules, and display ON/OFF modules status table
 mySocketIO.emit("GET_ALL_MODULES","DUMMY"); 
 mySocketIO.on("RES_ALL_MODULES",function(msg){ 
 
@@ -304,6 +383,7 @@ function updateStatus()
 
 // 
 
+// All button execute command
 function cmdButton(cmdIndex)
 {
     // 0: RESET_SMARTMIRROR
@@ -317,8 +397,9 @@ function cmdButton(cmdIndex)
     var selection = document.getElementById("dropONModules");
     var value = selection.options[selection.selectedIndex].value;
     var cmdArr = [];
-    cmdArr[0] = cmdIndex;
+    cmdArr[0] = cmdIndex; // Get command
 
+    // If user click BACKUP but select a specific module -> only BACKUP that module
     if(value != ns_ConfigServer.OnDisableOption && cmdArr[0] == 5)
     {       
         if(typeof cmdIndex == 'number')
@@ -338,9 +419,9 @@ function cmdButton(cmdIndex)
         case 2: getConfirmStr = "Bạn muốn dừng Gương thông minh hông?"; break;
         case 3: getConfirmStr = "Bạn muốn khởi động lại Raspberry hông?"; break;
         case 4: getConfirmStr = "Bạn muốn tắt Raspberry hông?"; break;
-        case 5: getConfirmStr = "Bạn muốn cập nhật lại toàn bộ module về trạng thái mặc định hông?"; break;
-        case 6: getConfirmStr = "Bạn muốn cập nhật lại module " + value + " về trạng thái mặc định hông?"; break;
-        default: break;
+        case 5: getConfirmStr = "Bạn muốn CHỈ cập nhật lại file config chính về trạng thái mặc định và bật hết các module lên hông??"; break;
+        case 6: getConfirmStr = "Bạn muốn CHỈ cập nhật lại module " + value + " về trạng thái mặc định hông?"; break;
+        default: getConfirmStr = "CONFIRM_ERROR"; break;
     }
  
     if(getConfirmStr != "CONFIRM_ERROR")
@@ -353,6 +434,6 @@ function cmdButton(cmdIndex)
         }
     }
     else{
-        alert("COMMAND_ERROR");
+        alert("Lỗi thực thi");
     }
 }
