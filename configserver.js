@@ -35,7 +35,7 @@ var googlePhotoCache = path.resolve("../modules/MMM-GoogleDriveSlideShow/.cache"
 var userId = "MMM";
 var userPass = "1";
 
-// Save all modules data
+// Save all modules data, this will be containe obj are columns respectively from database
 var allModules = [];
 
 // Save sessions data
@@ -301,7 +301,7 @@ io.sockets.on("connection", function(socket)
                 io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");
               }
               else 
-                socket.emit("ALERT_ERROR","updateAllStatus");
+                socket.emit("ALERT_ERROR","Không thể bật tất cả module!");
             }
             updateAllStatus(); 
           }
@@ -324,6 +324,32 @@ io.sockets.on("connection", function(socket)
   // Update modules status
   socket.on("UPDATE_MODULES_STATUS", function(id) {
     async function updateStatus() {
+
+      // If user turn ON/OFF, system will turn off pm2_PS3 and kill motion OR restart pm2_PS3
+      if(allModules[id].NAME == "mmmfacenet")
+      {
+        if(allModules[id].STATUS)
+          {
+            myProcess.exec("pm2 stop pm2_PS3 && killall motion", function (err,stdout,stderr) {
+              if(err)
+              {
+                console.log ("ERROR STOP PM2 AND KILL MOTION")
+                socket.emit("ALERT_ERROR","Không thể bật tất cả module!");
+              }
+            });
+          }
+        else 
+        {
+          myProcess.exec("pm2 restart pm2_PS3", function (err,stdout,stderr) {
+            if(err)
+            {
+              console.log ("ERROR RESTART PM2")
+              socket.emit("ALERT_ERROR","Không thể bật camera!");
+            }
+          });
+        }
+      }
+
       // Get status of module [id-1] then toggle the status to change status
       var status = !allModules[id].STATUS ? 1 : 0;
       result = await db.queryUpdateStatus(allModules[id].ID, status); 
@@ -333,7 +359,7 @@ io.sockets.on("connection", function(socket)
           io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");
         }
       else 
-        socket.emit("ALERT_ERROR","updateStatus");
+        socket.emit("ALERT_ERROR","Không thể cập nhật trạng thái cho module");
     }
     updateStatus(); 
   });

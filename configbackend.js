@@ -346,6 +346,10 @@ function updateStatus()
 {
     var selection = document.getElementById("dropAllModules");
     var value = selection.options[selection.selectedIndex].value;
+    if(selection.options[selection.selectedIndex].NAME == "mmmfacenet")
+    {
+        alert("!!! CẢNH BÁO !!!\nKhi thay đổi trạng thái của module này sẽ ảnh hưởng trực tiếp đến camera. Khi thực hiện đổi trạng thái nên đợi từ 5-10s đến khi đèn đỏ trên camera tắt đi hoặc bật lại thì hãy tiếp tục thực hiện tiếp những điều khiển khác!!!")
+    }
     mySocketIO.emit("UPDATE_MODULES_STATUS",value);
 }
 
