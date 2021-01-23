@@ -24,7 +24,7 @@ var clients = {};
 var myProcess = require('child_process');
 
  // Include file to use db queries command
-var db = require(path.resolve("db.js"));
+var db = require(path.resolve("db/db.js"));
 
 // Some directories
 var backupConfigFilename = path.resolve("../config/Backupconfig.js");
@@ -207,7 +207,7 @@ io.sockets.on("connection", function(socket)
     if(fs.existsSync(genConfigFilename))
     {
       // Write into support config.js file new configs
-      fs.writeFileSync(path.resolve(genConfigFilename), beautify(JSON.stringify(c), {brace_style: "expand" }));
+      fs.writeFileSync(path.resolve(genConfigFilename), beautify(JSON.stringify(configJSON), {brace_style: "expand" }));
       socket.emit("ALERT_OK","READY_TO_COMBINE_CONFIG_COMPONENTS");
     }
     else
