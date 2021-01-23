@@ -27,6 +27,7 @@ var myProcess = require('child_process');
 var db = require(path.resolve("db.js"));
 
 // Some directories
+var backupConfigFilename = path.resolve("../config/Backupconfig.js");
 var configFilename = path.resolve("../config/config.js");
 var genConfigFilename = path.resolve("../config/genConfig.js");
 var jsonDir = path.resolve("../configserver/json") + "/";
@@ -261,7 +262,7 @@ io.sockets.on("connection", function(socket)
       case 4: result = "echo '1' | sudo -S shutdown -h now"; break;
       // 5 is used for all
       // 6 is used for specific module
-      case 5: result = "cp ~/MagicMirror/THESIS/config/Backupconfig.js ~/MagicMirror/THESIS/config/config.js && pm2 restart pm2_mm"; break;
+      case 5: result = "cp " + result + " " + configFilename + " && pm2 restart pm2_mm"; break;
       case 6: {
         // Replace backup config.js file into config.js file
         var getFileBKName = jsonDir + msg[1] + '/' + msg[1] + 'BK.js';
