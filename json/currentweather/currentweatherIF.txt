@@ -22,67 +22,75 @@
 <br>Thông tin: Tốc độ hiển thị
 <br>Điền vào số không có dấu nháy: 1000 (1s)
 <br>
-<br><b>5. showPeriod:</b>
+<br><b>5. timeFormat: </b>
+<br>Thông tin: Định dạng giờ 12h hay 24h
+<br>Điền vào đơn số không có dấu nháy: 12, 24
+<br>
+<br><b>6. units:</b>
+<br>Thông tin: Sử dụng đơn vị tương ứng metric (C), imperial (F), default (K)
+<br>Điền vào đơn vị với dấu nháy: "metric", "imperial", "default"
+<br>
+<br><b>7. showPeriod:</b>
 <br>Thông tin: Hiển thị am/pm đối với định dạng 12h
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>6. showPeriodUpper:</b>
+<br><b>8. showPeriodUpper:</b>
 <br>Thông tin: Hiển thị AM/PM đối với định dạng 12h
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>7. showWindDirection:</b>
+<br><b>9. showWindDirection:</b>
 <br>Thông tin: Hiển thị hướng gió
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>8. showWindDirectionAsArrow:</b>
+<br><b>10. showWindDirectionAsArrow:</b>
 <br>Thông tin: Hiển thị hướng gió với dấu mũi tên
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>9. useBeaufort:</b>
+<br><b>11. useBeaufort:</b>
 <br>Thông tin: Hiển thị đơn vị gió hoặc biểu đồ gió
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>10. appendLocationNameToHeader:</b>
+<br><b>12. appendLocationNameToHeader:</b>
 <br>Thông tin: Lấy tên thành phố làm tên tiêu đề
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>11. useKMPHwind:</b>
+<br><b>13. useKMPHwind:</b>
 <br>Thông tin: Sử dụng đơn vị gió 
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>12. decimalSymbol:</b>
+<br><b>14. decimalSymbol:</b>
 <br>Thông tin: Ký tự dấu phẩy
 <br>Điền vào cấu hình với dấu nháy: "."
 <br>
-<br><b>13. showHumidity:</b>
+<br><b>15. showHumidity:</b>
 <br>Thông tin: Hiển thị độ ẩm
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>14. degreeLabel:</b>
+<br><b>16. degreeLabel:</b>
 <br>Thông tin: Hiển thị độ 
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>15. showIndoorTemperature:</b>
+<br><b>17. showIndoorTemperature:</b>
 <br>Thông tin: Hiển thị nhiệt độ phòng
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>16. showIndoorHumidity:</b>
+<br><b>18. showIndoorHumidity:</b>
 <br>Thông tin: Hiển thị độ ẩm phòng
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>17. showFeelsLike:</b>
+<br><b>19. showFeelsLike:</b>
 <br>Thông tin: Hiển thị cảm giác như nhiệt độ thời tiết
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br>
-<br><b>18. initialLoadDelay:</b>
+<br><b>20. initialLoadDelay:</b>
 <br>Thông tin: Thời gian module khởi tạo
 <br>Điền vào số không có dấu nháy: 1000 (1s)
 <br> 
-<br><b>19. retryDelay:</b>
+<br><b>21. retryDelay:</b>
 <br>Thông tin: Thời gian tải lại
 <br>Điền vào số không có dấu nháy: 2500 (2.5s)
 <br> 
-<br><b>20. roundTemp:</b>
+<br><b>22. roundTemp:</b>
 <br>Thông tin: Làm tròn số nhiệt độ
 <br>Điền vào cấu hình không có dấu nháy: true, false
 <br> 

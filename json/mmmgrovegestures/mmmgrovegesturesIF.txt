@@ -5,8 +5,18 @@
 <br><a href="https://github.com/eouia/MMM-GroveGestures" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
 <br>-----------------<br></i>
 
-<h2 style = "color:orange;"> CÁC CỬ CHỈ HIỆN CÓ CỦA HỆ THỐNG</h2>
-<br><b> Ẩn hiện thông tin gương</b>
+<br>
+<br><b>1. recognitionTimeout:</b>
+<br>Thông tin: Thời gian để kết thúc nhận ra một cử chỉ
+<br>Điền vào thời gian không có dấu nháy: 1500 (1.5s)
+<br>
+<br><b>2. visible:</b>
+<br>Thông tin: Hiển thị thông tin các cử chỉ đã nhận diện
+<br>Điền vào cấu hình không có dấu nháy: true, false
+
+<br>
+<h2 style = "color:purple;"> ----------------- <br>CÁC CỬ CHỈ HIỆN CÓ CỦA HỆ THỐNG</h2>
+<b> Ẩn hiện thông tin gương</b>
 <br>"WAVE": Ẩn thông tin gương
 <br>"FORWARD-BACKWARD": Hiện lại thông tin gương
 <br>

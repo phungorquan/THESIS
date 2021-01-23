@@ -31,7 +31,7 @@
 <br>- Cuối cùng là 4 nút cơ bản để điều khiển gương:
 <br>&nbsp;+ <b>Start:</b> Khởi động hệ thống gương thông minh
 <br>&nbsp;+ <b>Stop:</b> Tắt hệ thống gương thông minh
-<br>&nbsp;+ <b>Reset:</b> Khởi động lại hệ thống gương thông minh (Không áp dụng bất cứ thay đổi nào như nút "Áp dụng và khởi động lại")
+<br>&nbsp;+ <b>Reset:</b> Khởi động lại hệ thống gương thông minh (Việc ấn nút Reset sẽ không áp dụng trạng thái người dùng vừa thay đổi cho các mô-đun và không lưu các cấu hình đã chỉnh sửa mà phải "Áp dụng và khởi động lại". <b style = "color:purple">Ngoài ra chỉ áp dụng cho việc xoá cache và cập nhật lại hình cho mô-đun "Trình chiếu hình"</b>)
 <br>&nbsp;+ <b>Backup:</b> Khi người dùng chưa chọn mô-đun ở menu trên cùng mà nhấn nút này sẽ đưa gương về cấu hình mặc định và trạng thái tất cả các mô-đun sẽ được bật (Không đưa từng mô-đun về cấu hình mặc định). Nếu người dùng có chọn một mô-đun bất kỳ trong menu thì khi ấn nút này sẽ đưa mô-đun đang được chọn về cấu hình mặc định.
 
 <br><br><b>2. Bên phải</b>

@@ -6,9 +6,9 @@
     "maxFolders": 1, 
     "maxResults": 50,
     "refreshDriveDelayInSeconds": 86400, 
-    "refreshSlideShowIntervalInSeconds": 1,
-    "maxWidth": "1280",
-    "maxHeight": "800",
+    "refreshSlideShowIntervalInSeconds": 10,
+    "maxWidth": "850",
+    "maxHeight": "850",
     "theme": "blackFrame",
     "opacity": 1,
     "debug": false

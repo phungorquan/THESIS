@@ -9,7 +9,7 @@
 <br>
 <br><b>1. modules:</b>
 <br>Thông tin: Mảng chứa các module sẽ được hiển thị, mỗi phần tử là mỗi trang tương ứng
-<br>Điền vào các module với dấu nháy: ["MMM-VietnamCalendar","weatherforecast"],["MMM-Tools", "MMM-FaceNet", "currentweather"]
+<br>Điền vào các module với dấu nháy: ["MMM-VietnamCalendar","weatherforecast"],["MMM-Tools", "MMM-FaceNet", "currentweather"],["MMM-GoogleDriveSlideShow"]
 <br>
 <br><b>2. fixed:</b>
 <br>Thông tin: Mảng chứa các module sẽ được hiển thị ở tất cả các trang

@@ -1,7 +1,7 @@
 {
-	"position": "bottom_bar",
-	"module": "MMM-page-indicator",
-	"config": {
-    	"pages": 2
-    }
+  "position": "bottom_bar",
+  "module": "MMM-page-indicator",
+  "config": {
+    "pages": 3
+  }
 }

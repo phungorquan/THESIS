@@ -7,7 +7,14 @@
 <br>-----------------<br></i>
 
 <br>
-<br><b>1. snowboy:</b>
+<br><b>1. micConfig:</b>
+<br>Thông tin: Một object chứa cấu hình của card âm thanh mà phần cứng microphone đang sử dụng
+<br>"recorder": Thông tin driver hỗ trợ cho Raspbian, "sox", "rec", "arecord" - dùng cho Raspbian
+<br>"device": Cổng âm thanh của thiết bị đang cắm vào, dùng câu lệnh "arecord -l" trên linux để tìm
+<br>Điền vào "recorder" với dấu nháy:"sox", "rec", "arecord"
+<br>Điền vào "device" với dấu nháy: "plughw:2"
+<br>
+<br><b>2. snowboy:</b>
 <br>Thông tin: Một object chứa các thông tin con để đổi câu lệnh hotword kích hoạt Google Assistant
 <br>"usePMDL": Dùng từ khoá riêng từ một model tự tạo
 <br>"audioGain": Gain của microphone, không cần sửa
@@ -16,12 +23,30 @@
 <br>"Sensitivity": Độ nhạy ứng với model 
 <br>Điền vào "usePMDL" cấu hình không có dấu nháy: true, false
 <br>Điền vào "audioGain" độ nhạy không có dấu nháy: 2.0
-<br>Điền vào "Frontend" không có dấu nháy: true, false
+<br>Điền vào "Frontend" cấu hình không có dấu nháy: true, false
 <br>Điền vào "model" với dấu nháy: "smart_mirror", "jarvis", "computer", "snowboy", "subex", "neo_ya", "hey_extreme", "view_glass", "alexa"
 <br>Điền vào "Sensitivity" độ nhạy không có dấu nháy: null <b style = "color:red;">(Để null nếu không biết độ nhạy tương ứng)</b>
+<br>
+<br><b>3. A2DServer:</b>
+<br>Thông tin: Một object chứa các thông tin để sử dụng module Hỗ trợ Youtube (MMM-Assistant2Display)
+<br>"useA2D": Cho phép sử dụng A2D
+<br>"stopCommand": Câu lệnh để dừng hoạt động hiện tại của Youtube
+<br>"useYouTube": Cho phép sử dụng Youtube
+<br>"youtubeCommand": Từ khoá để G.A nhận biết đang tìm kiếm video với Youtube
+<br>"displayResponse": Cho phép hiển thị các tìm kiếm
+<br>Điền vào "useA2D" cấu hình không có dấu nháy: true, false
+<br>Điền vào "stopCommand" với dấu nháy: "stop"
+<br>Điền vào "useYouTube" cấu hình không có dấu nháy: true, false
+<br>Điền vào "youtubeCommand" với dấu nháy: "youtube"
+<br>Điền vào "displayResponse" cấu hình không có dấu nháy: true, false
+<br>
+<br><b>4. recipes:</b>
+<br>Thông tin: Một mảng chứa các file để thực hiện những câu lệnh cá nhân do người dùng chỉ định, tự tạo
+<br>Điền vào tên file ứng với các phần tử trong mảng có dấu nháy: "myCustomRecipe.js"
 
-<h2 style = "color:purple;"> CÁC TỪ KHOÁ HIỆN CÓ CỦA HỆ THỐNG</h2>
-<br><b> Điều khiển Raspberry</b>
+<br>
+<h2 style = "color:purple;"> ----------------- <br>CÁC TỪ KHOÁ HIỆN CÓ CỦA HỆ THỐNG</h2>
+<b> Điều khiển Raspberry</b>
 <br>"power off please": Ẩn thông tin gương
 <br>"reboot please": Hiện lại thông tin gương
 <br>  

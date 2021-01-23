@@ -1,3 +1,3 @@
 {
-	"module": "MMM-Cursor"
+  "module": "MMM-Cursor"
 }
