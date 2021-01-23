@@ -30,6 +30,7 @@ var db = require(path.resolve("db.js"));
 var configFilename = path.resolve("../config/config.js");
 var genConfigFilename = path.resolve("../config/genConfig.js");
 var jsonDir = path.resolve("../configserver/json") + "/";
+var jsonCheckingFile = path.resolve("../configserver/json/jsonChecking.js");
 var googlePhotoCache = path.resolve("../modules/MMM-GoogleDriveSlideShow/.cache");
 var userId = "MMM";
 var userPass = "1";
@@ -40,16 +41,42 @@ var allModules = [];
 // Save sessions data
 var globSessionArr = [];
 
+// Save JSON checking 
+var allJSONChecking = "";
+
 // Get all modules name + config
 async function getAllModulesStatus() {
-    result = await db.queryGetAllModulesStatus();
-    if(result != "queryGetAllModulesStatus-ERROR")
-      allModules = result;
-    else 
-      allModules = [];
-  }
+  result = await db.queryGetAllModulesStatus();
+  if(result != "queryGetAllModulesStatus-ERROR")
+    allModules = result;
+  else 
+    allModules = [];
+}
   // Get all modules name + config , when first run server
   getAllModulesStatus(); 
+
+// Get JSON checking types and objs
+async function getJSONChecking() {
+  if(fs.existsSync(jsonCheckingFile))
+  {
+    var getContent = fs.readFileSync(path.join(jsonCheckingFile),"utf8");
+    if(getContent.length > 0)
+    {
+      allJSONChecking = getContent;
+    }
+    else
+    {
+      console.log("EMPTY FILE: ",jsonCheckingFile);
+      socket.emit("ALERT_ERROR","Các điều kiện kiểm tra JSON rỗng");
+    }
+  }
+  else
+  {
+    console.log("NOT EXIST DIRECTORY: ",jsonCheckingFile);
+    socket.emit("ALERT_ERROR","Không tìm thấy đường dẫn của các điều kiện kiểm tra JSON");
+  }
+}
+  getJSONChecking(); 
 
 io.sockets.on("connection", function(socket)
 { 
@@ -349,6 +376,23 @@ io.sockets.on("connection", function(socket)
     }
     getModuleInfo(); 
   });
+
+  // Send object checking JSON
+  socket.on("GET_JSON_CHECKING", function() {
+    function getObjects() {
+      if(allJSONChecking.length > 0)
+      {
+        socket.emit("RES_JSON_CHECKING",allJSONChecking);
+      }
+      else 
+      {
+        console.log("EMPTY FILE: ",jsonCheckingFile);
+        socket.emit("ALERT_ERROR","Các điều kiện kiểm tra JSON rỗng");
+      }
+    }
+    getObjects(); 
+  });
+
 
   // Check login Id and pass
   socket.on("CHECKING_LOGIN", function(data){

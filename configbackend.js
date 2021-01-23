@@ -5,7 +5,8 @@ var ns_ConfigServer = {
     ON: 1,
     OFF: 0,
     OnDisableOption:"Chọn mô-đun" ,
-    numOfModules:0
+    numOfModules:0,
+    jsonChecking: {}
 };
 
 // Alert ERR function
@@ -67,67 +68,11 @@ mySocketIO.on("ALERT_OK",function(msg){
     }
 });
 
-
-function cmpType(obj)
-{
-    var objArr = {
-    "position": "string",
-    "header": "string",
-    "module": "string",
-    "config": "object",
-    "maximumEntries": "number",
-    "maximumNumberOfDays": "number",
-    "showLocation": "boolean",
-    "maxTitleLength": "number",
-    "wrapEvents": "boolean",
-    "maxTitleLines": "number",
-    "fetchInterval": "number",
-    "animationSpeed": "number",
-    "displayButton": "boolean",
-    "displayEndTime": "boolean",
-    "displayLunarDate": "boolean",
-    "displayPersonalEvents": "boolean",
-    "dateEndFormat": "string",
-    "defaultColor": "string",
-    "lunarColor": "string",
-    "colored": "boolean",
-    "tableClass": "string",
-    "displayLunarEvents": "boolean",
-    "userName": "object",
-    "ThayDuy":"string",
-    "ThayDuong":"string",
-    "Quan":"string",
-    "Khanh":"string",
-    "Bao":"string",
-    "BuiPhungHuuDuc":"string",
-    "ChauMinhDuc":"string",
-    "Dat":"string",
-    "Dung":"string",
-    "Duy":"string",
-    "Giang":"string",
-    "Huy":"string",
-    "LAnh":"string",
-    "Nhu":"string",
-    "Phong":"string",
-    "Quoc":"string",
-    "Tin":"string",
-    "Van":"string",
-    "calendars": "object",
-    "url": "string",
-    "color": "string",
-    "name": "string",
-    "personalDateEvent": "object",
-    "day": "number",
-    "month": "number",
-    "title": "string"
-};
-    // Check if obj is exist (it means user edit wrong obj)
-    if(objArr.hasOwnProperty(obj))
-    {
-        return objArr[obj]; // return type of that object
-    }
-    else return false;
-}
+mySocketIO.emit("GET_JSON_CHECKING","DUMMY");
+// Get checking JSON
+mySocketIO.on("RES_JSON_CHECKING",function(msg){ 
+    ns_ConfigServer.jsonChecking = JSON.parse(msg);
+});
 
 // Display content of modules
 mySocketIO.on("RES_MODULE_CONTENT",function(msg){ 
@@ -141,189 +86,6 @@ mySocketIO.on("RES_MODULE_INFO",function(info){
     document.getElementById("informationContentWillBeShowedHere").innerHTML = info;
     document.getElementById("modulesInfo").style.display = "block";
 });
-
-// When user click into information icon
-function showModulesInfo()
-{
-    var selection = document.getElementById("dropONModules");
-    var value = selection.options[selection.selectedIndex].value;
-
-    // Check if user select a specific module
-    if(value != ns_ConfigServer.OnDisableOption)
-    {   
-        // Emit to get that module information
-        mySocketIO.emit("GET_MODULE_INFO",value); 
-    }
-    // If user didn't select any module -> Display full information about author, system, how to use,...
-    else 
-    {
-        mySocketIO.emit("GET_MODULE_INFO","thongtinchung");
-    }
-}
-
-// Close information window when user click CLOSE button
-function closeInfo()
-{
-    document.getElementById("modulesInfo").style.display = "none";
-    document.getElementById("informationContentWillBeShowedHere").innerHTML = "";
-}
-
-// Get all modules name when select ON drop list
-function dropONModules(){
-    var selection = document.getElementById("dropONModules");
-    var value = selection.options[selection.selectedIndex].value;
-    if(value != ns_ConfigServer.OnDisableOption)
-    {   // Emit to get module content
-        mySocketIO.emit("GET_MODULE_CONTENT",value); 
-    }
-    // If user don't select module
-    else 
-    {
-        alert("Vui lòng chọn một mô-đun!");
-    }
-}
-
-// Display alert
-function displayJSONErr(arr)
-{
-    var alertStr = "";
-    if(arr.expectType == false)
-    {
-        alertStr = "Không tồn tại cấu hình này: " + arr.objName;
-    }
-    else
-    {   
-        alertStr = ("Sai cấu hình \nLỗi tại: " + arr.objName + "\nGiá trị đúng phải là dạng: " + arr.expectType + " nhưng giá trị điền vào ở dạng: " + arr.errType);
-    }
-    console.log(alertStr);
-    alert(alertStr);
-}
-
-// Save content 
-function saveModuleContent(){
-    var getContentArea = document.getElementById("modulesContent");
-
-    var fullConfigJSON = "";
-    var jsonOK = true;
-    // Check JSON available or not
-    try {
-        fullConfigJSON = JSON.parse(getContentArea.value);
-    } catch (e) {
-        jsonOK = false;
-        alert("Vui lòng kiểm tra lại, sai định dạng JSON (Kiểm tra lại các dấu ngoặc, hai chấm, phẩy,...)");
-    }
-
-    if(jsonOK)
-    {
-        var isConfigOK = true;
-        var alertStr = "";
-
-        // Check some objects before check obj in config ("position","header","module","config" or the other ones in the future)
-        for(index in fullConfigJSON)
-        {
-            var getType = cmpType(index);
-            if(getType != typeof(fullConfigJSON[index]))
-            {
-                isConfigOK = false;
-                var objErr = new Object;
-                objErr["objName"] = index;
-                objErr["expectType"] = getType;
-                objErr["errType"] = typeof(fullConfigJSON[index]);
-                displayJSONErr(objErr);
-                break;
-            }
-        }
-
-        if(isConfigOK)
-        {
-            // Check objects in config JSON
-            var configJSON = JSON.parse(getContentArea.value).config;
-            // Check one by one obj
-            for(index in configJSON)
-            {
-                // If obj is OK (string, number, object)
-                var getType = cmpType(index);
-                if(getType == typeof(configJSON[index]))
-                {
-                    // If obj is an object (that is a subObject with {[]})
-                    if(getType == "object")
-                    {
-                        // If inside subObject is Array 
-                        if(Array.isArray(configJSON[index]))
-                        {
-                            // Get inside and get one by one element in Array
-                            for(subIndex in configJSON[index])
-                            {
-                                // Get obj in an element
-                                for(lastIndex in configJSON[index][subIndex])
-                                {
-                                    // If that obj is !OK - > ready to alert
-                                    var getType = cmpType(lastIndex);
-                                    if(getType != typeof(configJSON[index][subIndex][lastIndex]))
-                                    {
-                                        isConfigOK = false;
-                                        var objErr = new Object;
-                                        objErr["objName"] = lastIndex;
-                                        objErr["expectType"] = getType;
-                                        objErr["errType"] = typeof(configJSON[index][subIndex][lastIndex]);
-                                        displayJSONErr(objErr);
-                                        break;
-                                }
-                                    
-                                }
-                                // Out one more for loop when false
-                                if(isConfigOK == false)
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                        // If inside subObject only has data without Array
-                        else
-                        {
-                            // Check one by one obj
-                            for(subIndex in configJSON[index])
-                            {
-                                // If that obj is !OK -> ready to alert
-                                var getType = cmpType(subIndex);
-                                if(getType != typeof(configJSON[index][subIndex]))
-                                {
-                                    isConfigOK = false;
-                                    var objErr = new Object;
-                                    objErr["objName"] = subIndex;
-                                    objErr["expectType"] = getType;
-                                    objErr["errType"] = typeof(configJSON[index][subIndex]);
-                                    displayJSONErr(objErr);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-                // If that obj is !OK -> ready to alert
-                else 
-                {
-                    isConfigOK = false;
-                    var objErr = new Object;
-                    objErr["objName"] = index;
-                    objErr["expectType"] = getType;
-                    objErr["errType"] = typeof(configJSON[index]);
-                    displayJSONErr(objErr);
-                    break;
-                }
-            }       
-            if(isConfigOK)
-            {
-                mySocketIO.emit("SAVE_MODULE_CONTENT",getContentArea.value);
-            }
-        }
-    }
-}
-
-// Gen all .js file to genConfig
-function genModuleContent(){
-    mySocketIO.emit("GEN_MODULES_CONFIG");
-}
 
 // Add to ON drop list all ON modules, and display ON/OFF modules status table
 mySocketIO.emit("GET_ALL_MODULES","DUMMY"); 
@@ -372,6 +134,199 @@ mySocketIO.on("RES_ALL_MODULES",function(msg){
         getAllModulesOption.add(optionAllModules);
     }
 });
+
+// When user click into information icon
+function showModulesInfo()
+{
+    var selection = document.getElementById("dropONModules");
+    var value = selection.options[selection.selectedIndex].value;
+
+    // Check if user select a specific module
+    if(value != ns_ConfigServer.OnDisableOption)
+    {   
+        // Emit to get that module information
+        mySocketIO.emit("GET_MODULE_INFO",value); 
+    }
+    // If user didn't select any module -> Display full information about author, system, how to use,...
+    else 
+    {
+        mySocketIO.emit("GET_MODULE_INFO","thongtinchung");
+    }
+}
+
+// Close information window when user click CLOSE button
+function closeInfo()
+{
+    document.getElementById("modulesInfo").style.display = "none";
+    document.getElementById("informationContentWillBeShowedHere").innerHTML = "";
+}
+
+// Get all modules name when select ON drop list
+function dropONModules(){
+    var selection = document.getElementById("dropONModules");
+    var value = selection.options[selection.selectedIndex].value;
+    if(value != ns_ConfigServer.OnDisableOption)
+    {   // Emit to get module content
+        mySocketIO.emit("GET_MODULE_CONTENT",value); 
+    }
+    // If user don't select module
+    else 
+    {
+        alert("Vui lòng chọn một mô-đun!");
+    }
+}
+
+function JSONChecking(obj)
+{
+    // Check if obj is exist (it means user edit wrong obj)
+    if(ns_ConfigServer.jsonChecking.hasOwnProperty(obj))
+    {
+        return ns_ConfigServer.jsonChecking[obj]; // return type of that object
+    }
+    else return false;
+}
+
+// Display alert
+function displayJSONErr(arr)
+{
+    var alertStr = "";
+    if(arr.expectType == false)
+    {
+        alertStr = "Không tồn tại cấu hình này: " + arr.objName;
+    }
+    else
+    {   
+        alertStr = ("Sai cấu hình \nLỗi tại: " + arr.objName + "\nGiá trị đúng phải là dạng: " + arr.expectType + " nhưng giá trị điền vào ở dạng: " + arr.errType);
+    }
+    console.log(alertStr);
+    alert(alertStr);
+}
+
+// Save content 
+function saveModuleContent(){
+    var getContentArea = document.getElementById("modulesContent");
+
+    var fullConfigJSON = "";
+    var jsonOK = true;
+    // Check JSON available or not
+    try {
+        fullConfigJSON = JSON.parse(getContentArea.value);
+    } catch (e) {
+        jsonOK = false;
+        alert("Vui lòng kiểm tra lại, sai định dạng JSON (Kiểm tra lại các dấu ngoặc, hai chấm, phẩy,...)");
+    }
+
+    if(jsonOK)
+    {
+        var isConfigOK = true;
+        var alertStr = "";
+
+        // Check some objects before check obj in config ("position","header","module","config" or the other ones in the future)
+        for(index in fullConfigJSON)
+        {
+            var getType = JSONChecking(index);
+            if(getType != typeof(fullConfigJSON[index]))
+            {
+                isConfigOK = false;
+                var objErr = new Object;
+                objErr["objName"] = index;
+                objErr["expectType"] = getType;
+                objErr["errType"] = typeof(fullConfigJSON[index]);
+                displayJSONErr(objErr);
+                break;
+            }
+        }
+
+        if(isConfigOK)
+        {
+            // Check objects in config JSON
+            var configJSON = JSON.parse(getContentArea.value).config;
+            // Check one by one obj
+            for(index in configJSON)
+            {
+                // If obj is OK (string, number, object)
+                var getType = JSONChecking(index);
+                if(getType == typeof(configJSON[index]))
+                {
+                    // If obj is an object (that is a subObject with {[]})
+                    if(getType == "object")
+                    {
+                        // If inside subObject is Array 
+                        if(Array.isArray(configJSON[index]))
+                        {
+                            // Get inside and get one by one element in Array
+                            for(subIndex in configJSON[index])
+                            {
+                                // Get obj in an element
+                                for(lastIndex in configJSON[index][subIndex])
+                                {
+                                    // If that obj is !OK - > ready to alert
+                                    var getType = JSONChecking(lastIndex);
+                                    if(getType != typeof(configJSON[index][subIndex][lastIndex]))
+                                    {
+                                        isConfigOK = false;
+                                        var objErr = new Object;
+                                        objErr["objName"] = lastIndex;
+                                        objErr["expectType"] = getType;
+                                        objErr["errType"] = typeof(configJSON[index][subIndex][lastIndex]);
+                                        displayJSONErr(objErr);
+                                        break;
+                                }
+                                    
+                                }
+                                // Out one more for loop when false
+                                if(isConfigOK == false)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        // If inside subObject only has data without Array
+                        else
+                        {
+                            // Check one by one obj
+                            for(subIndex in configJSON[index])
+                            {
+                                // If that obj is !OK -> ready to alert
+                                var getType = JSONChecking(subIndex);
+                                if(getType != typeof(configJSON[index][subIndex]))
+                                {
+                                    isConfigOK = false;
+                                    var objErr = new Object;
+                                    objErr["objName"] = subIndex;
+                                    objErr["expectType"] = getType;
+                                    objErr["errType"] = typeof(configJSON[index][subIndex]);
+                                    displayJSONErr(objErr);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                // If that obj is !OK -> ready to alert
+                else 
+                {
+                    isConfigOK = false;
+                    var objErr = new Object;
+                    objErr["objName"] = index;
+                    objErr["expectType"] = getType;
+                    objErr["errType"] = typeof(configJSON[index]);
+                    displayJSONErr(objErr);
+                    break;
+                }
+            }       
+            if(isConfigOK)
+            {
+                mySocketIO.emit("SAVE_MODULE_CONTENT",getContentArea.value);
+            }
+        }
+    }
+}
+
+// Gen all .js file to genConfig
+function genModuleContent(){
+    mySocketIO.emit("GEN_MODULES_CONFIG");
+}
 
 // Update status of modules (ON/OFF)
 function updateStatus()
