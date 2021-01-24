@@ -1,4 +1,7 @@
-/* https://circuitdigest.com/microcontroller-projects/iot-firebase-controlled-led-using-esp8266-nodemcu?fbclid=IwAR38H0ak-CIH5o_yIzf2ri0ZSl9Ye6XxRgHt8_cKMmNK-21IxWRSdLKDrhE
+/*  https://circuitdigest.com/microcontroller-projects/iot-firebase-controlled-led-using-esp8266-nodemcu?fbclid=IwAR38H0ak-CIH5o_yIzf2ri0ZSl9Ye6XxRgHt8_cKMmNK-21IxWRSdLKDrhE
+ *  https://www.grc.com/fingerprints.htm  Change fingerprint in Documents\Arduino\libraries\firebase-arduino-master\src\FirebaseHttpClient.h when still connect but don't know why can not commutenicate 
+ *  https://tapit.vn/tong-hop-huong-dan-dieu-khien-thiet-bi-su-dung-nodemcu-esp8266-va-google-assistant/?fbclid=IwAR0MGaT0QkvZOOFISDPyFtkHukIGLp4J_R7FcECzce5c-Botxq-395hCba0
+ *  
  */
 #include <ESP8266WiFi.h>
 #include <FirebaseArduino.h>
@@ -110,7 +113,7 @@ void setup()
     pinMode(BTN_LIGHT, INPUT_PULLUP);
     pinMode(BTN_FAN, INPUT_PULLUP);
 
-    // wifiManager.resetSettings();  // Uncomment if you want to reset wifi which saved to autoconnect
+    //wifiManager.resetSettings();  // Uncomment if you want to reset wifi which saved to autoconnect
     // Create wifi AP to select wifi if there are not any wifi connection saved before
     wifiManager.autoConnect("MMM-NODEMCU"); 
     WiFi.setAutoReconnect(true); // Auto reconnect if lost wifi connection
@@ -122,7 +125,11 @@ void loop()
 {
     lightControl(); // Check and control light
     fanControl(); // Check and control fan
-
+    
+    if (Firebase.failed()) {                  
+      Serial.print(Firebase.error());    
+      delay(500);    
+    }
     // If press to toggle light status
     if (digitalRead(BTN_LIGHT) == 0)
     {
