@@ -13,12 +13,11 @@
     "animationSpeed": 500,
     "displayButton": false,
     "displayEndTime": true,
+    "dateEndFormat": "LT(DD/MM)",
     "displayLunarDate": true,
     "displayPersonalEvents": true,
-    "dateEndFormat": "LT(DD/MM)",
     "defaultColor": "White",
     "lunarColor": "LightGreen",
-    "colored": true,
     "tableClass": "xsmall",
     "displayLunarEvents": true,
     "calendars": [

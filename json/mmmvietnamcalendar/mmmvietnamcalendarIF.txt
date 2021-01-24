@@ -6,7 +6,7 @@
 <br>
 
 <h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
-<br><b>1. maximumEntries:</b>
+<b>1. maximumEntries:</b>
 <br>Thông tin: Số lượng sự kiện tối đa sẽ được hiển thị (độc lập 2 lịch - tức 14 sự kiện)
 <br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 7
 <br>Ví dụ và cấu hình mặc định hiện tại: 7
@@ -19,7 +19,7 @@
 <br><b>3. showLocation:</b>
 <br>Thông tin: Hiển thị thông tin địa điểm xảy ra sự kiện từ Google Calendar
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
-<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>4. maxTitleLength:</b>
 <br>Thông tin: Độ dài ký tự tối đa tên sự kiện
@@ -29,7 +29,7 @@
 <br><b>5. wrapEvents:</b>
 <br>Thông tin: Bao chữ lại nếu dài quá độ dài cho phép ở trên, đồng thời kết hợp với maxTitileLines bên dưới để hiển thị số dòng tối đa
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
-<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>6. maxTitleLines</b>
 <br>Thông tin: Số lượng dòng tối đa khi bao chữ
@@ -51,47 +51,47 @@
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
 <br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
-<br><b>9. displayEndTime:</b>
+<br><b>10. displayEndTime:</b>
 <br>Thông tin: Hiển thị thời gian kết thúc sự kiện đối với Google Calendar
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
-<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
-<br><b>10. dateEndFormat:</b>
+<br><b>11. dateEndFormat:</b>
 <br>Thông tin: Định dạng giờ cho thời gian kết thúc
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: <a href="https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format/" target="_blank" rel="noopener noreferrer">Xem thêm các định dạng tại đây</a>
 <br>Ví dụ và cấu hình mặc định hiện tại: "LT(DD/MM)"
 <br>
-<br><b>11. displayLunarDate:</b>
+<br><b>12. displayLunarDate:</b>
 <br>Thông tin: Hiển thị ngày âm cho các sự kiện VN trừ Google Calendar
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
-<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
-<br><b>12. displayPersonalEvents:</b>
+<br><b>13. displayPersonalEvents:</b>
 <br>Thông tin: Hiển thị sự kiện cá nhân tuỳ ý được thêm vào từ người dùng
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
-<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
-<br><b>13. defaultColor:</b>
+<br><b>14. defaultColor:</b>
 <br>Thông tin: Màu mặc định khi người dùng không thêm màu ở Google Calendar
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: <a href="https://hocwebchuan.com/reference/cssSection/css_color.php" target="_blank" rel="noopener noreferrer">Xem thêm hệ màu tại đây</a>
 <br>Ví dụ và cấu hình mặc định hiện tại: "White" (Phải có dấu # ở đầu nếu sử dụng mã HEX)
 <br>
-<br><b>14. lunarColor:</b>
+<br><b>15. lunarColor:</b>
 <br>Thông tin: Màu cho sự kiện âm, dương, quốc tế, cá nhân trừ Google Calendar
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: <a href="https://hocwebchuan.com/reference/cssSection/css_color.php" target="_blank" rel="noopener noreferrer">Xem thêm hệ màu tại đây</a>
 <br>Ví dụ và cấu hình mặc định hiện tại: "LightGreen" (Phải có dấu # ở đầu nếu sử dụng mã HEX)
 <br>
-<br><b>15. tableClass:</b>
+<br><b>16. tableClass:</b>
 <br>Thông tin: Các class để thay đổi kích thước cho toàn thể sự kiện nhanh chóng
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "xxsmall", "xsmall", "small", "medium", "large", "xlarge"
 <br>Ví dụ và cấu hình mặc định hiện tại: "xsmall"
 <br>
-<br><b>16. displayLunarEvents:</b>
+<br><b>17. displayLunarEvents:</b>
 <br>Thông tin: Hiển thị các sự kiện âm, dương, quốc tế, cá nhân
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
-<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br> 
-<br><b>17. calendars:</b>
+<br><b>18. calendars:</b>
 <br>Thông tin: Mảng thông tin url của một lịch từ Google Calendar
 <br>"url": Url từ Google Calendar
 <br>"color": Màu sắc theo hệ RGB đã được đề cập ở trên
@@ -113,7 +113,7 @@
 <br>  "name": "Lịch cá nhân của quan.ng0anhin98"
 <br>}]
 <br>
-<br><b>18. personalDateEvent:</b>
+<br><b>19. personalDateEvent:</b>
 <br>Thông tin: Mảng các sự kiện cá nhân tuỳ ý từ người dùng
 <br>"day": Ngày diễn ra sự kiện, không cần thêm số 0 khi ngày bé hơn 10
 <br>"month": Tháng diễn ra sự kiện, không cần thêm số 0 khi tháng bé hơn 10
@@ -125,9 +125,14 @@
 <br>+ Điền vào "name" theo định dạng chuỗi với dấu nháy: "- Sinh nhật Xiu"
 <br>Ví dụ và cấu hình mặc định hiện tại:
 <br>[{
-<br>  "day": 1,
-<br>  "month": 1,
-<br>  "title": "- Sinh nhật Quân"
+<br>"day": 8,
+<br>"month": 6,
+<br>"title": "- Ngày thành lập UIT"
+<br>},
+<br>{
+<br>"day": 7,
+<br>"month": 7,
+<br>"title": "- Sinh nhật Quân"
 <br>}]
 
 <h2 style = "color:purple;">CÁC SỰ KIỆN LỊCH HIỆN CÓ</h2>

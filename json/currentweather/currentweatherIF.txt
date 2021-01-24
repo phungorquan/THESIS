@@ -1,96 +1,120 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - CURRENTWEATHER </h1>
-<br>
-
-<i style = "color:green;">Module này giúp cho hệ thống gương hiển thị thời tiết hiện tại
-<br><a href="https://docs.magicmirror.builders/modules/currentweather.html" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: CURRENTWEATHER </h1>
+<i><a href="https://docs.magicmirror.builders/modules/currentweather.html" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này giúp cho hệ thống gương hiển thị các thông tin về nhiệt độ, độ ẩm, hướng gió,... hiện tại</i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. location:</b>
-<br>Thông tin: Tên thành phố, tải danh sách thành phố ở đây: bulk.openweathermap.org/sample/city.list.json.gz
-<br>Điền vào tên thành phố với dấu nháy: "Thành phố Hồ Chí Minh"
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. location:</b>
+<br>Thông tin: Tên thành phố: <a href="http://bulk.openweathermap.org/sample/city.list.json.gz" target="_blank" rel="noopener noreferrer">Tải danh sách thành phố ở đây</a>
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy theo danh sách các thành phố trong file bên trên: "ThànhphốHồChíMinh" 
+<br>Ví dụ và cấu hình mặc định hiện tại: "ThànhphốHồChíMinh"
 <br>
 <br><b>2. locationID:</b>
 <br>Thông tin: ID của thành phố, xem danh sách ở trên
-<br>Điền vào ID thành phố với dấu nháy: "1566083"
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "1566083"
+<br>Ví dụ và cấu hình mặc định hiện tại: "1566083"
 <br>
 <br><b>3. updateInterval:</b>
 <br>Thông tin: Thời gian cập nhật lại 
-<br>Điền vào số không có dấu nháy: 600000 (10')
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 600000 (10')
+<br>Ví dụ và cấu hình mặc định hiện tại: 600000
 <br>
 <br><b>4. animationSpeed:</b>
-<br>Thông tin: Tốc độ hiển thị
-<br>Điền vào số không có dấu nháy: 1000 (1s)
+<br>Thông tin: Tốc độ chuyển
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 1000 (1s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 1000
 <br>
-<br><b>5. timeFormat: </b>
+<br><b>5. timeFormat:</b>
 <br>Thông tin: Định dạng giờ 12h hay 24h
-<br>Điền vào đơn số không có dấu nháy: 12, 24
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 12 hoặc 24
+<br>Ví dụ và cấu hình mặc định hiện tại: 24
 <br>
 <br><b>6. units:</b>
-<br>Thông tin: Sử dụng đơn vị tương ứng metric (C), imperial (F), default (K)
-<br>Điền vào đơn vị với dấu nháy: "metric", "imperial", "default"
+<br>Thông tin: Đơn vị tương ứng metric (C), imperial (F), default (K)
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "metric", "imperial", "default"
+<br>Ví dụ và cấu hình mặc định hiện tại: "metric"
 <br>
 <br><b>7. showPeriod:</b>
 <br>Thông tin: Hiển thị am/pm đối với định dạng 12h
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>8. showPeriodUpper:</b>
 <br>Thông tin: Hiển thị AM/PM đối với định dạng 12h
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>9. showWindDirection:</b>
 <br>Thông tin: Hiển thị hướng gió
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>10. showWindDirectionAsArrow:</b>
 <br>Thông tin: Hiển thị hướng gió với dấu mũi tên
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>11. useBeaufort:</b>
 <br>Thông tin: Hiển thị đơn vị gió hoặc biểu đồ gió
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>12. appendLocationNameToHeader:</b>
 <br>Thông tin: Lấy tên thành phố làm tên tiêu đề
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>13. useKMPHwind:</b>
 <br>Thông tin: Sử dụng đơn vị gió 
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>14. decimalSymbol:</b>
-<br>Thông tin: Ký tự dấu phẩy
-<br>Điền vào cấu hình với dấu nháy: "."
+<br>Thông tin: Ký tự dấu phẩy giữa các số thập phân
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "."
+<br>Ví dụ và cấu hình mặc định hiện tại: "."
 <br>
 <br><b>15. showHumidity:</b>
-<br>Thông tin: Hiển thị độ ẩm
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Thông tin:  Hiển thị độ ẩm
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>16. degreeLabel:</b>
 <br>Thông tin: Hiển thị độ 
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>17. showIndoorTemperature:</b>
 <br>Thông tin: Hiển thị nhiệt độ phòng
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>18. showIndoorHumidity:</b>
 <br>Thông tin: Hiển thị độ ẩm phòng
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>19. showFeelsLike:</b>
 <br>Thông tin: Hiển thị cảm giác như nhiệt độ thời tiết
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>20. initialLoadDelay:</b>
 <br>Thông tin: Thời gian module khởi tạo
-<br>Điền vào số không có dấu nháy: 1000 (1s)
-<br> 
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 500 (0.5s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 500
+<br>
 <br><b>21. retryDelay:</b>
 <br>Thông tin: Thời gian tải lại
-<br>Điền vào số không có dấu nháy: 2500 (2.5s)
-<br> 
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 2500 (2.5s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 2500
+<br>
 <br><b>22. roundTemp:</b>
 <br>Thông tin: Làm tròn số nhiệt độ
-<br>Điền vào cấu hình không có dấu nháy: true, false
-<br> 
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
+<br>
+

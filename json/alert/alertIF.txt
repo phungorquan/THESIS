@@ -1,29 +1,35 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - ALERT </h1>
-<br>
-
-<i style = "color:green;">Module này giúp cho hệ thống gương hiển thị các tin nhắn, thông báo
-<br><a href="https://docs.magicmirror.builders/modules/alert.html" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: ALERT </h1>
+<i><a href="https://docs.magicmirror.builders/modules/alert.html" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này giúp cho hệ thống gương hiển thị các tin nhắn, thông báo</i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. effect:</b>
-<br>Thông tin: Thay đổi cách hiển thị tin nhắn
-<br>Điền vào cấu hình với dấu nháy: "slidefadingdown", "scale", "slide", "genie", "jelly", "flip", "bouncyflip", "exploader"
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. effect:</b>
+<br>Thông tin: Thay đổi hình thức hiển thị tin nhắn
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "slidefadingdown", "scale", "slide", "genie", "jelly", "flip", "bouncyflip", "exploader"
+<br>Ví dụ và cấu hình mặc định hiện tại: "slidefadingdown"
 <br>
 <br><b>2. alert_effect:</b>
-<br>Thông tin: Thay đổi cách hiển thị thông báo
-<br>Điền vào cấu hình với dấu nháy: "slidefadingdown", "scale", "slide", "genie", "jelly", "flip", "bouncyflip", "exploader"
+<br>Thông tin: Thay đổi hình thức hiển thị thông báo
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "slidefadingdown", "scale", "slide", "genie", "jelly", "flip", "bouncyflip", "exploader"
+<br>Ví dụ và cấu hình mặc định hiện tại: "jelly"
 <br>
 <br><b>3. display_time:</b>
 <br>Thông tin: Thời gian hiển thị
-<br>Điền vào thời gian không có dấu nháy: 1000 (1s) 
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 1000 (1s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 1000
 <br>
 <br><b>4. position:</b>
 <br>Thông tin: Vị trí hiển thị trên màn hình
-<br>Điền vào vị trí với dấu nháy: "center", "right", "left", "bottom", "top_center",...
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "center", "right", "left", "bottom", "top_center"
+<br>Ví dụ và cấu hình mặc định hiện tại: "center"
 <br>
 <br><b>5. welcome_message:</b>
 <br>Thông tin: Hiển thị lời chào khi khởi động gương
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 
 

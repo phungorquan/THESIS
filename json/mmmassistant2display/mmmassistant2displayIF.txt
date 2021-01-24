@@ -1,7 +1,5 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-ASSISTANT2DISPLAY </h1>
-<br>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-ASSISTANT2DISPLAY </h1>
+<i><a href="https://github.com/bugsounet/MMM-Assistant2Display"" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ hỗ trợ module MMM-GoogleAssistant hiển thị được Youtube, chức năng bật các trang báo tìm kiếm đang bị chặn bởi Google <b style = "color:red;">(Nên dùng chung với module MMM-GoogleAssistant)</b></i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
-<i style = "color:green;">Module này sẽ hỗ trợ module MMM-GoogleAssistant hiển thị được Youtube
-<br><b style = "color:red;">(Nên dùng chung với module MMM-GoogleAssistant)</b>
-<br><a href="https://github.com/bugsounet/MMM-Assistant2Display" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>

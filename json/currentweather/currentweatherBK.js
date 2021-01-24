@@ -24,6 +24,6 @@
     "showFeelsLike": false,
     "initialLoadDelay": 0,
     "retryDelay": 2500,
-    "roundTemp": false
+    "roundTemp": true
   }
 }

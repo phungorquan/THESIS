@@ -1,23 +1,28 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-SNOW </h1>
-<br>
-
-<i style = "color:green;">Module này sẽ tạo hiệu ứng tuyết rơi toàn màn hình
-<br><a href="https://github.com/MichMich/MMM-Snow" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-SNOW </h1>
+<i><a href="https://github.com/MichMich/MMM-Snow" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ tạo hiệu ứng tuyết rơi toàn màn hình</i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. flakeCount:</b>
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. flakeCount:</b>
 <br>Thông tin: Số lượng tuyết rơi <b style = "color:red;"> (Càng nhiều sẽ càng lag)</b>
-<br>Điền vào số lượng không có dấu nháy: 20
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 5
+<br>Ví dụ và cấu hình mặc định hiện tại: 5
 <br>
 <br><b>2. theme:</b>
-<br>Thông tin: Các loại tuyết(hình)
-<br>Điền vào tên với dấu nháy: "custom", "winter", "love", "water"
+<br>Thông tin: Các loại tuyết (hình)
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "custom", "winter", "love", "water"
+<br>Ví dụ và cấu hình mặc định hiện tại: "custom" (Logo UIT và CE)
 <br>
 <br><b>3. sizeFactor:</b>
-<br>Thông tin: Kích thước của một bông tuyết
-<br>Điền vào kích thước không có dấu nháy: 4
+<br>Thông tin: Kích thước của một bông tuyết <b style = "color:red;"> (Càng lớn sẽ càng lag)</b>
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 5
+<br>Ví dụ và cấu hình mặc định hiện tại: 5
 <br>
 <br><b>4. downwards:</b>
-<br>Thông tin: Hướng tuyết sẽ rơi
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Thông tin: Cho phép hướng tuyết sẽ rơi xuống
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true

@@ -1,76 +1,106 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - NEWSFEED </h1>
-<br>
-
-<i style = "color:green;">Module này sẽ hiển thị tin tức từ các trang báo
-<br><b style = "color:red;">(Nên bật newsfeed khi có xài module MMM-News-QR)</b>
-<br><a href="https://docs.magicmirror.builders/modules/newsfeed.html" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: NEWSFEED </h1>
+<i><a href="https://docs.magicmirror.builders/modules/newsfeed.html" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ hiển thị tin tức từ các trang báo <b style = "color:red;">(Có thể dùng mà không cần module MMM-NEWS-QR)</b></i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. showSourceTitle:</b>
-<br>Thông tin: Hiển thị nguồn của trang báo
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. showSourceTitle:</b>
+<br>Thông tin: Hiển thị tiêu đề của trang báo do bạn tự đặt trong chuỗi JSON chứa thông tin của trang báo bên dưới
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>2. showPublishDate:</b>
 <br>Thông tin: Hiển thị ngày trang báo được đăng
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>3. showDescription:</b>
-<br>Thông tin: Hiển thị thông tin nội dung
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Thông tin: Hiển thị nội dung trang báo
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
-<br><b>4. wrapTitle</b>
-<br>Thông tin: Bọc lại tiêu đề để hiển thị thành nhiều hàng
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br><b>4. wrapTitle:</b>
+<br>Thông tin: Bọc lại tiêu đề để hiển thị thành nhiều hàng nếu quá dài
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>5. wrapDescription:</b>
-<br>Thông tin: Bọc lại nội dung để hiển thị thành nhiều hàng
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Thông tin: Bọc lại nội dung để hiển thị thành nhiều hàng nếu quá dài
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>6. truncDescription:</b>
-<br>Thông tin: Cắt ngắn mô tả
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Thông tin: Cắt ngắn lại nội dung để hiển thị lên cho người dùng
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>7. lengthDescription:</b>
-<br>Thông tin: Độ dài nội dung 
-<br>Điền vào độ dài không có dấu nháy: 100
+<br>Thông tin: Độ dài của nội dung được hiển thị
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 100
+<br>Ví dụ và cấu hình mặc định hiện tại: 100
 <br>
 <br><b>8. hideLoading:</b>
-<br>Thông tin: Ẩn hiện trạng thái đang tải khi lần đầu khởi tạo trang báo
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Thông tin: Ẩn hiện trạng thái đang tải khi lần đầu vận hành module này lần đầu
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>9. reloadInterval:</b>
 <br>Thông tin: Thời gian tải lại nội dung
-<br>Điền vào thời gian không có dấu nháy: 300000 (5')
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 300000 (5')
+<br>Ví dụ và cấu hình mặc định hiện tại: 300000
 <br>
 <br><b>10. updateInterval:</b>
-<br>Thông tin: Thời gian chuyển báo mới
-<br>Điền vào thời gian không có dấu nháy: 10000 (10s)
+<br>Thông tin: Thời gian chuyển sang một tin báo mới
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 10000 (10s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 10000
 <br>
 <br><b>11. animationSpeed:</b>
 <br>Thông tin: Tốc độ chuyển
-<br>Điền vào thời gian không có dấu nháy: 1500 (1.5s)
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 1500 (1.5s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 1500
 <br>
 <br><b>12. maxNewsItems:</b>
-<br>Thông tin: Số lượng tin mới tối đa (Số 0 là không giới hạn)
-<br>Điền vào số lượng không có dấu nháy: 0
+<br>Thông tin: Bọc lại nội dung để hiển thị thành nhiều hàng nếu quá dài
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 0 (Số 0 là không giới hạn)
+<br>Ví dụ và cấu hình mặc định hiện tại: 0
 <br>
 <br><b>13. ignoreOldItems:</b>
 <br>Thông tin: Không hiển thị tin cũ quá 1 khoảng thời gian
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>14. ignoreOlderThan:</b>
-<br>Thông tin: Thời gian bao lâu để hệ thống không hiển thị 
-<br>Điền vào thời gian không có dấu nháy: 604800000 (7 ngày)
+<br>Thông tin: Thời gian bao lâu để hệ thống không hiển thị nội dung báo đó
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 604800000 (7ngày)
+<br>Ví dụ và cấu hình mặc định hiện tại: 604800000
 <br>
 <br><b>15. logFeedWarnings:</b>
 <br>Thông tin: Hiển thị thông báo khi có lỗi xảy ra
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>16. feeds:</b>
-<br>Thông tin: Mảng chứa nguồn từ các báo
+<br>Thông tin: Mảng chứa thông tin về nguồn và tiêu đề của trang báo
 <br>"title": Tiêu đề mà người dùng muốn đặt cho báo
 <br>"url": Nguồn trang báo theo định dạng rss
-<br>Điền vào "title" với dấu nháy: "Báo 24h"
-<br>Điền vào "url" với dấu nháy: "https://cdn.24h.com.vn/upload/rss/tintuctrongngay.rss"
+<br>Các cấu hình có thể điền vào:
+<br>+ Phải đặt 2 trường dữ liệu bên dưới vào trong dấu ngoặc nhọn {}, và mỗi trang báo cách nhau bằng dấu phẩy (,)
+<br>+ Điền vào "title" theo định dạng chuỗi với dấu nháy: "Báo 24h"
+<br>+ Điền vào "url" theo định dạng chuỗi với dấu nháy: "https://cdn.24h.com.vn/upload/rss/tintuctrongngay.rss"
+<br>Ví dụ và cấu hình mặc định hiện tại:
+<br>[{
+<br>"title": "24h",
+<br>"url": "https://cdn.24h.com.vn/upload/rss/tintuctrongngay.rss"
+<br>},
+<br>{
+<br>"title": "VNExpress",
+<br>"url": "https://vnexpress.net/rss/tin-moi-nhat.rss"
+<br>},
+<br>{
+<br>"title": "24h",
+<br>"url": "https://cdn.24h.com.vn/upload/rss/bongda.rss"
+<br>}]
 

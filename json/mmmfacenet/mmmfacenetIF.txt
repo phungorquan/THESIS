@@ -1,22 +1,46 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-FACENET </h1>
-<br>
-
-<i style = "color:green;">Module này sẽ hiển thị câu lệnh chào tương ứng với người đứng trước gương
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-FACENET </h1>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ hiển thị câu lệnh chào tương ứng với người đứng trước gương, kết quả để hiển thị câu lệnh chào được nhận từ một server xử lý ảnh độc lập. Đồng thời cũng hiển thị hình ảnh thu được từ camera</i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. streamVideo:</b>
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. streamVideo:</b>
 <br>Thông tin: Hiển thị hình ảnh thu được từ camera
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>2. displayRate:</b>
-<br>Thông tin: Hiển thị độ chính xác
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Thông tin: Hiển thị độ chính xác kèm theo lời chào (Dùng cho lập trình viên debug)
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
 <br><b>3. updateInterval:</b>
-<br>Thông tin: Thời gian cập nhật câu lệnh chào về mặc định "Chào"
-<br>Điền vào thời gian không có dấu nháy: 3000000 (5')
+<br>Thông tin: Thời gian cập nhật câu lệnh chào về mặc định 
+<br>Các cấu hình có thể điền vào theo số không có dấu nháy: 300000 (5')
+<br>Ví dụ và cấu hình mặc định hiện tại: 300000 (5')
 <br>
 <br><b>4. userName:</b>
-<br>Thông tin: Nick name do người dùng tự đặt cho tên người đã được nhận diện
-<br> Điền vào theo cú pháp: "tennguoiduocnhandien":"nicknamemuondat"
+<br>Thông tin: Mảng các tên do người dùng tự đặt cho tên người đã được nhận diện (Tên các trường obj phải là tên của các dataset trong tập dữ liệu thì hệ thống mới nhận ra được)
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy và phải đặt các trường dữ liệu bên dưới vào trong dấu ngoặc nhọn {}, và mỗi tên cách nhau bằng dấu phẩy (,)
+<br>Ví dụ điền vào cho một trường obj theo dạng chuỗi với dấu nháy: "tennguoiduocnhandien":"nicknamemuondat" (trường cuối cùng không được để dấu phẩy ',')
+<br>Ví dụ và cấu hình mặc định hiện tại:
+<br>"ThayDuy":"Thầy Duy",
+<br>"ThayDuong":"Thầy Dương",
+<br>"Quan":"Xiu",
+<br>"Khanh":"Khánh",
+<br>"Bao":"Bảo",
+<br>"BuiPhungHuuDuc":"Đức Bùi",
+<br>"ChauMinhDuc":"Châu Minh Đức",
+<br>"Dat":"Đạt Phan Hữu",
+<br>"Dung":"Dũng",
+<br>"Duy":"Duy Trần",
+<br>"Giang":"Giang Trương",
+<br>"Huy":"Chế Quang Huy",
+<br>"LAnh":"Lan Anh",
+<br>"Nhu":"Nhu Ngô",
+<br>"Phong":"Void",
+<br>"Quoc":"Quốc Kim",
+<br>"Tin":"Tín",
+<br>"Van":"Vân Vân"

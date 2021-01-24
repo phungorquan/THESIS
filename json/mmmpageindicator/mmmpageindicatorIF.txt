@@ -1,12 +1,13 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-PAGE-INDICATOR </h1>
-<br>
-
-<i style = "color:green;">Module này sẽ hiển thị số lượng trang 
-<br><b style = "color:red;">(Nên dùng chung với module MMM-Pages)</b>
-<br><a href="https://github.com/edward-shen/MMM-page-indicator" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-PAGE-INDICATOR </h1>
+<i><a href="https://github.com/edward-shen/MMM-page-indicator" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ hiển thị số lượng trang với các nút tròn <b style = "color:red;">(Nên dùng chung với module MMM-Pages)</b></i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. pages:</b>
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. pages:</b>
 <br>Thông tin: Số lượng trang <b style = "color:red;"> (Nên ứng với số lượng mảng trong MMM-Pages)</b>
-<br>Điền vào số lượng trang không có dấu nháy: 2
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 3
+<br>Ví dụ và cấu hình mặc định hiện tại: 3

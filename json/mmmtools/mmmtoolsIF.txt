@@ -1,11 +1,19 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-TOOLS </h1>
-<br>
-
-<i style = "color:green;">Module này sẽ hiển thị thông tin về phần cứng của hệ thống như cpu, ram,...
-<br><a href="https://github.com/bugsounet/MMM-Tools" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-TOOLS </h1>
+<i><a href="https://github.com/bugsounet/MMM-Tools" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ hiển thị thông tin về phần cứng của hệ thống như cpu, ram,...</i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. refresh_interval_ms:</b>
-<br>Thông tin: Thời gian cập nhật thông tin của hệ thống
-<br>Điền vào thời gian không có dấu nháy: 10000 (10s)
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. refresh_interval_ms:</b>
+<br>Thông tin: Thời gian cập nhật lại trạng thái của hệ thống
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 20000 (20s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 20000
+<br>
+<br><b>2. databaseSave:</b>
+<br>Thông tin: Cho phép lưu các dữ liệu vào cơ sở dữ liệu <b style = "color:red;">(Chỉ dành cho lập trình viên)</b>
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
+

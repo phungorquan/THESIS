@@ -1,20 +1,26 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-PAGES </h1>
-<br>
-
-<i style = "color:green;">Module này sẽ giúp tạo ra một hệ thống phân trang cho các module
-<br><b style = "color:red;">(Nên dùng chung với module MMM-page-indicator)</b>
-<br><a href="https://github.com/edward-shen/MMM-pages" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-PAGES </h1>
+<i><a href="https://github.com/edward-shen/MMM-pages" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ giúp tạo ra một hệ thống phân trang cho các module <b style = "color:red;">(Nên dùng chung với module MMM-Page-Indicator)</b></i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. modules:</b>
-<br>Thông tin: Mảng chứa các module sẽ được hiển thị, mỗi phần tử là mỗi trang tương ứng
-<br>Điền vào các module với dấu nháy: ["MMM-VietnamCalendar","weatherforecast"],["MMM-Tools", "MMM-FaceNet", "currentweather"],["MMM-GoogleDriveSlideShow"]
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. modules:</b>
+<br>Thông tin: Mảng chứa các mảng module sẽ được hiển thị, mỗi mảng là 1 trang tương ứng và mỗi phần tử trong mảng là tên các module được hiển thị trong trang đó
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy và mỗi phần tử của mảng cách nhau bằng dấu phẩy (,), mỗi mảng cách nhau bằng dấu phẩy (,): ["module1","module2"],["module3"],["module4"]
+<br>Ví dụ và cấu hình mặc định hiện tại: 
+<br>["MMM-VietnamCalendar","weatherforecast","MMM-News-QR","newsfeed"],
+<br>["MMM-Tools","MMM-FaceNet","currentweather","MMM-News-QR","newsfeed"],
+<br>["MMM-GoogleDriveSlideShow"]
 <br>
 <br><b>2. fixed:</b>
 <br>Thông tin: Mảng chứa các module sẽ được hiển thị ở tất cả các trang
-<br>Điền vào các module với dấu nháy: ["MMM-Snow", "MMM-GroveGestures", "newsfeed", "MMM-News-QR", "clock", "MMM-Assistant2Display", "MMM-GoogleAssistant", "MMM-pages", "MMM-page-indicator"]
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy và cách nhau bằng dấu phẩy (,)
+<br>Ví dụ và cấu hình mặc định hiện tại:["MMM-Snow", "MMM-GroveGestures", "clock", "MMM-Assistant2Display", "MMM-GoogleAssistant", "MMM-pages", "MMM-page-indicator"]
 <br>
 <br><b>3. animationTime:</b>
 <br>Thông tin: Thời gian chuyển đổi giữa các trang
-<br>Điền vào thời gian không có dấu nháy: 1000 (1s)
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 1000 (1s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 500

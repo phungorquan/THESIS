@@ -1,6 +1,3 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-CURSOR </h1>
-<br>
-
-<i style = "color:green;">Module này giúp cho hệ thống gương hiển thị đồng hồ và ngày tháng tương ứng hiện tại
-<br><a href="https://github.com/evghenix/MMM-Cursor" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: CLOCK </h1>
+<i><a href="https://github.com/evghenix/MMM-Cursor" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này giúp cho hệ thống gương hiển thị con trỏ chuột khi người dùng cắm chuột vào điều khiển gương thông minh, thường chỉ dùng cho lập trình viên khi cần debug (Hiện tại không thể dùng chuột nhấn do layout G.A đã đè lên toàn hệ thống)</i>

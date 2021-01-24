@@ -1,54 +1,83 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-GOOGLEASSISTANT </h1>
-<br>
-
-<i style = "color:green;">Module này sẽ giúp cho gương có thể chơi Youtube, điều khiển các thiết bị hoặc module thông qua trợ lý ảo Google Assistant
-<br><b style = "color:red;">(Nên dùng chung với module MMM-Assistant2Display)</b>
-<br><a href="https://github.com/bugsounet/MMM-GoogleAssistant" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-GOOGLEASSISTANT </h1>
+<i><a href="https://github.com/bugsounet/MMM-GoogleAssistant"" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ giúp cho gương có thể chơi Youtube, điều khiển các thiết bị hoặc module thông qua trợ lý ảo Google Assistant <b style = "color:red;">(Nên dùng chung với module MMM-Assistant2Display nếu muốn hiển thị Youtube)</b></i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. micConfig:</b>
-<br>Thông tin: Một object chứa cấu hình của card âm thanh mà phần cứng microphone đang sử dụng
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. micConfig:</b>
+<br>Thông tin: Một chuỗi JSON object chứa cấu hình của card âm thanh mà phần cứng microphone đang sử dụng
 <br>"recorder": Thông tin driver hỗ trợ cho Raspbian, "sox", "rec", "arecord" - dùng cho Raspbian
 <br>"device": Cổng âm thanh của thiết bị đang cắm vào, dùng câu lệnh "arecord -l" trên linux để tìm
-<br>Điền vào "recorder" với dấu nháy:"sox", "rec", "arecord"
-<br>Điền vào "device" với dấu nháy: "plughw:2"
+<br>Các cấu hình có thể điền vào:
+<br>+ Phải đặt 2 trường dữ liệu bên dưới vào trong dấu ngoặc nhọn {}, và mỗi trường cách nhau bằng dấu phẩy (,)
+<br>+ Điền vào "recorder" với dấu nháy:"sox", "rec", "arecord"
+<br>+ Điền vào "device" với dấu nháy: "plughw:2"
+<br>Ví dụ và cấu hình mặc định hiện tại:
+<br>{ 
+<br>"recorder": "arecord",
+<br>"device": "plughw:2"
+<br>}
 <br>
 <br><b>2. snowboy:</b>
-<br>Thông tin: Một object chứa các thông tin con để đổi câu lệnh hotword kích hoạt Google Assistant
+<br>Thông tin: Một chuỗi JSON object chứa các thông tin để đổi câu lệnh hotword kích hoạt Google Assistant
 <br>"usePMDL": Dùng từ khoá riêng từ một model tự tạo
 <br>"audioGain": Gain của microphone, không cần sửa
-<br>"Frontend": Tiền xử lý hotword với snow_boy và smart_mirror thì nên để false
+<br>"Frontend": Tiền xử lý hotword, với "snow_boy" và "smart_mirror" thì nên để false
 <br>"Model": Tên model, cũng là hotword để kích hoạt G.A
 <br>"Sensitivity": Độ nhạy ứng với model 
-<br>Điền vào "usePMDL" cấu hình không có dấu nháy: true, false
-<br>Điền vào "audioGain" độ nhạy không có dấu nháy: 2.0
-<br>Điền vào "Frontend" cấu hình không có dấu nháy: true, false
-<br>Điền vào "model" với dấu nháy: "smart_mirror", "jarvis", "computer", "snowboy", "subex", "neo_ya", "hey_extreme", "view_glass", "alexa"
-<br>Điền vào "Sensitivity" độ nhạy không có dấu nháy: null <b style = "color:red;">(Để null nếu không biết độ nhạy tương ứng)</b>
+<br>Các cấu hình có thể điền vào:
+<br>+ Phải đặt 5 trường dữ liệu bên dưới vào trong dấu ngoặc nhọn {}, và mỗi trường cách nhau bằng dấu phẩy (,)
+<br>+ Điền vào "usePMDL" cấu hình không có dấu nháy: true, false
+<br>+ Điền vào "audioGain" độ nhạy không có dấu nháy: 2.0
+<br>+ Điền vào "Frontend" cấu hình không có dấu nháy: true, false
+<br>+ Điền vào "model" với dấu nháy: "smart_mirror", "jarvis", "computer", "snowboy", "subex", "neo_ya", "hey_extreme", "view_glass", "alexa"
+<br>+ Điền vào "Sensitivity" độ nhạy không có dấu nháy: null <b style = "color:red;">(Để null nếu không biết độ nhạy tương ứng)</b>
+<br>Ví dụ và cấu hình mặc định hiện tại:
+<br>{
+<br>"usePMDL": false,
+<br>"audioGain": 2.0,
+<br>"Frontend": true,
+<br>"Model": "jarvis",
+<br>"Sensitivity": 0.7
+<br>}
 <br>
 <br><b>3. A2DServer:</b>
-<br>Thông tin: Một object chứa các thông tin để sử dụng module Hỗ trợ Youtube (MMM-Assistant2Display)
+<br>Thông tin: Một chuỗi JSON object chứa các thông tin để sử dụng module Hỗ trợ Youtube (MMM-Assistant2Display)
 <br>"useA2D": Cho phép sử dụng A2D
 <br>"stopCommand": Câu lệnh để dừng hoạt động hiện tại của Youtube
 <br>"useYouTube": Cho phép sử dụng Youtube
 <br>"youtubeCommand": Từ khoá để G.A nhận biết đang tìm kiếm video với Youtube
 <br>"displayResponse": Cho phép hiển thị các tìm kiếm
-<br>Điền vào "useA2D" cấu hình không có dấu nháy: true, false
-<br>Điền vào "stopCommand" với dấu nháy: "stop"
-<br>Điền vào "useYouTube" cấu hình không có dấu nháy: true, false
-<br>Điền vào "youtubeCommand" với dấu nháy: "youtube"
-<br>Điền vào "displayResponse" cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào:
+<br>+ Phải đặt 5 trường dữ liệu bên dưới vào trong dấu ngoặc nhọn {}, và mỗi trường cách nhau bằng dấu phẩy (,)
+<br>+ Điền vào "useA2D" cấu hình không có dấu nháy: true, false
+<br>+ Điền vào "stopCommand" với dấu nháy: "stop"
+<br>+ Điền vào "useYouTube" cấu hình không có dấu nháy: true, false
+<br>+ Điền vào "youtubeCommand" với dấu nháy: "youtube"
+<br>+ Điền vào "displayResponse" cấu hình không có dấu nháy: true, false
+<br>Ví dụ và cấu hình mặc định hiện tại:
+<br>{
+<br>"useA2D": true,
+<br>"stopCommand": "stop",
+<br>"useYouTube": true,
+<br>"youtubeCommand": "youtube",
+<br>"displayResponse": true
+<br>}
 <br>
 <br><b>4. recipes:</b>
-<br>Thông tin: Một mảng chứa các file để thực hiện những câu lệnh cá nhân do người dùng chỉ định, tự tạo
-<br>Điền vào tên file ứng với các phần tử trong mảng có dấu nháy: "myCustomRecipe.js"
+<br>Thông tin: Một mảng chứa các file để thực hiện những câu lệnh cá nhân do người dùng chỉ định, tự tạo <b style = "color:red"> (Người dùng bắt buộc phải hiểu về cách thức lập trình và cách thực thi những hàm mới nên việc cấu hình thêm các câu lệnh không được cung cấp tại đây)</b>
+<br>Các cấu hình có thể điền vào:
+<br> Điền tên file vào các phần tử trong mảng theo dạng chuỗi với dấu nháy và mỗi phần tử cách nhau bằng dấu phẩy (,): "myCustomRecipe.js"
+<br>Ví dụ và cấu hình mặc định hiện tại: ["myCustomRecipe.js"]
 
 <br>
 <h2 style = "color:purple;"> ----------------- <br>CÁC TỪ KHOÁ HIỆN CÓ CỦA HỆ THỐNG</h2>
 <b> Điều khiển Raspberry</b>
-<br>"power off please": Ẩn thông tin gương
-<br>"reboot please": Hiện lại thông tin gương
+<br>"power off please": Tắt Raspberry
+<br>"reboot please": Khởi động lại Raspberry
 <br>  
 <br><b> Chuyển trang</b>
 <br>"turn right please": Chuyển trang trái
@@ -56,7 +85,7 @@
 <br>"Chuyển trang đi": Chuyển đến trang báo tiếp theo
 <br>
 <br><b> Điều khiển đền</b>
-<br>"turn light on please": Chuyển về trang báo trước đó
-<br>"turn light off please": Mở trang báo dạng web để xem chi tiết
+<br>"turn light on please": Mở đèn
+<br>"turn light off please": Tắt đèn
 <br>"nháy đèn chơi": Nháy đèn đỏ, xanh lá, xanh dương
 <br>"mở đèn cầu vồng": Hiển thị theo màu cầu vồng chuyển động

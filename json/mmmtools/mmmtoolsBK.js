@@ -3,6 +3,6 @@
   "module": "MMM-Tools",
   "config": {
     "refresh_interval_ms": 20000,
-    "databaseSave": true
+    "databaseSave": false
   }
 }

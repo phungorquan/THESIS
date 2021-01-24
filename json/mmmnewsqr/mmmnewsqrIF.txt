@@ -1,28 +1,33 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-NEWS-QR </h1>
-<br>
-
-<i style = "color:green;">Module này sẽ hiển thị mã QR ứng với tin tức
-<br><b style = "color:red;">(Nên dùng chung với module newsfeed)</b>
-<br><a href="https://github.com/nischi/MMM-News-QR" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-NEWS-QR </h1>
+<i><a href="https://github.com/nischi/MMM-News-QR" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ hiển thị mã QR ứng với tin tức <b style = "color:red;">(Nên dùng chung với module newsfeed)</b></i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. interval:</b>
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. interval:</b>
 <br>Thông tin: Thời gian cập nhật mã QR <b style = "color:red;"> (Nên dùng chung thời gian với module newsfeed)</b>
-<br>Điền vào thời gian không có dấu nháy: 2000 (2s)
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 2000 (2s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 2000
 <br>
 <br><b>2. animationSpeed:</b>
-<br>Thông tin: Thời gian chuyển đổi
-<br>Điền vào thời gian không có dấu nháy: 0
+<br>Thông tin: Thời gian chuyển động
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 0 (0s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 0
 <br>
 <br><b>3. colorDark:</b>
 <br>Thông tin: Màu đen cho mã QR
-<br>Điền vào hệ màu RGB với # ở đàu với dấu nháy: "#fff" (Trắng)
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: <a href="https://hocwebchuan.com/reference/cssSection/css_color.php" target="_blank" rel="noopener noreferrer">Xem thêm hệ màu tại đây</a>
+<br>Ví dụ và cấu hình mặc định hiện tại: "#fff" (Phải có dấu # ở đầu nếu sử dụng mã HEX)
 <br>
-<br><b>4. userName:</b>
+<br><b>4. colorLight:</b>
 <br>Thông tin: Màu trắng cho mã QR
-<br>Điền vào hệ màu RGB với # ở đàu với dấu nháy: "#000" (Đen)
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: <a href="https://hocwebchuan.com/reference/cssSection/css_color.php" target="_blank" rel="noopener noreferrer">Xem thêm hệ màu tại đây</a>
+<br>Ví dụ và cấu hình mặc định hiện tại: "#000" (Phải có dấu # ở đầu nếu sử dụng mã HEX)
 <br>
-<br><b>5. imageSize:</b>
+<br><b>5. welcome_message:</b>
 <br>Thông tin: Kích thước mã QR
-<br>Điền vào kích thước không có dấu nháy: 100
+<br>Các cấu hình có thể điền vào theo số không có dấu nháy: 100
+<br>Ví dụ và cấu hình mặc định hiện tại: 100

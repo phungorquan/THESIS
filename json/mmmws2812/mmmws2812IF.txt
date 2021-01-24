@@ -1,5 +1,22 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-WS2812 </h1>
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-WS2812 </h1>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ hiển thị LED khi khởi động gương và nhận tín hiệu từ các module khác để điều khiển đèn LED</i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
+
+<br>
 <br>
 
-<i style = "color:green;">Module này sẽ nhận tín hiệu từ các module khác để điều khiển đèn LED
-<br>-----------------<br></i>
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. initLedMMM:</b>
+<br>Thông tin: Chế độ led sẽ hiển thị khi khởi động gương
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "WS-BLINK", "WS-THEATER", "WS-BLINK", "WS-BREATHING", "WS-RAINBOW", "WS-COLORFUL"
+<br>Ví dụ và cấu hình mặc định hiện tại: WS-RAINBOW
+<br>
+<br><b>2. allowGA:</b>
+<br>Thông tin: Cho phép điều khiển đèn từ Google Assistant thông qua giọng nói
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
+<br>
+<br><b>3. allowGesture:</b>
+<br>Thông tin: Cho phép điều khiển đèn thông qua cử chỉ
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: true

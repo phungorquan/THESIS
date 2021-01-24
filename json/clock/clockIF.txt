@@ -35,7 +35,7 @@
 <br><b>6. showDate</b>
 <br>Thông tin: Hiển thị phần ngày cho đồng hồ
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
-<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
 <br><b>7. showWeek:</b>
 <br>Thông tin: Hiển thị tuần hiện tại trong năm
@@ -50,54 +50,54 @@
 <br><b>9. lunarShow:</b>
 <br>Thông tin: Hiển thị ngày âm lịch, năm khi đã bật showDate
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
-<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>Ví dụ và cấu hình mặc định hiện tại: true
 <br>
-<br><b>9. timeFormat:</b>
+<br><b>10. timeFormat:</b>
 <br>Thông tin: Định dạng giờ 12h hay 24h
 <br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 12 hoặc 24
 <br>Ví dụ và cấu hình mặc định hiện tại: 24
 <br>
-<br><b>10. analogSize:</b>
+<br><b>11. analogSize:</b>
 <br>Thông tin: Kích thước mặt đồng hồ kim
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy và đơn vị px đi kèm: "200px"
 <br>Ví dụ và cấu hình mặc định hiện tại: "200px"
 <br>
-<br><b>11. analogFace:</b>
+<br><b>12. analogFace:</b>
 <br>Thông tin: Giao diện mặt đồng hồ
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "none", "simple", "face-XXX" (với XXX từ 001->012 phải có số 0 ở đầu)
 <br>Ví dụ và cấu hình mặc định hiện tại: "simple"
 <br>
-<br><b>12. analogPlacement:</b>
+<br><b>13. analogPlacement:</b>
 <br>Thông tin: Vị trí đặt đồng hồ
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "top", "bottom", "left", "right"
 <br>Ví dụ và cấu hình mặc định hiện tại: "bottom"
 <br>
-<br><b>13. analogShowDate:</b>
+<br><b>14. analogShowDate:</b>
 <br>Thông tin: Hiển thị ngày khi chỉ hiện đồng hồ kim
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "top", "bottom", false (false không cần dấu nháy)
 <br>Ví dụ và cấu hình mặc định hiện tại: "bottom"
 <br>
-<br><b>14. secondsColor:</b>
+<br><b>15. secondsColor:</b>
 <br>Thông tin: Đổi màu cho phần giây
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: <a href="https://hocwebchuan.com/reference/cssSection/css_color.php" target="_blank" rel="noopener noreferrer">Xem thêm hệ màu tại đây</a>
 <br>Ví dụ và cấu hình mặc định hiện tại: "#110000" (Phải có dấu # ở đầu nếu sử dụng mã HEX)
 <br>
-<br><b>15. showSunTimes:</b>
+<br><b>16. showSunTimes:</b>
 <br>Thông tin: Hiển thị giờ mặt trời mọc/lặn
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
 <br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
-<br><b>16. showMoonTimes:</b>
+<br><b>17. showMoonTimes:</b>
 <br>Thông tin: Hiển thị giờ mặt trăng lên/tà
 <br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
 <br>Ví dụ và cấu hình mặc định hiện tại: false
 <br>
-<br><b>17. lat:</b>
+<br><b>18. lat:</b>
 <br>Thông tin: Vĩ độ, dành cho giờ mặt trời/mặt trăng
 <br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 10.8698797
 <br>Ví dụ và cấu hình mặc định hiện tại: 10.8698797
 <br> 
-<br><b>18. lon:</b>
+<br><b>19. lon:</b>
 <br>Thông tin: Kinh độ, dành cho giờ mặt trời/mặt trăng
 <br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 106.8016022
 <br>Ví dụ và cấu hình mặc định hiện tại: 106.8016022
