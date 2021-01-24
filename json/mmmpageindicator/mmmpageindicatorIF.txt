@@ -1,0 +1,12 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-PAGE-INDICATOR </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ hiển thị số lượng trang 
+<br><b style = "color:red;">(Nên dùng chung với module MMM-Pages)</b>
+<br><a href="https://github.com/edward-shen/MMM-page-indicator" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. pages:</b>
+<br>Thông tin: Số lượng trang <b style = "color:red;"> (Nên ứng với số lượng mảng trong MMM-Pages)</b>
+<br>Điền vào số lượng trang không có dấu nháy: 2

@@ -1,0 +1,28 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-NEWS-QR </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ hiển thị mã QR ứng với tin tức
+<br><b style = "color:red;">(Nên dùng chung với module newsfeed)</b>
+<br><a href="https://github.com/nischi/MMM-News-QR" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. interval:</b>
+<br>Thông tin: Thời gian cập nhật mã QR <b style = "color:red;"> (Nên dùng chung thời gian với module newsfeed)</b>
+<br>Điền vào thời gian không có dấu nháy: 2000 (2s)
+<br>
+<br><b>2. animationSpeed:</b>
+<br>Thông tin: Thời gian chuyển đổi
+<br>Điền vào thời gian không có dấu nháy: 0
+<br>
+<br><b>3. colorDark:</b>
+<br>Thông tin: Màu đen cho mã QR
+<br>Điền vào hệ màu RGB với # ở đàu với dấu nháy: "#fff" (Trắng)
+<br>
+<br><b>4. userName:</b>
+<br>Thông tin: Màu trắng cho mã QR
+<br>Điền vào hệ màu RGB với # ở đàu với dấu nháy: "#000" (Đen)
+<br>
+<br><b>5. imageSize:</b>
+<br>Thông tin: Kích thước mã QR
+<br>Điền vào kích thước không có dấu nháy: 100

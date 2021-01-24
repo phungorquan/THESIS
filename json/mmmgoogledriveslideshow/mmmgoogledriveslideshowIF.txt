@@ -1,0 +1,49 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-GOOGLEDRIVESLIDESHOW </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ hiển thị các hình ảnh từ Google Drive
+<br><a href="https://github.com/clegallic/MMM-GoogleDriveSlideShow" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<b style = "color:purple">TIPS: Khi có thay đổi hình ảnh mà muốn hệ thống cập nhật lại thì ta phải ấn nút Reset để khởi động lại gương</b
+
+<br>
+<br><b>1. rootFolderId:</b>
+<br>Thông tin: Id của folder chứa hình ảnh (drive.google.com/drive/u/0/folders/1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt) thì "1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt" là id
+<br>Điền vào id với dấu nháy: "1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt" hoặc để null sẽ tải lên hình trong toàn Google Drive
+<br>
+<br><b>2. maxFolders:</b>
+<br>Thông tin: Số lượng folder tối đa khi người dùng để null ở mục trên
+<br>Điền vào số lượng không có dấu nháy: 1
+<br>
+<br><b>3. maxResults:</b>
+<br>Thông tin: Số lượng hình tối đa mà hệ thống sẽ yêu cầu từ Google Drive
+<br>Điền vào kích thước không có dấu nháy: 50
+<br>
+<br><b>4. refreshDriveDelayInSeconds:</b>
+<br>Thông tin: Thời gian cập nhật lại từ Google Drive
+<br>Điền vào thời gian không có dấu nháy: 86400 (1ngày) <b style = "color:red"> Lưu ý đây là giây </b>
+<br>
+<br><b>5. refreshSlideShowIntervalInSeconds:</b>
+<br>Thông tin: Thời gian của 1 chu trình các hình, thời gian hiển thị 1 hình = thời gian này / số lượng hình
+<br>Điền vào thời gian không có dấu nháy: 10 (10s) <b style = "color:red"> Lưu ý đây là giây </b>
+<br>
+<br><b>6. maxWidth:</b>
+<br>Thông tin: Kích thước rộng tối đa của khung hình
+<br>Điền vào kích thước với dấu nháy: "800"
+<br>
+<br><b>7. maxHeight:</b>
+<br>Thông tin: Kích thước cao tối đa của khung hình
+<br>Điền vào kích thước với dấu nháy: "600"
+<br>
+<br><b>8. theme:</b>
+<br>Thông tin: Giao diện hiển thị cho hình
+<br>Điền vào giao diện với dấu nháy: "insetShadow", "whiteFrame", "blackFrame"
+<br>
+<br><b>9. opacity:</b>
+<br>Thông tin: Độ trong suốt của hình (0->1) số thập phân
+<br>Điền vào độ trong suốt không có dấu nháy: 1
+<br>
+<br><b>10. debug:</b>
+<br>Thông tin: Cấu hình sẽ hiển thị ra console log dành cho lập trình viên khi có lỗi xảy ra (Phải mở terminal và debug trên Raspberry Pi theo cách thủ công)
+<br>Điền vào cấu hình không có dấu nháy: true, false

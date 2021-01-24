@@ -1,0 +1,5 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-WS2812 </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ nhận tín hiệu từ các module khác để điều khiển đèn LED
+<br>-----------------<br></i>

@@ -1,0 +1,187 @@
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-VIETNAMCALENDAR </h1>
+<br><i style = "color:green;">Module này hiển thị hơn 50 sự kiện dương/âm lịch tại Việt Nam và một số sự kiện quốc tế phổ biến, đồng thời cũng đồng bộ được với Google Calendar để hiển thị lịch cá nhân</i>
+<br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
+
+<br>
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<br><b>1. maximumEntries:</b>
+<br>Thông tin: Số lượng sự kiện tối đa sẽ được hiển thị (độc lập 2 lịch - tức 14 sự kiện)
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 7
+<br>Ví dụ và cấu hình mặc định hiện tại: 7
+<br>
+<br><b>2. maximumNumberOfDays:</b>
+<br>Thông tin: Số lượng ngày tối đa trong năm
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 365
+<br>Ví dụ và cấu hình mặc định hiện tại: 365
+<br>
+<br><b>3. showLocation:</b>
+<br>Thông tin: Hiển thị thông tin địa điểm xảy ra sự kiện từ Google Calendar
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>
+<br><b>4. maxTitleLength:</b>
+<br>Thông tin: Độ dài ký tự tối đa tên sự kiện
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 25
+<br>Ví dụ và cấu hình mặc định hiện tại: 25
+<br>
+<br><b>5. wrapEvents:</b>
+<br>Thông tin: Bao chữ lại nếu dài quá độ dài cho phép ở trên, đồng thời kết hợp với maxTitileLines bên dưới để hiển thị số dòng tối đa
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>
+<br><b>6. maxTitleLines</b>
+<br>Thông tin: Số lượng dòng tối đa khi bao chữ
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 3
+<br>Ví dụ và cấu hình mặc định hiện tại: 3
+<br>
+<br><b>7. fetchInterval:</b>
+<br>Thông tin: Thời gian cập nhật lại các sự kiện
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 60000 (1s = 1000 -> 60000 = 60000s = 1')
+<br>Ví dụ và cấu hình mặc định hiện tại: 60000
+<br>
+<br><b>8. animationSpeed:</b>
+<br>Thông tin: Tốc độ chuyển động
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 500 (1s = 1000 -> 500 = 0.5s)
+<br>Ví dụ và cấu hình mặc định hiện tại: 500
+<br>
+<br><b>9. displayButton:</b>
+<br>Thông tin: Hiển thị nút nhấn để chuyển qua lại giữa các lịch để dễ theo dõi, sau thời gian được cấu hình ở mục fetchInterval sẽ tự động chuyển về lịch đầy đủ gồm các sự kiện và Google Calendar
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>
+<br><b>9. displayEndTime:</b>
+<br>Thông tin: Hiển thị thời gian kết thúc sự kiện đối với Google Calendar
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>
+<br><b>10. dateEndFormat:</b>
+<br>Thông tin: Định dạng giờ cho thời gian kết thúc
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: <a href="https://momentjscom.readthedocs.io/en/latest/moment/04-displaying/01-format/" target="_blank" rel="noopener noreferrer">Xem thêm các định dạng tại đây</a>
+<br>Ví dụ và cấu hình mặc định hiện tại: "LT(DD/MM)"
+<br>
+<br><b>11. displayLunarDate:</b>
+<br>Thông tin: Hiển thị ngày âm cho các sự kiện VN trừ Google Calendar
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>
+<br><b>12. displayPersonalEvents:</b>
+<br>Thông tin: Hiển thị sự kiện cá nhân tuỳ ý được thêm vào từ người dùng
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br>
+<br><b>13. defaultColor:</b>
+<br>Thông tin: Màu mặc định khi người dùng không thêm màu ở Google Calendar
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: <a href="https://hocwebchuan.com/reference/cssSection/css_color.php" target="_blank" rel="noopener noreferrer">Xem thêm hệ màu tại đây</a>
+<br>Ví dụ và cấu hình mặc định hiện tại: "White" (Phải có dấu # ở đầu nếu sử dụng mã HEX)
+<br>
+<br><b>14. lunarColor:</b>
+<br>Thông tin: Màu cho sự kiện âm, dương, quốc tế, cá nhân trừ Google Calendar
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: <a href="https://hocwebchuan.com/reference/cssSection/css_color.php" target="_blank" rel="noopener noreferrer">Xem thêm hệ màu tại đây</a>
+<br>Ví dụ và cấu hình mặc định hiện tại: "LightGreen" (Phải có dấu # ở đầu nếu sử dụng mã HEX)
+<br>
+<br><b>15. tableClass:</b>
+<br>Thông tin: Các class để thay đổi kích thước cho toàn thể sự kiện nhanh chóng
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "xxsmall", "xsmall", "small", "medium", "large", "xlarge"
+<br>Ví dụ và cấu hình mặc định hiện tại: "xsmall"
+<br>
+<br><b>16. displayLunarEvents:</b>
+<br>Thông tin: Hiển thị các sự kiện âm, dương, quốc tế, cá nhân
+<br>Các cấu hình có thể điền vào theo dạng đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
+<br> 
+<br><b>17. calendars:</b>
+<br>Thông tin: Mảng thông tin url của một lịch từ Google Calendar
+<br>"url": Url từ Google Calendar
+<br>"color": Màu sắc theo hệ RGB đã được đề cập ở trên
+<br>"name": Tên người dùng muốn đặt cho tiêu đề của lịch
+<br>Các cấu hình có thể điền vào:
+<br>+ Phải đặt 3 trường dữ liệu bên dưới vào trong dấu ngoặc nhọn {}, và mỗi lịch cách nhau bằng dấu phẩy (,)
+<br>+ Điền vào "url" theo định dạng chuỗi với dấu nháy: "https://calendar.google.com/calendar/ical/anhquantong77%40gmail.com/public/basic.ics"
+<br>+ Điền vào "color" theo định dạng chuỗi với dấu nháy: "Violet"
+<br>+ Điền vào "name" theo định dạng chuỗi với dấu nháy: "Lịch cá nhân của Xiu"
+<br>Ví dụ và cấu hình mặc định hiện tại:
+<br>[{
+<br>  "url": "https://calendar.google.com/calendar/ical/anhquantong77%40gmail.com/public/basic.ics",
+<br>  "color": "Violet",
+<br>  "name": "Lịch cá nhân của anhquantong77"
+<br>},
+<br>{
+<br>  "url": "https://calendar.google.com/calendar/ical/quan.ng0anhin98%40gmail.com/public/basic.ics",
+<br>  "color": "PowderBlue",
+<br>  "name": "Lịch cá nhân của quan.ng0anhin98"
+<br>}]
+<br>
+<br><b>18. personalDateEvent:</b>
+<br>Thông tin: Mảng các sự kiện cá nhân tuỳ ý từ người dùng
+<br>"day": Ngày diễn ra sự kiện, không cần thêm số 0 khi ngày bé hơn 10
+<br>"month": Tháng diễn ra sự kiện, không cần thêm số 0 khi tháng bé hơn 10
+<br>"title": Tên sự kiện
+<br>Các cấu hình có thể điền vào:
+<br>+ Phải đặt 3 trường dữ liệu bên dưới vào trong dấu ngoặc nhọn {}, và mỗi lịch cách nhau bằng dấu phẩy (,)
+<br>+ Điền vào "day" theo định dạng số không có dấu nháy: 7
+<br>+ Điền vào "color" theo định dạng số không không có dấu nháy: 7
+<br>+ Điền vào "name" theo định dạng chuỗi với dấu nháy: "- Sinh nhật Xiu"
+<br>Ví dụ và cấu hình mặc định hiện tại:
+<br>[{
+<br>  "day": 1,
+<br>  "month": 1,
+<br>  "title": "- Sinh nhật Quân"
+<br>}]
+
+<h2 style = "color:purple;">CÁC SỰ KIỆN LỊCH HIỆN CÓ</h2>
+<br>1. Tết Dương lịch
+<br>2. Ngày Sinh viên Học sinh VN
+<br>3. Tết ông Công ông Táo
+<br>4. Mùng 1 Tết Nguyên Đán
+<br>5. Mùng 2 Tết Nguyên Đán
+<br>6. Mùng 3 Tết Nguyên Đán
+<br>7. Ngày thành lập ĐCSVN
+<br>8. Tết Nguyên Tiêu
+<br>9. Ngày Lễ tình nhân Valentine
+<br>10. Ngày Thầy thuốc VN
+<br>11. Quốc tế Phụ Nữ
+<br>12. Quốc tế Hạnh phúc
+<br>13. Ngày thành lập ĐTNCS HCM
+<br>14. Tết Hàn thực
+<br>15. Ngày Thể thao VN
+<br>16. Ngày Cá tháng Tư
+<br>17. Giỗ tổ Hùng Vương
+<br>18. Lễ Phục Sinh
+<br>19. Ngày Sách VN
+<br>20. Ngày Trái đất
+<br>21. Ngày thống nhất đất nước
+<br>22. Quốc tế Lao Động
+<br>23. Ngày chiến thắng ĐBP
+<br>24. Lễ Phật Đản
+<br>25. Ngày của Mẹ
+<br>26. Quốc tế Gia đình
+<br>27. Ngày thành lập ĐTNTP HCM
+<br>28. Ngày sinh Chủ tịch HCM
+<br>29. Quốc tế Thiếu Nhi
+<br>30. Ngày Môi trường Thế Giới
+<br>31. Ngày BH ra đi tìm đường cứu nước
+<br>32. Ngày của Cha
+<br>33. Tết Đoan Ngọ
+<br>34. Ngày Gia đình VN
+<br>35. Ngày Dân số Thế Giới
+<br>36. Ngày Thương binh liệt sĩ
+<br>37. Ngày CMT8 thành công
+<br>38. Quốc Khánh
+<br>39. Lễ Vu Lan
+<br>40. Quốc tế Người cao tuổi
+<br>41. Tết Trung thu
+<br>42. Ngày Doanh nhân VN
+<br>43. Ngày thành lập Hội Phụ nữ VN
+<br>44. Halloween Lễ hội hoá trang
+<br>45. Quốc tế Nam giới
+<br>46. Ngày Nhà giáo VN
+<br>47. Lễ tạ ơn
+<br>48. Black Friday
+<br>49. Quốc tế phòng chống AIDS
+<br>50. Quốc tế người khuyết tật
+<br>51. Quốc tế nhân quyền
+<br>52. Ngày thành lập QĐND VN
+<br>53. Noel Lễ Giáng Sinh
+

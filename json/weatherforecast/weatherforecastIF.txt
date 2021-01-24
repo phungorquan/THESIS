@@ -1,0 +1,71 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - WEATHERFORECAST </h1>
+<br>
+
+<i style = "color:green;">Module này hiển thị thông tin thời tiết trong tuần
+<br><a href="https://docs.magicmirror.builders/modules/weatherforecast.html" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. location:</b>
+<br>Thông tin: Tên thành phố, tải danh sách thành phố ở đây: bulk.openweathermap.org/sample/city.list.json.gz
+<br>Điền vào tên thành phố với dấu nháy: "Thành phố Hồ Chí Minh"
+<br>
+<br><b>2. locationID:</b>
+<br>Thông tin: ID của thành phố, xem danh sách ở trên
+<br>Điền vào ID thành phố với dấu nháy: "1566083"
+<br>
+<br><b>3. maxNumberOfDays:</b>
+<br>Thông tin: Số lượng ngày tới đa
+<br>Điền vào số lượng không có dấu nháy: 7
+<br>
+<br><b>4. showRainAmount:</b>
+<br>Thông tin: Hiển thị lưu lượng mưa
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>5. updateInterval:</b>
+<br>Thông tin: Thời gian cập nhật
+<br>Điền vào thời gian không có dấu nháy: 600000 (10')
+<br>
+<br><b>6. animationSpeed:</b>
+<br>Thông tin: Tốc độ chuyển
+<br>Điền vào thời gian không có dấu nháy: 1000 (1s)
+<br>
+<br><b>7. decimalSymbol:</b>
+<br>Thông tin: Kí hiệu tách số
+<br>Điền vào kí hiệu với dấu nháy: "."
+<br>
+<br><b>8. fade:</b>
+<br>Thông tin: Làm mờ ở cuối lịch cho đẹp
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>9. fadePoint:</b>
+<br>Thông tin: Độ đậm nhạt làm mờ
+<br>Điền vào cấu hình không có dấu nháy: 0.5
+<br>
+<br><b>10. colored:</b>
+<br>Thông tin: Tô màu
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>11. scale:</b>
+<br>Thông tin: Nếu là true thì sẽ hiển thị độ C hoặc độ F tương ứng, nếu không sẽ hiển thị kí hiệu độ (°)
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>12. units:</b>
+<br>Thông tin: Sử dụng đơn vị tương ứng metric (C), imperial (F), default (K)
+<br>Điền vào đơn vị với dấu nháy: "metric", "imperial", "default"
+<br>
+<br><b>13. initialLoadDelay:</b>
+<br>Thông tin: Tốc độ khởi tạo lần đầu
+<br>Điền vào thời gian không có dấu nháy: 2500 (2.5s)
+<br>
+<br><b>14. retryDelay:</b>
+<br>Thông tin: Tốc độ thử lại khi có lỗi xảy ra
+<br>Điền vào thời gian không có dấu nháy: 2000 (2s)
+<br>
+<br><b>15. appendLocationNameToHeader:</b>
+<br>Thông tin: Sử dụng tên địa điểm làm tên tiêu đề
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>16. roundTemp:</b>
+<br>Thông tin: Làm tròn số
+<br>Điền vào cấu hình không có dấu nháy: true, false

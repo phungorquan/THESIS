@@ -1,0 +1,23 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-SNOW </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ tạo hiệu ứng tuyết rơi toàn màn hình
+<br><a href="https://github.com/MichMich/MMM-Snow" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. flakeCount:</b>
+<br>Thông tin: Số lượng tuyết rơi <b style = "color:red;"> (Càng nhiều sẽ càng lag)</b>
+<br>Điền vào số lượng không có dấu nháy: 20
+<br>
+<br><b>2. theme:</b>
+<br>Thông tin: Các loại tuyết(hình)
+<br>Điền vào tên với dấu nháy: "custom", "winter", "love", "water"
+<br>
+<br><b>3. sizeFactor:</b>
+<br>Thông tin: Kích thước của một bông tuyết
+<br>Điền vào kích thước không có dấu nháy: 4
+<br>
+<br><b>4. downwards:</b>
+<br>Thông tin: Hướng tuyết sẽ rơi
+<br>Điền vào cấu hình không có dấu nháy: true, false

@@ -1,0 +1,22 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-FACENET </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ hiển thị câu lệnh chào tương ứng với người đứng trước gương
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. streamVideo:</b>
+<br>Thông tin: Hiển thị hình ảnh thu được từ camera
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>2. displayRate:</b>
+<br>Thông tin: Hiển thị độ chính xác
+<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>
+<br><b>3. updateInterval:</b>
+<br>Thông tin: Thời gian cập nhật câu lệnh chào về mặc định "Chào"
+<br>Điền vào thời gian không có dấu nháy: 3000000 (5')
+<br>
+<br><b>4. userName:</b>
+<br>Thông tin: Nick name do người dùng tự đặt cho tên người đã được nhận diện
+<br> Điền vào theo cú pháp: "tennguoiduocnhandien":"nicknamemuondat"

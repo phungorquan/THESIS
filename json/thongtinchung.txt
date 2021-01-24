@@ -1,0 +1,42 @@
+<h1 style = "color:blue;">Thông tin chung của hệ thống gương thông minh</h1>
+<br>
+
+<br>Nội dung này được chia làm 3 phần:
+<br><b>Phần 1:</b> Giới thiệu sơ bộ về gương thông minh, thầy hướng dẫn và tác giả
+<br><b>Phần 2:</b> Các phần cứng bên trong 
+<br><b>Phần 3:</b> Cách sử dụng trang web
+
+<br><br><b style = "color:green;">PHẦN 1: GIỚI THIỆU</b>
+<br>Gương thông minh là một dự án phát triển về một tấm gương không chỉ dùng để soi đơn thuần mà còn có thể hiển thị được các thông tin cơ bản cho người dùng, ngoài ra người dùng có thể tương tác được với gương thông qua giọng nói và cảm biến cử chỉ, hoặc trang web.
+<br> <b>THD:</b> PGS.TS. Vũ Đức Lung và ThS. Phan Đình Duy
+<br> <b>SV1:</b> Tống Anh Quân - 16520985 - anhquantong77@gmail.com
+<br> <b>SV2:</b> Nguyễn Lương Duy Khánh - 16520584 - nguyenluongduykhanh@gmail.com
+
+<br><br><b style = "color:green;">PHẦN 2: CÁC PHẦN CỨNG</b>
+<br>1. Raspberry Pi 3B+, board mạch chính
+<br>2. Màn hình LCD, vẫn còn bộ điều khiển của màn đi kèm nằm bên trong
+<br>3. Nguồn Raspberry chính hãng, nguồn 5V cấp cho loa/đèn/quạt/cảm biến, nguồn 220 cấp cho màn hình LCD
+<br>4. Camera PS3, camera tích hợp microphone được cắm thẳng vào cổng USB của Pi
+<br>5. Cảm biến cử chỉ PAJ7620U, giao tiếp với Pi thông qua giao thức I2C
+<br>6. Đèn led WS2812B, được điều khiển từ Pi thông qua chuẩn 1-Wire
+<br>7. Loa, nhận tín hiệu từ Pi thông qua cổng chuyển HDMI -> VGA vì jack 3.5mm trùng với chân 1-Wire nên sẽ bị rè
+<br>8. Khung nhựa mica 5ly bao quanh và một tấm gương có độ phản chiếu cao(Không phải gương hai chiều thực thụ)  
+
+<br><br><b style = "color:green;">PHẦN 3: CÁCH SỬ DỤNG TRANG WEB</b>
+<br><b>1. Bên trái</b>
+<br>- Ở phần bên trái trên cùng sẽ có một menu để chọn các mô-đun, khi chưa chọn mô-đun mà người dùng nhấn vào <img width="20px" height="20px" src="../configserver/images/info.png"> thì sẽ hiện ra thông tin đang đọc, nếu người dùng chọn vào một mô-đun bất kỳ và sau đó ấn vào <img width="20px" height="20px" src="../configserver/images/info.png"> sẽ hiển thị ra thông tin về các cấu hình mà người dùng có thể chỉnh sửa cho mô-đun đó.
+<br>- Bên dưới menu này là một ô chứa nội dung của các mô-đun bất kỳ sau khi người dùng chọn từ menu bên trên. Nội dung sẽ là một chuỗi JSON gồm các trường dữ liệu, thông tin chỉnh sửa nằm trong <img width="20px" height="20px" src="../configserver/images/info.png">
+<br>- Tiếp đến là nút "Lưu", khi người dùng thay đổi bất kỳ nội dung nào ở ô chứa nội dung bên trên mà muốn áp dụng cho gương thì người dùng <b style="color:red">BẮT BUỘC</b> phải ấn "Lưu", nếu có lỗi xảy ra về JSON như bị dư dấu phẩy, thiếu ngoặc kép, sai định dạng JSON,... thì hệ thống sẽ thông báo đến người dùng (Lưu ý là hệ thống sẽ không thông báo khi người dùng điền sai cấu hình).
+<br>- Tiếp đến là nút "Áp dụng và khởi động lại", nút này sẽ <b style="color:red">CẦN PHẢI</b> nhấn sau khi người dùng đã nhấn "Lưu" để hệ thống tự động khởi động lại và áp dụng những thay đổi từ người dùng. Ngoài ra, đối với phần bên phải, khi người dùng có thay đổi trạng thái của các mô-đun thì người dùng cũng <b style="color:red">CẦN PHẢI</b> nhấn nút này nếu muốn thay đổi bất cứ thứ gì cho gương.
+<br>- Cuối cùng là 4 nút cơ bản để điều khiển gương:
+<br>&nbsp;+ <b>Start:</b> Khởi động hệ thống gương thông minh
+<br>&nbsp;+ <b>Stop:</b> Tắt hệ thống gương thông minh
+<br>&nbsp;+ <b>Reset:</b> Khởi động lại hệ thống gương thông minh (Việc ấn nút Reset sẽ không áp dụng trạng thái người dùng vừa thay đổi cho các mô-đun và không lưu các cấu hình đã chỉnh sửa mà phải "Áp dụng và khởi động lại". <b style = "color:purple">Ngoài ra chỉ áp dụng cho việc xoá cache và cập nhật lại hình cho mô-đun "Trình chiếu hình"</b>)
+<br>&nbsp;+ <b>Backup:</b> Khi người dùng chưa chọn mô-đun ở menu trên cùng mà nhấn nút này sẽ đưa gương về cấu hình mặc định và trạng thái tất cả các mô-đun sẽ được bật (Không đưa từng mô-đun về cấu hình mặc định). Nếu người dùng có chọn một mô-đun bất kỳ trong menu thì khi ấn nút này sẽ đưa mô-đun đang được chọn về cấu hình mặc định.
+
+<br><br><b>2. Bên phải</b>
+<br>- Ở phần trên là một bảng chứa tất cả những trạng thái của mô-đun hiện có của gương thông minh. <b style="color:green">Màu xanh là mô-đun đang được bật </b> và <b style="color:red">màu đỏ là đang tắt</b> - tức sẽ không hiển thị trên gương.
+<br>- Tiếp đến là một menu khác giúp người dùng chọn tên của các mô-đun trong bảng trạng thái, sau đó nhấn nút "Tắt/Mở" thì hệ thống sẽ tự động đảo trạng thái của một mô-đun mà người dùng đã chọn. <b style="color:red">LƯU Ý</b>, người dùng cần nhấn "Áp dụng và khởi động lại" nếu muốn áp dụng những thay đổi trạng thái cho gương thông minh.
+<br>- Cuối cùng là hai nút chức năng điều khiển trực tiếp đến board Raspberry Pi
+<br>&nbsp;+ <b>Reboot:</b> Khởi động lại Raspberry Pi (Hệ thống gương thông minh sẽ tự động khởi động lại)
+<br>&nbsp;+ <b>Shutdown:</b> Tắt luôn Raspberry Pi, lúc này người dùng cần rút nguồn và cắm lại.

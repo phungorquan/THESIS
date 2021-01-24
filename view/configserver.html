@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SmartMirror</title> <!-- Tên Tab -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <link rel="icon" type="image/png" href="../configserver/images/tabicon.png"><!--  Hiển thị hình cho tab -->
+        <link rel="stylesheet" href="../configserver/css/configserver.css">  <!-- include File CSS tự tạo -->
+        <style>
+        </style>
+    </head>
+    <body> 
+      <div id="modulesInfo" class="modal">
+        <div class="modal-content animate" style = "padding: 35px; width: 80%; height:70%">
+          <div style = "float:right;">
+            <img id = "closeInfo" width="20px" height="20px" style="cursor: pointer;" onclick="closeInfo()" src="../configserver/images/close.png">
+          </div>
+          <p class = "contentLimit" id = "informationContentWillBeShowedHere"></p>
+        </div>
+      </div>  
+      <table cellspacing = "50" style = "margin-left: auto;  margin-right: auto;  margin-top: auto;  margin-bottom: auto; padding: 5px">
+        <tr>
+          <td style = "border: 0px solid black; border-radius: 10px;"> 
+            <select id ="dropONModules" style = "text-align: center; width: 90%;" onchange="dropONModules()"></select>
+            <img width="30px" height="30px" style="cursor: pointer; float: right;" src="../configserver/images/info.png"
+            onclick="showModulesInfo()">
+            <br><br>
+            <textarea id = "modulesContent" style = "width:350px; height:400px;"></textarea><br><br>
+            <button id = "buttonSavePro" class = "myButton" onclick="saveModuleContent()">Lưu</button><br><br>
+            <button id = "buttonGenPro" class = "myButton" onclick="genModuleContent()">Áp dụng và khởi động lại</button>
+          </td>
+          <td><div style = "border-left: 1px solid black;height: 550px;"></div></td>
+          <td style = "border: 0px solid black; border-radius: 10px; width: 250px;"> 
+            <p style = "text-align: center; float: center;">TRẠNG THÁI</p>
+            <table id="allModulesStatus" style = "width:100%; text-align: center;"></table><br>
+            <table>
+              <select id ="dropAllModules" style = "text-align: center; width: 100%;"></select><br><br>
+              <button id = "buttonApplyStatus" class = "myStatusButton" onclick="updateStatus()">Tắt/Mở</button>
+            </table>
+          </td>
+      </tr>
+      <tr>
+          <td  style = "text-align:center;">
+             <p><b>Điều khiển hệ thống gương</p>
+              <button class="myCmdButton" id="btnStart" onclick="cmdButton(1)">
+                  Start
+              </button>
+              <button class="myCmdButton" id="btnStop" onclick="cmdButton(2)">
+                  Stop
+              </button>
+              <button class="myCmdButton" id="btnReset" onclick="cmdButton(0)">
+                  Reset
+              </button>
+              <button class="myCmdButton" id="btnBackup" onclick="cmdButton(5)">
+                  Backup
+              </button>
+              
+          </td>
+          <td><div style = "border-left: 1px solid black; height: 100px;"></div></td>
+          <td  style = "text-align:center;">
+            <p><b>Điều khiển Raspberry</p>
+            <button class="myCmdButton" id="btnReboot" onclick="cmdButton(3)">
+                Reboot
+            </button>
+            <button class="myCmdButton" id="btnShutdown" onclick="cmdButton(4)">
+                Shutdown
+            </button>
+          </td>
+      </tr>
+      </table>
+      
+    </body>
+    <!-- <script src="/configserver/beauty/beautify.js"> -->
+    </script>
+    <script src="/socket.io/socket.io.js">
+    </script>
+    <script src="/configserver/funcs/configbackend.js">
+    </script>
+</html>

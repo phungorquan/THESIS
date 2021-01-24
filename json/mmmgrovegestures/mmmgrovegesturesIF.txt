@@ -1,0 +1,54 @@
+<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-GROVEGESTURES </h1>
+<br>
+
+<i style = "color:green;">Module này sẽ kích hoạt và điều khiển các thiết bị ngoại vi, module khác thông qua cảm biến cử chỉ PAJ7620U
+<br><a href="https://github.com/eouia/MMM-GroveGestures" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
+<br>-----------------<br></i>
+
+<br>
+<br><b>1. recognitionTimeout:</b>
+<br>Thông tin: Thời gian để kết thúc nhận ra một cử chỉ
+<br>Điền vào thời gian không có dấu nháy: 1500 (1.5s)
+<br>
+<br><b>2. visible:</b>
+<br>Thông tin: Hiển thị thông tin các cử chỉ đã nhận diện
+<br>Điền vào cấu hình không có dấu nháy: true, false
+
+<br>
+<h2 style = "color:purple;"> ----------------- <br>CÁC CỬ CHỈ HIỆN CÓ CỦA HỆ THỐNG</h2>
+<b> Ẩn hiện thông tin gương</b>
+<br>"WAVE": Ẩn thông tin gương
+<br>"FORWARD-BACKWARD": Hiện lại thông tin gương
+<br>
+<br><b> Chuyển trang</b>
+<br>"LEFT": Chuyển trang trái
+<br>"RIGHT": Chuyển trang phải
+<br>
+<br><b> Điều khiển mô-đun tin tức</b>
+<br>"CLOCKWISE": Chuyển đến trang báo tiếp theo
+<br>"ANTICLOCKWISE": Chuyển về trang báo trước đó
+<br>"RIGHT-LEFT": Mở trang báo dạng web để xem chi tiết
+<br>"DOWN": Cuộn trang báo xuống
+<br>"UP": Cuộn trang báo lên
+<br>
+<br><b> Điều khiển âm lượng của hệ thống</b>
+<br>"UP-DOWN": Mở âm lượng tối đa
+<br>"DOWN-UP": Tắt âm thanh
+<br>
+<br><b> Điều khiển mô-đun lịch</b>
+<br>"LEFT-DOWN": Chuyển lịch
+<br>    
+<br><b> Điều khiển led WS2812B</b>
+<br>"DOWN-RIGHT": Bật đèn đơn giản
+<br>"DOWN-LEFT": Tắt đèn
+<br>"RIGHT-LEFT-RIGHT": Vào chế độ điều khiển đèn xịn hơn
+<br>
+<br><b> Điều khiển led WS2812B khi đang ở trong MODE xịn hơn</b>
+<br>"LEFT": Nháy đèn theo kiểu rạp phim classico
+<br>"RIGHT": Nháy đèn đỏ, xanh lá, xanh dương
+<br>"UP": Bật đèn đơn giản
+<br>"DOWN": Tắt đèn
+<br>"ANTICLOCKWISE": Nháy theo kiểu dạng nhịp thở 3 màu đỏ, xanh lá, xanh dương
+<br>"CLOCKWISE": Hiển thị theo màu cầu vồng chuyển động
+<br>"FORWARD-BACKWARD": Hiển thị màu cầu vồng đứng im
+<br>"LEFT-RIGHT-LEFT": Thoát chế độ điều khiển đèn xịn trở về dùng các cử chỉ như phía trên trước khi vào MODE này
