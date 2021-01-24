@@ -27,9 +27,9 @@ var myProcess = require('child_process');
 var db = require(path.resolve("db/db.js"));
 
 // Some directories
-var backupConfigFilename = path.resolve("../config/Backupconfig.js");
+var backupConfigFilename = path.resolve("../configserver/json/backupConfig.js");
 var configFilename = path.resolve("../config/config.js");
-var genConfigFilename = path.resolve("../config/genConfig.js");
+var genConfigFilename = path.resolve("../configserver/json/supportGenConfig.js");
 var jsonDir = path.resolve("../configserver/json") + "/";
 var jsonCheckingFile = path.resolve("../configserver/json/jsonChecking.js");
 var googlePhotoCache = path.resolve("../modules/MMM-GoogleDriveSlideShow/.cache");
@@ -262,7 +262,7 @@ io.sockets.on("connection", function(socket)
       case 4: result = "echo '1' | sudo -S shutdown -h now"; break;
       // 5 is used for all
       // 6 is used for specific module
-      case 5: result = "cp " + result + " " + configFilename + " && pm2 restart pm2_mm"; break;
+      case 5: result = "cp " + backupConfigFilename + " " + configFilename + " && pm2 restart pm2_PS3 && pm2 restart pm2_mm"; break;
       case 6: {
         // Replace backup config.js file into config.js file
         var getFileBKName = jsonDir + msg[1] + '/' + msg[1] + 'BK.js';
@@ -288,6 +288,7 @@ io.sockets.on("connection", function(socket)
         var execResult = "";
         if (err) {
           console.log("*** ERROR EXEC - " + msg[0] + " ***\n" + stderr);
+          socket.emit("ALERT_ERROR", "Thực thi không thành công");
         } 
         else {
           console.log("*** RUN " + msg[0] +" OK ***");
@@ -300,6 +301,7 @@ io.sockets.on("connection", function(socket)
               {
                 getAllModulesStatus(); // Get modules data again
                 io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");
+
               }
               else 
                 socket.emit("ALERT_ERROR","Không thể bật tất cả module!");
@@ -331,11 +333,12 @@ io.sockets.on("connection", function(socket)
       {
         if(allModules[id].STATUS)
           {
-            myProcess.exec("pm2 stop pm2_PS3 && killall motion", function (err,stdout,stderr) {
+            myProcess.exec("pm2 stop pm2_PS3 && sudo killall motion", function (err,stdout,stderr) {
               if(err)
               {
-                console.log ("ERROR STOP PM2 AND KILL MOTION")
-                socket.emit("ALERT_ERROR","Không thể bật tất cả module!");
+                console.log ("ERROR STOP PM2 AND KILL MOTION");
+		console.log (stderr);
+                socket.emit("ALERT_ERROR","Không thể tắt camera");
               }
             });
           }
@@ -344,7 +347,8 @@ io.sockets.on("connection", function(socket)
           myProcess.exec("pm2 restart pm2_PS3", function (err,stdout,stderr) {
             if(err)
             {
-              console.log ("ERROR RESTART PM2")
+              console.log ("ERROR RESTART PM2");
+              console.log (stderr);
               socket.emit("ALERT_ERROR","Không thể bật camera!");
             }
           });

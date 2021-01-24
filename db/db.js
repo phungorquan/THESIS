@@ -2,10 +2,10 @@ var mysql = require('mysql'); // Khởi tạo câu lệnh DB
 var pool = mysql.createPool({
     connectionLimit: 5,
     host: "localhost", // Host mặc định
-  	user: "root", // User mặc định
-  	password: "", // Password mặc định
-  	dateStrings: true, 
-  	database: "modules" // Tên database
+    user: "root", // User mặc định
+    password: "password", // Password mặc định
+    dateStrings: true, 
+    database: "modules" // Tên database
 });
 
 // Get all modules name + status
