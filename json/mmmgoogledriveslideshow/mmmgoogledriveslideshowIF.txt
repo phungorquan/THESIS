@@ -1,49 +1,60 @@
-<h1 style = "color:blue;">THÔNG TIN VÀ CẤU HÌNH CỦA MODULE - MMM-GOOGLEDRIVESLIDESHOW </h1>
-<br>
-
-<i style = "color:green;">Module này sẽ hiển thị các hình ảnh từ Google Drive
-<br><a href="https://github.com/clegallic/MMM-GoogleDriveSlideShow" target="_blank" rel="noopener noreferrer">Click để xem thêm chi tiết</a>
-<br>-----------------<br></i>
-
-<b style = "color:purple">TIPS: Khi có thay đổi hình ảnh mà muốn hệ thống cập nhật lại thì ta phải ấn nút Reset để khởi động lại gương</b
+<h1 style = "color:blue;">THÔNG TIN CỦA MODULE: MMM-GOOGLEDRIVESLIDESHOW </h1>
+<i><a href="https://github.com/clegallic/MMM-GoogleDriveSlideShow" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này sẽ hiển thị các hình ảnh từ Google Drive, người dùng phải cần tham khảo cách đăng ký API Google Drive để dùng trong link trên</i>
+<br><b style = "color:purple">TIPS: Khi có thay đổi hình ảnh trên Google Drive, ta phải ấn nút Reset để xoá cache và đồng thời khởi động lại gương</b>
+<br><i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
-<br><b>1. rootFolderId:</b>
-<br>Thông tin: Id của folder chứa hình ảnh (drive.google.com/drive/u/0/folders/1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt) thì "1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt" là id
-<br>Điền vào id với dấu nháy: "1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt" hoặc để null sẽ tải lên hình trong toàn Google Drive
+<br>
+
+<h2 style = "color:purple;">TÓM TẮT CÁC CẤU HÌNH</h2>
+<b>1. rootFolderId:</b>
+<br>Thông tin: Id của folder chứa hình ảnh (http://drive.google.com/drive/u/0/folders/1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt) thì "1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt" là Id
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt"
+<br>Ví dụ và cấu hình mặc định hiện tại: "1j7RLtFiFXFelZjaveD0QUiOWkIqX9LNt"
 <br>
 <br><b>2. maxFolders:</b>
-<br>Thông tin: Số lượng folder tối đa khi người dùng để null ở mục trên
-<br>Điền vào số lượng không có dấu nháy: 1
+<br>Thông tin: Số lượng folder tối đa khi người dùng để null ở mục trên. <b style = "color:red;">Lưu ý: hệ thống sẽ hiển thị TẤT CẢ hình trong drive của người dùng </b>
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 1
+<br>Ví dụ và cấu hình mặc định hiện tại: 1
 <br>
 <br><b>3. maxResults:</b>
 <br>Thông tin: Số lượng hình tối đa mà hệ thống sẽ yêu cầu từ Google Drive
-<br>Điền vào kích thước không có dấu nháy: 50
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 50
+<br>Ví dụ và cấu hình mặc định hiện tại: 50
 <br>
 <br><b>4. refreshDriveDelayInSeconds:</b>
 <br>Thông tin: Thời gian cập nhật lại từ Google Drive
-<br>Điền vào thời gian không có dấu nháy: 86400 (1ngày) <b style = "color:red"> Lưu ý đây là giây </b>
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 86400 (1ngày) <b style = "color:red"> Lưu ý đây là giây </b>
+<br>Ví dụ và cấu hình mặc định hiện tại: 86400
 <br>
 <br><b>5. refreshSlideShowIntervalInSeconds:</b>
-<br>Thông tin: Thời gian của 1 chu trình các hình, thời gian hiển thị 1 hình = thời gian này / số lượng hình
-<br>Điền vào thời gian không có dấu nháy: 10 (10s) <b style = "color:red"> Lưu ý đây là giây </b>
+<br>Thông tin: Bọc lại nội dung để hiển thị thành nhiều hàng nếu quá dài
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 10 (10s) <b style = "color:red"> Lưu ý đây là giây </b>
+<br>Ví dụ và cấu hình mặc định hiện tại: 10
 <br>
 <br><b>6. maxWidth:</b>
-<br>Thông tin: Kích thước rộng tối đa của khung hình
-<br>Điền vào kích thước với dấu nháy: "800"
+<br>Thông tin: Cắt ngắn lại nội dung để hiển thị lên cho người dùng
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "800"
+<br>Ví dụ và cấu hình mặc định hiện tại: "850"
 <br>
 <br><b>7. maxHeight:</b>
-<br>Thông tin: Kích thước cao tối đa của khung hình
-<br>Điền vào kích thước với dấu nháy: "600"
+<br>Thông tin: Độ dài của nội dung được hiển thị
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "600"
+<br>Ví dụ và cấu hình mặc định hiện tại: "850"
 <br>
 <br><b>8. theme:</b>
 <br>Thông tin: Giao diện hiển thị cho hình
-<br>Điền vào giao diện với dấu nháy: "insetShadow", "whiteFrame", "blackFrame"
+<br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy: "insetShadow", "whiteFrame", "blackFrame"
+<br>Ví dụ và cấu hình mặc định hiện tại: "blackFrame"
 <br>
 <br><b>9. opacity:</b>
 <br>Thông tin: Độ trong suốt của hình (0->1) số thập phân
-<br>Điền vào độ trong suốt không có dấu nháy: 1
+<br>Các cấu hình có thể điền vào theo dạng số không có dấu nháy: 1
+<br>Ví dụ và cấu hình mặc định hiện tại: 1
 <br>
 <br><b>10. debug:</b>
 <br>Thông tin: Cấu hình sẽ hiển thị ra console log dành cho lập trình viên khi có lỗi xảy ra (Phải mở terminal và debug trên Raspberry Pi theo cách thủ công)
-<br>Điền vào cấu hình không có dấu nháy: true, false
+<br>Các cấu hình có thể điền vào theo đúng, sai không có dấu nháy: true hoặc false
+<br>Ví dụ và cấu hình mặc định hiện tại: false
+

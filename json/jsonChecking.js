@@ -170,14 +170,24 @@
     "MMM-GoogleAssistant": "string",
     "MMM-pages": "string",
     "MMM-page-indicator": "string",
-    "aniamationTime": "number",
-
+    "animationTime": "number",
 
     "refresh_interval_ms": "number",
     "databaseSave": "boolean",
 
     "recognitionTimeout": "number",
     "visible": "boolean", 
+
+    "rootFolderId": "string",
+    "maxFolders": "number",
+    "maxResults": "number",
+    "refreshDriveDelayInSeconds": "number",
+    "refreshSlideShowIntervalInSeconds": "number",
+    "maxWidth": "string",
+    "maxHeight": "string",
+    "theme": "string",
+    "opacity": "number",
+    "debug": "boolean",
 
     "pages": "number"
 
