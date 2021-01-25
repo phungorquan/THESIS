@@ -1,6 +1,6 @@
 <h1 style = "color:blue;">THÔNG TIN CỦA MODULE: CURRENTWEATHER </h1>
 <i><a href="https://docs.magicmirror.builders/modules/currentweather.html" target="_blank" rel="noopener noreferrer">Thông tin tác giả, mã nguồn và cấu hình chi tiết</a></i>
-<br><i style = "color:green;">Thông tin cơ bản: Module này giúp cho hệ thống gương hiển thị các thông tin về nhiệt độ, độ ẩm, hướng gió,... hiện tại</i>
+<br><i style = "color:green;">Thông tin cơ bản: Module này giúp cho hệ thống gương hiển thị các thông tin về nhiệt độ, độ ẩm, hướng gió,... hiện tại. Người dùng phải cần tham khảo cách đăng ký 1 tài khoản trong link trên và đổi appID trong file .js của module này nếu muốn</i>
 <br> <i style = "color:red;">Lưu ý: Các cấu hình bên dưới có thể gây ra lỗi hệ thống nên người dùng phải tuân thủ theo các thông tin của mỗi cấu hình để giảm thiểu sai sót ở mức thấp nhất</i>
 
 <br>
