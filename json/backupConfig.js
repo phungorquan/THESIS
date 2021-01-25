@@ -30,8 +30,8 @@ var config ={
             "showDate": true,
             "showWeek": false,
             "dateFormat": "ddd, DD/MM",
-            "timeFormat": 24,
             "lunarShow": true,
+            "timeFormat": 24,
             "analogSize": "200px",
             "analogFace": "simple",
             "analogPlacement": "bottom",
@@ -59,12 +59,11 @@ var config ={
             "animationSpeed": 500,
             "displayButton": false,
             "displayEndTime": true,
+            "dateEndFormat": "LT(DD/MM)",
             "displayLunarDate": true,
             "displayPersonalEvents": true,
-            "dateEndFormat": "LT(DD/MM)",
             "defaultColor": "White",
             "lunarColor": "LightGreen",
-            "colored": true,
             "tableClass": "xsmall",
             "displayLunarEvents": true,
             "calendars": [
@@ -121,14 +120,20 @@ var config ={
         "module": "MMM-Cursor"
     },
     {
-        "module": "MMM-WS2812"
+        "module": "MMM-WS2812",
+        "config":
+        {
+            "initLedMMM": "WS-RAINBOW",
+            "allowGA": true,
+            "allowGesture": true
+        }
     },
     {
         "position": "fullscreen",
         "module": "MMM-Snow",
         "config":
         {
-            "flakeCount": 10,
+            "flakeCount": 5,
             "theme": "custom",
             "sizeFactor": 7,
             "downwards": true
@@ -162,6 +167,21 @@ var config ={
         "module": "newsfeed",
         "config":
         {
+            "showSourceTitle": true,
+            "showPublishDate": true,
+            "showDescription": true,
+            "wrapTitle": true,
+            "wrapDescription": true,
+            "truncDescription": false,
+            "lengthDescription": 100,
+            "hideLoading": false,
+            "reloadInterval": 300000,
+            "updateInterval": 10000,
+            "animationSpeed": 1500,
+            "maxNewsItems": 0,
+            "ignoreOldItems": true,
+            "ignoreOlderThan": 604800000,
+            "logFeedWarnings": false,
             "feeds": [
             {
                 "title": "24h",
@@ -174,22 +194,7 @@ var config ={
             {
                 "title": "24h",
                 "url": "https://cdn.24h.com.vn/upload/rss/bongda.rss"
-            }],
-            "showSourceTitle": true,
-            "showPublishDate": true,
-            "showDescription": true,
-            "wrapTitle": true,
-            "wrapDescription": true,
-            "truncDescription": false,
-            "lengthDescription": 500,
-            "hideLoading": true,
-            "reloadInterval": 300000,
-            "updateInterval": 10000,
-            "animationSpeed": 1500,
-            "maxNewsItems": 0,
-            "ignoreOldItems": true,
-            "ignoreOlderThan": 604800000,
-            "logFeedWarnings": false
+            }]
         }
     },
     {
@@ -219,7 +224,7 @@ var config ={
             "showFeelsLike": false,
             "initialLoadDelay": 0,
             "retryDelay": 2500,
-            "roundTemp": false
+            "roundTemp": true
         }
     },
     {
@@ -238,12 +243,14 @@ var config ={
             "fade": true,
             "fadePoint": 0.5,
             "colored": true,
-            "units": "metric",
             "scale": false,
-            "initialLoadDelay": 2500,
+            "units": "metric",
+            "initialLoadDelay": 1000,
             "retryDelay": 2000,
             "appendLocationNameToHeader": true,
-            "roundTemp": false
+            "calendarClass": "calendar",
+            "tableClass": "medium",
+            "roundTemp": true
         }
     },
     {
@@ -261,8 +268,8 @@ var config ={
                 "usePMDL": false,
                 "audioGain": 2,
                 "Frontend": true,
-                "Model": "smart_mirror",
-                "Sensitivity": null
+                "Model": "jarvis",
+                "Sensitivity": 0.7
             },
             "A2DServer":
             {
@@ -284,7 +291,8 @@ var config ={
         "module": "MMM-Tools",
         "config":
         {
-            "refresh_interval_ms": 10000
+            "refresh_interval_ms": 20000,
+            "databaseSave": false
         }
     },
     {
