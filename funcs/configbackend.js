@@ -72,7 +72,19 @@ mySocketIO.on("ALERT_OK",function(msg){
 mySocketIO.emit("GET_JSON_CHECKING","DUMMY");
 // Get checking JSON
 mySocketIO.on("RES_JSON_CHECKING",function(msg){ 
-    ns_ConfigServer.jsonChecking = JSON.parse(msg);
+    // Checking JSON are correct or not
+    try {
+        ns_ConfigServer.jsonChecking = JSON.parse(msg);
+    } catch (e) {
+        alert("Các điều kiện kiểm tra JSON rỗng, LỖI HỆ THỐNG!!!");
+        return;
+    }
+
+    if(ns_ConfigServer.jsonChecking.position.length > 0);
+    else 
+    {
+        alert("Các điều kiện kiểm tra JSON rỗng, LỖI HỆ THỐNG!!!"); 
+    }
 });
 
 // Display content of modules
@@ -179,12 +191,22 @@ function dropONModules(){
 
 function JSONChecking(obj)
 {
-    // Check if obj is exist (it means user edit wrong obj)
-    if(ns_ConfigServer.jsonChecking.hasOwnProperty(obj))
+    // Checking empty jsonChecking or not
+    if(ns_ConfigServer.jsonChecking.position.length > 0)
     {
-        return ns_ConfigServer.jsonChecking[obj]; // return type of that object
+        // Check if obj is exist (it means user edit wrong obj)
+        if(ns_ConfigServer.jsonChecking.hasOwnProperty(obj))
+        {
+            return ns_ConfigServer.jsonChecking[obj]; // return type of that object
+        }
+        else return false;
     }
-    else return false;
+    else 
+    {
+        alert("Các điều kiện kiểm tra JSON rỗng"); 
+        return;
+    }
+
 }
 
 // Display alert
@@ -268,19 +290,49 @@ function saveModuleContent(){
                         // Get obj in an element
                         for(lastIndex in configJSON[index][subIndex])
                         {
-                            // If that obj is !OK - > ready to alert
-                            var getType = JSONChecking(lastIndex);
-                            if(getType != typeof(configJSON[index][subIndex][lastIndex]))
+                            // If that is only array without json obj
+                            if(!isNaN(lastIndex))
                             {
-                                isConfigOK = false;
-                                var objErr = new Object;
-                                objErr["objName"] = lastIndex;
-                                objErr["expectType"] = getType;
-                                objErr["errType"] = typeof(configJSON[index][subIndex][lastIndex]);
-                                displayJSONErr(objErr);
+                                // Go through one by one element to check
+                                for(eleArrInx in configJSON[index][subIndex].length)
+                                {
+                                    var getData = eleArrInx;
+                                    var getType = JSONChecking(getData);
+                                    if(getType != typeof(eleArrInx))
+                                    {
+                                        isConfigOK = false;
+                                        var objErr = new Object;
+                                        objErr["objName"] = getData;
+                                        objErr["expectType"] = getType;
+                                        objErr["errType"] = typeof(eleArrInx);
+                                        console.log("false");
+                                        displayJSONErr(objErr);
+                                        break;
+                                    }
+                                }
+                            }
+                            // Inside array are the other json obj
+                            else
+                            {
+                                // If that obj is !OK - > ready to alert
+                                var getType = JSONChecking(lastIndex);
+                                if(getType != typeof(configJSON[index][subIndex][lastIndex]))
+                                {
+                                    isConfigOK = false;
+                                    var objErr = new Object;
+                                    objErr["objName"] = lastIndex;
+                                    objErr["expectType"] = getType;
+                                    objErr["errType"] = typeof(configJSON[index][subIndex][lastIndex]);
+                                    console.log("false");
+                                    displayJSONErr(objErr);
+                                    break;
+                                }
+                            }
+                            // Out one more for loop when false
+                            if(isConfigOK == false)
+                            {
                                 break;
-                        }
-                            
+                            }
                         }
                         // Out one more for loop when false
                         if(isConfigOK == false)
@@ -304,6 +356,7 @@ function saveModuleContent(){
                             objErr["objName"] = subIndex;
                             objErr["expectType"] = getType;
                             objErr["errType"] = typeof(configJSON[index][subIndex]);
+                            console.log("false");
                             displayJSONErr(objErr);
                             break;
                         }
@@ -319,6 +372,7 @@ function saveModuleContent(){
             objErr["objName"] = index;
             objErr["expectType"] = getType;
             objErr["errType"] = typeof(configJSON[index]);
+            console.log("false");
             displayJSONErr(objErr);
             break;
         }
