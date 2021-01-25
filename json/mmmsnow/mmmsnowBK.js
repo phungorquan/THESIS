@@ -2,9 +2,9 @@
   "position": "fullscreen",
   "module": "MMM-Snow",
   "config":{
-    "flakeCount": 30,
+    "flakeCount": 5,
     "theme": "custom",
-    "sizeFactor": 4,
+    "sizeFactor": 5,
     "downwards": true
   }
 }
