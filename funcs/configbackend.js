@@ -80,7 +80,7 @@ mySocketIO.on("RES_JSON_CHECKING",function(msg){
         return;
     }
 
-    if(ns_ConfigServer.jsonChecking.position.length > 0);
+    if(ns_ConfigServer.jsonChecking.hasOwnProperty("position"));
     else 
     {
         alert("Các điều kiện kiểm tra JSON rỗng, LỖI HỆ THỐNG!!!"); 
@@ -189,15 +189,15 @@ function dropONModules(){
     }
 }
 
-function JSONChecking(obj)
+function JSONCheckingType(obj)
 {
     // Checking empty jsonChecking or not
-    if(ns_ConfigServer.jsonChecking.position.length > 0)
+    if(ns_ConfigServer.jsonChecking.hasOwnProperty("position"))
     {
         // Check if obj is exist (it means user edit wrong obj)
         if(ns_ConfigServer.jsonChecking.hasOwnProperty(obj))
         {
-            return ns_ConfigServer.jsonChecking[obj]; // return type of that object
+            return ns_ConfigServer.jsonChecking[obj].dataType; // return type of that object
         }
         else return false;
     }
@@ -209,13 +209,39 @@ function JSONChecking(obj)
 
 }
 
+function JSONCheckingData(obj)
+{
+    // Checking empty jsonChecking or not
+    if(ns_ConfigServer.jsonChecking.hasOwnProperty("position"))
+    {
+        // Check if obj is exist (it means user edit wrong obj)
+        if(ns_ConfigServer.jsonChecking.hasOwnProperty(obj))
+        {
+            if(ns_ConfigServer.jsonChecking[obj].hasOwnProperty("dataAllow"))
+            {
+                return ns_ConfigServer.jsonChecking[obj].dataAllow; // return all allow data of that object
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else return false;
+    }
+    else 
+    {
+        alert("Các điều kiện kiểm tra JSON rỗng"); 
+        return;
+    }
+}
+
 // Display alert
 function displayJSONErr(arr)
 {
     var alertStr = "";
     if(arr.expectType == false)
     {
-        alertStr = "Không tồn tại cấu hình này: " + arr.objName;
+        alertStr = "Không tồn tại cấu hình, hoặc dữ liệu phù hợp cho cấu hình này: " + arr.objName;
     }
     else
     {   
@@ -223,6 +249,120 @@ function displayJSONErr(arr)
     }
     console.log(alertStr);
     alert(alertStr);
+}
+
+// Display alert
+function displayJSONDataErr(arr)
+{
+    var alertStr = "";
+    if(arr.arrData == false)
+    {
+        alertStr = "Không tồn tại cấu hình này: " + arr.objName;
+    }
+    else{
+        alertStr = ("Sai cấu hình \nLỗi tại: " + arr.objName + "\nGiá trị điền vào là: " + arr.errData +" không tồn tại trong mảng này: " + arr.arrData);
+    }
+    console.log(alertStr);
+    alert(alertStr);
+}
+
+function validURL(str) {
+  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+  return !!pattern.test(str);
+}
+
+function validColor(strColor){
+  strColor = strColor.toLowerCase();
+  var s = new Option().style;
+  s.color = strColor;
+  return s.color == strColor;
+}
+
+// Process checking JSON Data
+function processJSONDataChecking(index,configJSON)
+{
+    var getDataAllowArr = JSONCheckingData(index);
+    var isDataAllow = false;
+    if(Array.isArray(getDataAllowArr))
+    {
+        for(dataArrCheckingIdx in getDataAllowArr)
+        {
+            // Check number is positive or not
+            if(getDataAllowArr.length == 1 && getDataAllowArr[dataArrCheckingIdx] == "checkPositive")
+            {
+                if(configJSON >= 0)
+                {
+                    isDataAllow = true;
+                    break;
+                }
+                else{
+                    alertStr = ("Sai cấu hình \nLỗi tại: " + index + "\nGiá trị điền vào là: " + configJSON +", phải là một số dương >= 0");
+                    alert(alertStr);
+                    return false;
+                }
+            }
+
+            // Check url is valid or not
+            else if(getDataAllowArr.length == 1 && getDataAllowArr[dataArrCheckingIdx] == "checkURL")
+            {
+                if(validURL(configJSON))
+                {
+                    isDataAllow = true;
+                    break;
+                }
+                else{
+                    alertStr = ("Sai định dạng URL của " + index);
+                    alert(alertStr);
+                    return false;
+                }
+            }
+
+            // Check color is positive or not
+            else if(getDataAllowArr.length == 1 && getDataAllowArr[dataArrCheckingIdx] == "checkColor")
+            {
+                var RegExp = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i;
+                if(validColor(configJSON) || RegExp.test(configJSON))
+                {
+                    isDataAllow = true;
+                    break;
+                }
+                else{
+                    alertStr = ("Sai định dạng màu của " + index);
+                    alert(alertStr);
+                    return false;
+                }
+            }
+            else
+            {
+                if(getDataAllowArr[dataArrCheckingIdx] == configJSON)
+                {
+                    isDataAllow = true;
+                    break;
+                }
+            }
+        }
+    }
+    else 
+    {
+        isDataAllow = getDataAllowArr;
+    }
+
+    if(isDataAllow == false)
+    {
+        var objErr = new Object;
+        objErr["objName"] = index;
+        objErr["errData"] = configJSON;
+        objErr["arrData"] = getDataAllowArr;
+        console.log("false at, ",index);
+        displayJSONDataErr(objErr);
+    }
+
+    return isDataAllow;
 }
 
 // Save content 
@@ -245,17 +385,18 @@ function saveModuleContent(){
         fullConfigJSON = JSON.parse(getContentArea.value);
     } catch (e) {
         jsonOK = false;
-        alert("Vui lòng kiểm tra lại, sai định dạng JSON (Kiểm tra lại các dấu ngoặc, hai chấm, phẩy,...)");
+        alert("Vui lòng kiểm tra lại, sai định dạng JSON)");
         return;
     }
 
     var isConfigOK = true;
     var alertStr = "";
+    var isDataAllow = true;
 
     // Check some objects before check obj in config ("position","header","module","config" or the other ones in the future)
     for(index in fullConfigJSON)
     {
-        var getType = JSONChecking(index);
+        var getType = JSONCheckingType(index);
         if(getType != typeof(fullConfigJSON[index]))
         {
             isConfigOK = false;
@@ -266,18 +407,24 @@ function saveModuleContent(){
             displayJSONErr(objErr);
             return;
         }
+
+        // Checking data is available or not
+        if(!processJSONDataChecking(index,fullConfigJSON[index]))
+            return;
     }
 
 
     // Check objects in config JSON
-    var configJSON = JSON.parse(getContentArea.value).config;
+    var configJSON = fullConfigJSON.config;
     // Check one by one obj
     for(index in configJSON)
     {
         // If obj is OK (string, number, object)
-        var getType = JSONChecking(index);
+        var getType = JSONCheckingType(index);
         if(getType == typeof(configJSON[index]))
         {
+            //console.log(getType);
+            //console.log(index);
             // If obj is an object (that is a subObject with {[]})
             if(getType == "object")
             {
@@ -293,29 +440,53 @@ function saveModuleContent(){
                             // If that is only array without json obj
                             if(!isNaN(lastIndex))
                             {
-                                // Go through one by one element to check
-                                for(eleArrInx in configJSON[index][subIndex].length)
+                                // Only an array, not has array inside
+                                if(typeof(configJSON[index][subIndex]) == "string")
                                 {
-                                    var getData = eleArrInx;
-                                    var getType = JSONChecking(getData);
-                                    if(getType != typeof(eleArrInx))
+                                    var getData = configJSON[index][subIndex];
+                                    var getType = JSONCheckingType(getData);
+                                    if(getType != typeof(configJSON[index][subIndex]))
                                     {
                                         isConfigOK = false;
                                         var objErr = new Object;
                                         objErr["objName"] = getData;
                                         objErr["expectType"] = getType;
-                                        objErr["errType"] = typeof(eleArrInx);
-                                        console.log("false");
+                                        objErr["errType"] = typeof(configJSON[index][subIndex]);
+                                        console.log("false at, ", getData);
                                         displayJSONErr(objErr);
                                         break;
                                     }
+                                    // Checking data is available or not
+                                    isDataAllow = processJSONDataChecking(index,getData);
                                 }
+                                else
+                                {
+                                     // Go through one by one element to check
+                                    for(eleArrInx in configJSON[index][subIndex])
+                                    {
+                                        var getData = configJSON[index][subIndex][eleArrInx];
+                                        var getType = JSONCheckingType(getData);
+                                        if(getType != typeof(configJSON[index][subIndex][eleArrInx]))
+                                        {
+                                            isConfigOK = false;
+                                            var objErr = new Object;
+                                            objErr["objName"] = getData;
+                                            objErr["expectType"] = getType;
+                                            objErr["errType"] = typeof(getData);
+                                            console.log("false at, ", getData);
+                                            displayJSONErr(objErr);
+                                            break;
+                                        }
+                                        // Checking data is available or not
+                                        isDataAllow = processJSONDataChecking(index,getData);
+                                    }
+                                }       
                             }
                             // Inside array are the other json obj
                             else
                             {
                                 // If that obj is !OK - > ready to alert
-                                var getType = JSONChecking(lastIndex);
+                                var getType = JSONCheckingType(lastIndex);
                                 if(getType != typeof(configJSON[index][subIndex][lastIndex]))
                                 {
                                     isConfigOK = false;
@@ -323,19 +494,21 @@ function saveModuleContent(){
                                     objErr["objName"] = lastIndex;
                                     objErr["expectType"] = getType;
                                     objErr["errType"] = typeof(configJSON[index][subIndex][lastIndex]);
-                                    console.log("false");
+                                    console.log("false at, ", lastIndex);
                                     displayJSONErr(objErr);
                                     break;
                                 }
+                                // Checking data is available or not
+                                isDataAllow = processJSONDataChecking(lastIndex,configJSON[index][subIndex][lastIndex]);
                             }
                             // Out one more for loop when false
-                            if(isConfigOK == false)
+                            if(isConfigOK == false || isDataAllow == false)
                             {
                                 break;
                             }
                         }
                         // Out one more for loop when false
-                        if(isConfigOK == false)
+                        if(isConfigOK == false || isDataAllow == false)
                         {
                             break;
                         }
@@ -348,7 +521,7 @@ function saveModuleContent(){
                     for(subIndex in configJSON[index])
                     {
                         // If that obj is !OK -> ready to alert
-                        var getType = JSONChecking(subIndex);
+                        var getType = JSONCheckingType(subIndex);
                         if(getType != typeof(configJSON[index][subIndex]))
                         {
                             isConfigOK = false;
@@ -356,12 +529,24 @@ function saveModuleContent(){
                             objErr["objName"] = subIndex;
                             objErr["expectType"] = getType;
                             objErr["errType"] = typeof(configJSON[index][subIndex]);
-                            console.log("false");
+                            console.log("false at, ", subIndex);
                             displayJSONErr(objErr);
                             break;
                         }
+                        // Checking data is available or not
+                        isDataAllow = processJSONDataChecking(subIndex,configJSON[index][subIndex]);
                     }
                 }
+            }
+            else
+            {
+                // Checking data is available or not
+                isDataAllow = processJSONDataChecking(index,configJSON[index]);
+            }
+            // Out one more for loop when false
+            if(isConfigOK == false || isDataAllow == false)
+            {
+                break;
             }
         }
         // If that obj is !OK -> ready to alert
@@ -372,12 +557,17 @@ function saveModuleContent(){
             objErr["objName"] = index;
             objErr["expectType"] = getType;
             objErr["errType"] = typeof(configJSON[index]);
-            console.log("false");
+            console.log("false at, ", index);
             displayJSONErr(objErr);
             break;
         }
+        if(isConfigOK == false || isDataAllow == false)
+        {
+            console.log("false");
+            break;
+        }
     }       
-    if(isConfigOK)
+    if(isConfigOK && isDataAllow)
     {
         var isConfirmed = confirm("Bạn có chắc chắn muốn lưu lại cấu hình hông?");
         if(isConfirmed)

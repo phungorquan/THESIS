@@ -18,7 +18,6 @@
     "initialLoadDelay": 1000,
     "retryDelay": 2000,
     "appendLocationNameToHeader": true,
-    "calendarClass": "calendar",
     "tableClass": "medium",
     "roundTemp": true
   }
