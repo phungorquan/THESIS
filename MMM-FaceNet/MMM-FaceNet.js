@@ -1,8 +1,7 @@
-var currentUserDetected = "";
-
 Module.register("MMM-FaceNet", {
     // Default module configurations
     defaults: {
+        threshold: 0.7,
         streamVideo: true,
         displayRate: false,
         updateInterval: 300000, // Refresh text every 5'
@@ -29,7 +28,7 @@ Module.register("MMM-FaceNet", {
     },
     start: function() {
         console.log("Starting module: " + this.name);
-        this.sendSocketNotification("STARTUP", "STARTUP");
+        this.sendSocketNotification("CONFIG", this.config.threshold);
         this.scheduleUpdate();
     },
 
@@ -40,47 +39,23 @@ Module.register("MMM-FaceNet", {
             var strCombine = "";
             if (splitSpecificUser[0].length > 0)
             {
-                if(this.config.displayRate)
+                for(index in splitSpecificUser)
                 {
-                    for(index in splitSpecificUser)
+                    // Change user namespace
+                    var getName = splitSpecificUser[index];
+                    if(this.config.userName.hasOwnProperty(getName))
                     {
-                        var splitNameAndRate = splitSpecificUser[index].split(',');
-                        
-                        // Change user namespace
-                        var getName = splitNameAndRate[0];
-                        if(this.config.userName.hasOwnProperty(getName))
-                        {
-                            getName = this.config.userName[getName];
-                        }
-                        strCombine += getName + splitNameAndRate[1] + "<br>";
+                        getName = this.config.userName[getName];
                     }
+                    strCombine += getName + "<br>";
                 }
-                else // Only display text
-                {
-                    for(index in splitSpecificUser)
-                    {
-                        var splitNameAndRate = splitSpecificUser[index].split(',');
-                        
-                        // Change user namespace
-                        var getName = splitNameAndRate[0];
-                        if(this.config.userName.hasOwnProperty(getName))
-                        {
-                            getName = this.config.userName[getName];
-                        }
-                        strCombine += getName + "<br>";
-                    }
-                }
-
-                // Display beautiful notification but it is ERROR now.
-                //this.sendNotification("SHOW_ALERT",{type: "notification",title: "Hello" , message:"<h1>"+strCombine+"</h1>", timer : 2000});
-
-                // Display
-                document.getElementById("facenetResult").innerHTML = "Chào " + strCombine;
             }
-            else{
-                // Display hello to nobody
-                document.getElementById("facenetResult").innerHTML = "Chào";
-            }
+
+            // Display beautiful notification but it is ERROR now (display a lot of notification as the same time -> OVER LOAD)
+            //this.sendNotification("SHOW_ALERT",{type: "notification",title: "Hello" , message:"<h1>"+strCombine+"</h1>", timer : 2000});
+
+            // Display
+            document.getElementById("facenetResult").innerHTML = "Chào " + strCombine;
         }
         else if (notification == "CAMERA_STATUS")
         {
@@ -99,7 +74,7 @@ Module.register("MMM-FaceNet", {
 
         var userRecog = document.createElement("span");
         userRecog.setAttribute("id", "facenetResult");
-        userRecog.innerHTML = "Chào";
+        userRecog.innerHTML = "Chào người lạ";
         userRecog.style.color = "pink";
         row1.appendChild(userRecog);
 
@@ -123,7 +98,7 @@ Module.register("MMM-FaceNet", {
     scheduleUpdate: function() {
         // Refresh text to "Chào" after a period of time
         setInterval(() => {
-            document.getElementById("facenetResult").innerHTML = "Chào";
+            document.getElementById("facenetResult").innerHTML = "Chào người lạ";
         }, this.config.updateInterval);
     },
 });
