@@ -20,11 +20,11 @@ module.exports = NodeHelper.create({
                     var getName = splitNameAndRate[0];
                     if(parseFloat(splitNameAndRate[1]) > self.threshold)
                     {
-                        strCombine += getName + "/";
+                        strCombine += getName + "," + splitNameAndRate[1] + "/";
                     }
                     else 
                     {
-                        strCombine += "người lạ" + "/";
+                        strCombine += "người lạ" + "," + splitNameAndRate[1] + "/";
                     }
                 }
                 self.sendSocketNotification("FACENET_RESULT", strCombine);
