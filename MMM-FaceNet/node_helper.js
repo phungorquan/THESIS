@@ -1,7 +1,7 @@
 const NodeHelper = require('node_helper');
 module.exports = NodeHelper.create({
     start: function() {
-        this.threshold = 0;
+        this.config = {};
         var self = this;
         console.log('[Xiu MMM-FACENET] Starting node_helper');
         
@@ -18,13 +18,13 @@ module.exports = NodeHelper.create({
                     
                     // Change user namespace
                     var getName = splitNameAndRate[0];
-                    if(parseFloat(splitNameAndRate[1]) > self.threshold)
+                    if(parseFloat(splitNameAndRate[1]) > self.config.threshold)
                     {
                         strCombine += getName + "," + splitNameAndRate[1] + "/";
                     }
                     else 
                     {
-                        strCombine += "người lạ" + "," + splitNameAndRate[1] + "/";
+                        strCombine += self.config.helloStrangerText + "," + splitNameAndRate[1] + "/";
                     }
                 }
                 self.sendSocketNotification("FACENET_RESULT", strCombine);
@@ -40,7 +40,7 @@ module.exports = NodeHelper.create({
         if (notification == "STARTUP");
         else if (notification == "CONFIG")
         {
-            this.threshold = payload;
+            this.config = payload;
         }
     },
 });
