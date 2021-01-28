@@ -183,6 +183,13 @@
         "dataType": "number",
         "dataAllow": ["checkPositive"]
     },
+    "threshold": {
+        "dataType": "number",
+        "dataAllow": ["checkPositive"]
+    },
+    "helloStrangerText": {
+        "dataType": "string"
+    },
     "userName": {
         "dataType": "object"
     },

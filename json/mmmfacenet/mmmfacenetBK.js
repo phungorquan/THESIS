@@ -5,6 +5,8 @@
     "streamVideo": true,
     "displayRate": false,
     "updateInterval": 300000,
+    "threshold": 0.7,
+    "helloStrangerText": "người lạ",
     "userName":{
       "ThayDuy":"Thầy Duy",
       "ThayDuong":"Thầy Dương",

@@ -21,7 +21,17 @@
 <br>Các cấu hình có thể điền vào theo số không có dấu nháy: 300000 (5')
 <br>Ví dụ và cấu hình mặc định hiện tại: 300000 (5')
 <br>
-<br><b>4. userName:</b>
+<br><b>4. threshold:</b>
+<br>Thông tin: Ngưỡng để hiển thị tên người dùng được nhận diện hoặc người lạ
+<br>Các cấu hình có thể điền vào theo số thập phân không có dấu nháy: 0.5 -> 1.0
+<br>Ví dụ và cấu hình mặc định hiện tại: 0.7
+<br>
+<br><b>5. helloStrangerText:</b>
+<br>Thông tin: Người dùng có thể gán các câu từ tuỳ thích thay cho chữ "người lạ" khi nhận diện được người lạ
+<br>Các cấu hình có thể điền vào theo chuỗi với dấu nháy: "người lạ"
+<br>Ví dụ và cấu hình mặc định hiện tại: "người lạ"
+<br>
+<br><b>6. userName:</b>
 <br>Thông tin: Mảng các tên do người dùng tự đặt cho tên người đã được nhận diện (Tên các trường obj phải là tên của các dataset trong tập dữ liệu thì hệ thống mới nhận ra được)
 <br>Các cấu hình có thể điền vào theo dạng chuỗi với dấu nháy và phải đặt các trường dữ liệu bên dưới vào trong dấu ngoặc nhọn {}, và mỗi tên cách nhau bằng dấu phẩy (,)
 <br>Ví dụ điền vào cho một trường obj theo dạng chuỗi với dấu nháy: "tennguoiduocnhandien":"nicknamemuondat" (trường cuối cùng không được để dấu phẩy ',')
