@@ -2,6 +2,7 @@ Module.register("MMM-FaceNet", {
     // Default module configurations
     defaults: {
         threshold: 0.7,
+        helloStrangerText: "người lạ",
         streamVideo: true,
         displayRate: false,
         updateInterval: 300000, // Refresh text every 5'
@@ -28,7 +29,7 @@ Module.register("MMM-FaceNet", {
     },
     start: function() {
         console.log("Starting module: " + this.name);
-        this.sendSocketNotification("CONFIG", this.config.threshold);
+        this.sendSocketNotification("CONFIG", this.config);
         this.scheduleUpdate();
     },
 
