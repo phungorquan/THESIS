@@ -42,12 +42,17 @@ Module.register("MMM-FaceNet", {
                 for(index in splitSpecificUser)
                 {
                     // Change user namespace
-                    var getName = splitSpecificUser[index];
-                    if(this.config.userName.hasOwnProperty(getName))
+                    var getName = splitSpecificUser[index].split(",");
+                    var getRate = "";
+                    if(this.config.userName.hasOwnProperty(getName[0]))
                     {
-                        getName = this.config.userName[getName];
+                        if(this.config.displayRate)
+                        {   
+                            getRate = " ," + getName[1];
+                        }
+                        getName[0] = this.config.userName[getName[0]];
                     }
-                    strCombine += getName + "<br>";
+                    strCombine += getName[0] + getRate + "<br>";
                 }
             }
 
@@ -61,7 +66,7 @@ Module.register("MMM-FaceNet", {
         {
             // Display error information to user
             document.getElementById("facenetResult").innerHTML = payload;
-            console.log(payload);
+            // console.log(payload);
         }
     },
     // Override dom generator.
