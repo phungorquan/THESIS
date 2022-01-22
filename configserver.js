@@ -33,6 +33,7 @@ var genConfigFilename = path.resolve("../configserver/json/supportGenConfig.js")
 var jsonDir = path.resolve("../configserver/json") + "/";
 var jsonCheckingFile = path.resolve("../configserver/json/jsonChecking.js");
 var googlePhotoCache = path.resolve("../modules/MMM-GoogleDriveSlideShow/.cache");
+var getConfigServerFol = path.resolve("../configserver") + "/";
 var userId = "MMM";
 var userPass = "1";
 
@@ -262,7 +263,7 @@ io.sockets.on("connection", function(socket)
       case 4: result = "echo '1' | sudo -S shutdown -h now"; break;
       // 5 is used for all
       // 6 is used for specific module
-      case 5: result = "cp " + backupConfigFilename + " " + configFilename + " && pm2 restart pm2_PS3 && pm2 restart pm2_mm"; break;
+      case 5: result = "cp " + backupConfigFilename + " " + configFilename + " && pm2 restart pm2_PS3"; break;
       case 6: {
         // Replace backup config.js file into config.js file
         var getFileBKName = jsonDir + msg[1] + '/' + msg[1] + 'BK.js';
@@ -270,7 +271,7 @@ io.sockets.on("connection", function(socket)
 
         if(fs.existsSync(getFileBKName) && fs.existsSync(getFileName))
         {
-          result = "cp " + getFileBKName + " " + getFileName + " && pm2 restart pm2_mm";
+          result = "cp " + getFileBKName + " " + getFileName;
         }
         else
         {
@@ -301,7 +302,6 @@ io.sockets.on("connection", function(socket)
               {
                 getAllModulesStatus(); // Get modules data again
                 io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");
-
               }
               else 
                 socket.emit("ALERT_ERROR","Không thể bật tất cả module!");
@@ -311,7 +311,9 @@ io.sockets.on("connection", function(socket)
           else if(msg[0] == 6)
           {
             // Backup a module
-            io.sockets.emit("ALERT_OK","REQUEST_GEN_JSON_ALL_DEVICES");   
+            socket.emit("ALERT_OK","REQUEST_GEN_JSON_ALL_DEVICES"); 
+            // Update all clients
+            io.sockets.emit("ALERT_OK","UPDATE_MODULES_OK");  
           }
           if(stdout)
             console.log(stdout);
@@ -337,7 +339,7 @@ io.sockets.on("connection", function(socket)
               if(err)
               {
                 console.log ("ERROR STOP PM2 AND KILL MOTION");
-		console.log (stderr);
+		            console.log (stderr);
                 socket.emit("ALERT_ERROR","Không thể tắt camera");
               }
             });
